@@ -43,7 +43,7 @@ public class LoginController {
 		return logindao.demo();
 	}
 
-	@PostMapping("/postlogin")
+	@GetMapping("/postlogin")
 	public String loginPage2(@ModelAttribute Credential cr) {
 	    String password = cr.getPassword();
 		String username = cr.getUsername();
