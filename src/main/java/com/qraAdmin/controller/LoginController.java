@@ -52,4 +52,5 @@ public class LoginController {
 		//adminservice.forpasswordvalidation(username,password);
 		return adminservice.forpasswordvalidation(username,password); 
 	}
+	
 }
