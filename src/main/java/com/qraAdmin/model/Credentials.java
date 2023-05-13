@@ -19,6 +19,4 @@ public class Credentials {
 	public String toString() {
 		return "Credentials [Username=" + Username + ", Password=" + Password + "]";
 	}
- 
-    
 }

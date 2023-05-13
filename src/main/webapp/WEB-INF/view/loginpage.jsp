@@ -61,13 +61,14 @@ form{
 // 	  console.log(password); 
 	  
 	  $.ajax({
-	      type: 'POST',
+	      type: 'GET',
 	      url: "postlogin",
 	      data: {Username:Username,Password:Password},
 	      dataType: "json",
 	      success: function(resultData) { 
 	    	  console.log("sdsdds",resultData);
-	    	  window.location.href= "/admin" }
+	    	  //window.location.href= "/admin" }
+	     
 	});
 	
   }
