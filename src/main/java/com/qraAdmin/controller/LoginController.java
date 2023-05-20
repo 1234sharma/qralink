@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.qraAdmin.dao.LoginDao;
@@ -20,7 +21,7 @@ public class LoginController {
 	@Autowired(required=true)
 	AdminLoginService adminservice;
 
-	@GetMapping("/login")
+	@GetMapping("/loginPage")
 	public ModelAndView firstpage() {
 		ModelAndView model = new ModelAndView("loginpage");
 		return model;
@@ -37,13 +38,7 @@ public class LoginController {
 		return model;
 	}
 
-	@PostMapping("/loginpost")
-	public List<Map<String, Object>> loginPage() {
-		System.out.println(logindao.demo());
-		return logindao.demo();
-	}
-
-	@GetMapping("/postlogin")
+	@PostMapping("/login")
 	public String loginPage2(@ModelAttribute Credential cr) {
 	    String password = cr.getPassword();
 		String username = cr.getUsername();
