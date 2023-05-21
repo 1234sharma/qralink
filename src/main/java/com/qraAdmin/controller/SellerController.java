@@ -25,4 +25,10 @@ public class SellerController {
 		return model;
 	}
 
+	
+	@GetMapping("/addproduct")
+	public ModelAndView addproduct() {
+		ModelAndView model = new ModelAndView("addproduct");
+		return model;
+	}
 }
