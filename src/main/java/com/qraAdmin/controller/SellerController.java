@@ -10,6 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.qraAdmin.model.ProductBean;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Controller
 public class SellerController {
 	@GetMapping("/sellerPage")
@@ -26,9 +28,16 @@ public class SellerController {
 	}
 
 	
-	@GetMapping("/addproduct")
-	public ModelAndView addproduct() {
+	@GetMapping("/addproductPage")
+	public ModelAndView addproductPage() {
 		ModelAndView model = new ModelAndView("addproduct");
+		return model;
+	}
+	
+	@PostMapping("/addProduct")
+	public ModelAndView addproduct(HttpServletRequest request) {
+		ModelAndView model = new ModelAndView("addproduct");
+		System.out.println(request.getParameter("productName"));
 		return model;
 	}
 }
