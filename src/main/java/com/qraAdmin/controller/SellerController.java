@@ -34,6 +34,13 @@ public class SellerController {
 		return model;
 	}
 	
+	@GetMapping("/sellerdash")
+	public ModelAndView sellerdashboard() {
+		ModelAndView model = new ModelAndView("Seller");
+		return model;
+	}
+	
+	
 	@PostMapping("/addProduct")
 	public ModelAndView addproduct(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView("addproduct");
