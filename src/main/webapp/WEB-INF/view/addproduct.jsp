@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <!--Product Information Form-->
-                <form action="addProduct" method="POST" class="m-3 mt-0" >
+                <form action="addProduct" method="POST" enctype="multipart/form-data"  class="m-3 mt-0" >
                     <div class="new_panel mt-0"  ng-controller="ZipCodeCtrl">
                         <div class="panel_heading">
                             <div class="fw-bold">Product Information</div>
@@ -57,7 +57,7 @@
                                         <label class="form-label fw-bold ">Categories Type</label>
                                     </div>
                                     <div class="col-md-6">                                                                                
-                                        <select class="form-select" aria-label="Default select example">
+                                        <select class="form-select" aria-label="Default select example" name="category">
                                             <option selected>Please Select</option>
                                             <option value="1">One</option>
                                             <option value="2">Two</option>
@@ -70,7 +70,7 @@
                                         <label class="form-label fw-bold ">Sub-Categories Type</label>
                                     </div>
                                     <div class="col-md-6">                                                                                
-                                        <select class="form-select" aria-label="Default select example">
+                                        <select class="form-select" aria-label="Default select example" name="subcategory">
                                             <option selected>Please Select</option>
                                             <option value="1">One</option>
                                             <option value="2">Two</option>
@@ -83,7 +83,7 @@
                                         <label class="form-label fw-bold ">Micro-Categories Type</label>
                                     </div>
                                     <div class="col-md-6">                                                                                
-                                        <select class="form-select" aria-label="Default select example">
+                                        <select class="form-select" aria-label="Default select example" name="microcategory">
                                             <option selected>Please Select</option>
                                             <option value="1">One</option>
                                             <option value="2">Two</option>
@@ -94,22 +94,22 @@
                                 <div class="col-md-12 mt-2">
                                     <label for="exampleFormControlTextarea1" class="form-label fw-bold">Product Description:</label>
                                     <span class=""> Use  To expand</span>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" placeholder="Product Info"></textarea>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" placeholder="Product Info" name="productdesc"></textarea>
                                 </div>   
                                 <div class="col-md-12 mt-2">
                                     <label for="exampleFormControlTextarea1" class="form-label fw-bold">Product Short Description</label><span class="element">*</span>
-                                    <textarea class="form-control" id="product" rows="10" placeholder="Product Info"></textarea>
+                                    <textarea class="form-control" id="product" rows="10" placeholder="Product Info"name="productshortdesc"></textarea>
                                 </div>   
                                 <div class="col-md-4 col-lg-3 mt-2">
                                     <div class="from-group">                                                                                
                                         <label class="form-label fw-bold ">Default Currency</label>
-                                        <input class="form-control" type="text" placeholder="Rs" aria-label="Disabled input example" disabled>
+                                        <input class="form-control" type="text" placeholder="Rs" aria-label="Disabled input example" name="currency" disabled>
                                     </div>                                
                                 </div>
                                 <div class="col-md-4 mt-2">
                                     <div class="from-group">
                                         <label class="form-label fw-bold">Product Price </label><span class="element">*</span>
-                                        <input type="text" class="form-control" id="product_price" placeholder="Product Price">
+                                        <input type="text" class="form-control" id="product_price" placeholder="Product Price" name="productprice">
                                     </div>
                                 </div>
                                
@@ -124,38 +124,38 @@
                                                 <div class="col-md-4 col-md-4">
                                                     <div class="from-group">
                                                         <label class="form-label fw-bold">Model number:</label>
-                                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="modelnumber">
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="col-md-4 col-md-4">
                                                     <div class="from-group">
                                                         <label class="form-label fw-bold">Size</label>
-                                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="size">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 col-md-4 mt-2">
                                                     <div class="from-group">
                                                         <label class="form-label fw-bold">Net Weight</label>
-                                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="weight">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 col-md-4 mt-2">
                                                     <div class="from-group">
                                                         <label class="form-label fw-bold">Shape</label>
-                                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="shape">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 col-md-4 mt-2">
                                                     <div class="from-group">
                                                         <label class="form-label fw-bold">Color</label>
-                                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="color">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 mt-2">
                                                     <div class="from-group">
                                                         <label class="form-label fw-bold">Material</label>
-                                                        <select class="form-select" aria-label="Default select example">
+                                                        <select class="form-select" aria-label="Default select example" name="material">
                                                             <option selected>Please select</option>
                                                             <option value="1">Textiles</option>
                                                             <option value="2">Metals</option>
@@ -173,14 +173,14 @@
                                                 <div class="col-md-4 col-md-4 mt-2">
                                                     <div class="from-group">
                                                         <label class="form-label fw-bold">Minimum Order Quantity :</label>
-                                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder=""name="orderqnt">
                                                     </div>
                                                 </div> 
                                                 
                                                 <div class="col-md-4 col-md-4 mt-2">
                                                     <div class="from-group">
                                                         <label class="form-label fw-bold">Usage/Application</label>
-                                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="uses">
                                                     </div>
                                                 </div>                                             
                                             </div>
