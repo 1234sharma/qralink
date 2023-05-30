@@ -203,7 +203,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="formFile" class="form-label fw-bold">Upload Product Image No. 2:</label>
-                                                    <input class="form-control" type="file" id="formFile">                                                    
+                                                    <input class="form-control" type="file" id="formFile" name="image2">                                                    
                                                 </div>
                                                 <div class="col-md-6 col-xs-12 mt-2">
                                                     <div class="from-group">

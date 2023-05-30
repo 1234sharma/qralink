@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.qraAdmin.dao.UserDao;
 import com.qraAdmin.service.AdminLoginService;
@@ -40,6 +41,7 @@ public class LoginController {
 	}
 
 	@PostMapping("/login")
+	@ResponseBody
 	public String loginPage2(@ModelAttribute Credential cr) {
 	    String password = cr.getPassword();
 		String username = cr.getUsername();

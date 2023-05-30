@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Random;
 
 import org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapProperties.Credential;
 import org.springframework.http.MediaType;
@@ -21,6 +22,9 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class SellerController {
+	
+	Random rand=new Random();
+	
 	@GetMapping("/sellerPage")
 	public ModelAndView sellerPage() {
 		ModelAndView model = new ModelAndView("adminDashbard");
@@ -49,7 +53,7 @@ public class SellerController {
 	
 	
 	@PostMapping("/addProduct")
-	public ModelAndView addproduct(HttpServletRequest request,@RequestParam("image1") MultipartFile image1) {
+	public ModelAndView addproduct(HttpServletRequest request,@RequestParam("image1") MultipartFile image1,@RequestParam("image2") MultipartFile image2) {
 		ModelAndView model = new ModelAndView("addproduct");
 		System.out.println(request.getParameter("productName"));
 		System.out.println(request.getParameter("brandName"));
@@ -68,18 +72,18 @@ public class SellerController {
 		System.out.println(request.getParameter("orderqnt"));
 		System.out.println(request.getParameter("uses"));
 		
-		StringBuilder fileNames = new StringBuilder();
-        Path fileNameAndPath = Paths.get("D:\\qrapics", "image1"+image1.getOriginalFilename());
-        fileNames.append(image1.getOriginalFilename());
+        Path fileNameAndPath1 = Paths.get("D:\\qrapics", "image1"+rand.nextInt(60000)+image1.getOriginalFilename());
+        Path fileNameAndPath2 = Paths.get("D:\\qrapics", "image2"+rand.nextInt(60000)+image1.getOriginalFilename());
         try {
-			Files.write(fileNameAndPath, image1.getBytes());
-			System.out.println(fileNameAndPath);
+			Files.write(fileNameAndPath1, image1.getBytes());
+			Files.write(fileNameAndPath2, image2.getBytes());
+			System.out.println(fileNameAndPath1);
+			System.out.println(fileNameAndPath2);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         
-        //model.addAttribute("msg", "Uploaded images: " + fileNames.toString());
 		
 		return model;
 	}

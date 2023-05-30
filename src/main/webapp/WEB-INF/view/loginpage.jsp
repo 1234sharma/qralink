@@ -57,22 +57,35 @@ form{
   function passdatatocontroller(){
 	  var Username = document.getElementById("Inputuser1").value;
 	  var Password = document.getElementById("InputPassword1").value;
+    var str = {
+      "Username" : Username,
+      "Password" : Password,
+			};
 // 	  console.log(username);
 // 	  console.log(password); 
-	  
-	  $.ajax({
-	      type: 'POST',
-	      url: "postlogin",
-	      data: {Username:Username,Password:Password},
-	      dataType: "json",
-	      success: function(resultData) { 
-	    	  console.log("sdsdds",resultData);
-	    	  window.location.href= "/admin" ;
-	    	  }
-	     
-	});
 	
-  }
+
+$.ajax({
+				type : "POST",
+				url : "/login",
+				data : str, // serializes the form's elements
+				success : function(data) {
+
+					// Ajax call completed successfully
+					alert("Details submitted succesfully");
+					window.location = "http://localhost:8089/addproductPage";
+					//alert(data);
+
+				},
+				error : function(data) {
+
+					// Some error in ajax call
+					alert("Please Try Again");
+				}
+
+			});
+
+	}
   </script>
 </body>
 </html>
