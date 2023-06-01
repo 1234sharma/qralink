@@ -95,11 +95,7 @@
                                     <label for="exampleFormControlTextarea1" class="form-label fw-bold">Product Description:</label>
                                     <span class=""> Use  To expand</span>
                                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" placeholder="Product Info" name="productdesc"></textarea>
-                                </div>   
-                                <div class="col-md-12 mt-2">
-                                    <label for="exampleFormControlTextarea1" class="form-label fw-bold">Product Short Description</label><span class="element">*</span>
-                                    <textarea class="form-control" id="product" rows="10" placeholder="Product Info"name="productshortdesc"></textarea>
-                                </div>   
+                                </div>      
                                 <div class="col-md-4 col-lg-3 mt-2">
                                     <div class="from-group">                                                                                
                                         <label class="form-label fw-bold ">Default Currency</label>
@@ -125,13 +121,6 @@
                                                     <div class="from-group">
                                                         <label class="form-label fw-bold">Model number:</label>
                                                         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="modelnumber">
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="col-md-4 col-md-4">
-                                                    <div class="from-group">
-                                                        <label class="form-label fw-bold">Size</label>
-                                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="size">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 col-md-4 mt-2">
@@ -204,18 +193,6 @@
                                                 <div class="col-md-6">
                                                     <label for="formFile" class="form-label fw-bold">Upload Product Image No. 2:</label>
                                                     <input class="form-control" type="file" id="formFile" name="image2">                                                    
-                                                </div>
-                                                <div class="col-md-6 col-xs-12 mt-2">
-                                                    <div class="from-group">
-                                                        <label class="form-label fw-bold">Youtube Video No. 1:</label>
-                                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Youtube Video Url">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-xs-12 mt-2">
-                                                    <div class="from-group">
-                                                        <label class="form-label fw-bold">Youtube Video No. 2:</label>
-                                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Youtube Video Url">
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

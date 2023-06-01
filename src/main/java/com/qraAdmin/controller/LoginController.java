@@ -53,7 +53,7 @@ public class LoginController {
 	
 	@GetMapping("/registerPage")
 	public ModelAndView registerPage() {
-		ModelAndView model = new ModelAndView("registerpage");
+		ModelAndView model = new ModelAndView("registerPage");
 		return model;
 	}
 	
