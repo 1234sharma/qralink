@@ -28,6 +28,11 @@ public class LoginController {
 		ModelAndView model = new ModelAndView("loginpage");
 		return model;
 	}
+	@GetMapping("/homepage")
+	public ModelAndView homepage() {
+		ModelAndView model = new ModelAndView("Home");
+		return model;
+	}
 
 	@GetMapping("/qrahome")
 	public ModelAndView firstpage2() {
