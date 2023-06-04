@@ -32,7 +32,7 @@ public class SellerController {
 
 	@GetMapping("/sellerPage")
 	public ModelAndView sellerPage() {
-		ModelAndView model = new ModelAndView("adminDashbard");
+		ModelAndView model = new ModelAndView("Seller");
 		return model;
 	}
 

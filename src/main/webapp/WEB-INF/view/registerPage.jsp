@@ -58,7 +58,7 @@
 <div id="main-col" class="col-md-12 register_form">
 <div class="top_set_box">
 <div class="col-md-9" style="border-right: 1px solid;">
-<form name="registration" action="https://www.qralink.com/registration-1.html" method="post" autocomplete="off" enctype="multipart/form-data">
+<form name="registration" action="register" method="post" autocomplete="off" enctype="multipart/form-data">
 
 <div class="block_div white_back_div">
 <div class="col-md-12">
@@ -67,13 +67,13 @@
 
 <div class="col-md-1">
 <div class="radio radio-primary">
-<input type="radio" name="type" id="radio1" value="P" onclick="inputtaghiddenandshow()">
+<input type="radio" name="type" id="radio1" value="buyer" onclick="inputtaghiddenandshow()">
 <label for="radio1">Buyers</label>
 </div>
 </div>
 <div class="col-md-1">
 <div class="radio radio-primary">
-<input type="radio" name="type" value="C" id="company_profile" onclick="showhiddeninputtag()">
+<input type="radio" name="type" value="seller" id="company_profile" onclick="showhiddeninputtag()">
 <label for="company_profile">&nbsp;Seller</label>
 </div>
 </div>
@@ -94,7 +94,7 @@
 <div class="col-md-4">
 <div class="form-group" >
 <label class="name_sm">Company Name:<span style="color:#F00">*</span></label>
-<input class="form-control" placeholder="Company Name" type="text" value name="company_name" id="company_name_p">
+<input class="form-control" placeholder="Company Name" type="text"  name="company_name" id="company_name_p">
 <div id="company_name_id" style="color:#FF0000;"></div>
 </div>
 </div>
@@ -139,6 +139,7 @@
 <span id="state_change">
 <select name="state" id="state" class="form-control" required>
 <option value selected="selected" class="le-input">Please select state</option>
+<option value="java" selected="selected" class="le-input">JAVA</option>
 </select>
 </span>
 <span id="state_error" style="color:#F00"></span>
@@ -146,7 +147,8 @@
 <div class="col-md-4">
 <label class="name_sm">City:<span style="color:#F00">*</span></label>
 <span id="city_change"><select name="city" id="city" class="form-control" required>
-<option value selected="selected" class="le-input">Please select city</option></select>
+<option value selected="selected" class="le-input">Please select city</option>
+<option value="mumbai" selected="selected" class="le-input">Mumbai</option></select>
 </span>
 <span id="city_error" style="color:#F00"></span>
 </div>

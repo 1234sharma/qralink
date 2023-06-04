@@ -92,19 +92,24 @@ form {
 				success : function(data) {
 					console.log(data);
 					// Ajax call completed successfully
-					if(data=="success"){
-					window.location = "http://localhost:8089/addproductPage";
-					//alert(data);
+					if(data=="seller"){
+					window.location = "http://localhost:8089/sellerPage";
+					}
+					if(data=="buyer"){
+					window.location = "http://localhost:8089/qrahome";
+					}
+					if(data=="Admin"){
+					window.location = "http://localhost:8089/admin";
 					}
 					else
 						{
 						sweetAlert("Invalid User", "Something Went wrong", "error");
 						}
 				},
-				error : function(data) {
+				error : function(res) {
 
 					// Some error in ajax call
-					alert("Please Try Again");
+					alert("Please Try Again "+ res.responseText +"  " +res.status);
 				}
 
 			});

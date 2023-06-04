@@ -40,14 +40,14 @@ public class UserDao {
     public int registerUser(String name,String mobileNumber,String CompanyName,String email,String country,String state,String city,String password,String userType) {
         int count=0;    	
     try {	
-     count=	jdbcTemplate.update("INSERT INTO QRALINK.USERDETAILS(username"
+     count=	jdbcTemplate.update("INSERT INTO QRALINK.USERDETAIL(username"
     			+ ",mobile"
     			+ ",companyname"
     			+ ",email"
     			+ ",country"
     			+ ",state"
     			+ ",city"
-    			+ ",password"
+    			+ ",pass"
     			+ ",usertype) VALUES(?,?,?,?,?,?,?,?,?)",name, mobileNumber,CompanyName,email, country, state, city, password, userType);
     	
     }catch (Exception e) {
@@ -82,6 +82,21 @@ public class UserDao {
     	
     	return count;
     	
+    }
+    
+    public String getUserIfExist(String username,String password) {
+    	String sql="SELECT usertype FROM qralink.userdetail where email=\""+username+"\" and pass=\""+password+"\"";
+    	String type="";
+    	try {
+    		System.out.println(sql);
+    	 type= jdbcTemplate.queryForObject(sql, String.class);
+    	 System.out.println(type);
+        }catch(Exception e) {
+        	System.out.println(e);
+        	type=null;
+        }
+    	
+    	return type;
     }
     
 }

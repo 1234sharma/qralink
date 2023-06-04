@@ -15,9 +15,8 @@ public class UserService {
 	
 	public int userRegister(String name,String mobile,String companyName,String email,String country,String state,String city ,String password,String usertype )
 	{
+		return userdao.registerUser(name, mobile, companyName, email, country, state, city, password, usertype);
 		
-		
-		return 1;
 	}
 	
 	public int addProduct(ProductBean product) {
