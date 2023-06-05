@@ -32,12 +32,16 @@ public class LoginController {
 		ModelAndView model = new ModelAndView("loginpage");
 		return model;
 	}
+	@GetMapping("/postbyreq")
+	public ModelAndView postbyrequirement() {
+		ModelAndView model = new ModelAndView("postByRequirement");
+		return model;
+	}
 	@GetMapping("/homepage")
 	public ModelAndView homepage() {
 		ModelAndView model = new ModelAndView("Home");
 		return model;
 	}
-
 	@GetMapping("/qrahome")
 	public ModelAndView firstpage2() {
 		ModelAndView model = new ModelAndView("Home");
