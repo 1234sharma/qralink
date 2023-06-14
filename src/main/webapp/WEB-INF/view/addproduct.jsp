@@ -57,11 +57,8 @@
                                         <label class="form-label fw-bold ">Categories Type</label>
                                     </div>
                                     <div class="col-md-6">                                                                                
-                                        <select class="form-select" aria-label="Default select example" name="category">
+                                        <select class="form-select" aria-label="Default select example"id="categoryid" name="category">
                                             <option selected>Please Select</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
                                         </select>
                                     </div>
                                 </div>
@@ -218,5 +215,50 @@
         </div>
    </div>    
    </div>
+   <script>
+    let category=[];
+    let subCategory=[];
+    let microcategory=[];
+    window.onload=function loadvalues(){
+           loadCategory();
+           loadSubCategory();
+           loadMicroCategory();
+    }
+    function loadCategory(){
+        $.ajax({
+				type : "GET",
+				url : "/getcategories",
+				success : function(data) {
+					// Ajax call completed successfully
+                   select = document.getElementById('categoryid');
+                   
+                   alert("Details submitted succesfully "+ data[0].category_NAME);
+                  for (var i = 0; i<data.length; i++){
+                   var opt = document.createElement('option');
+                      opt.value = data[i].categoryId;
+                      opt.innerHTML = data[i].category_NAME;
+                      select.appendChild(opt);
+                   }
+					alert("Details submitted succesfully "+ category);
+				},
+				error : function(data) {
+					// Some error in ajax call
+					alert("Please Try Again");
+				}
+
+			});
+    }
+   </script>
+   	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+       <script src="https://code.jquery.com/jquery-3.6.0.js"
+           integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+           crossorigin="anonymous"></script>
+   
+       <script
+           src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+   
+       <script
+           src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 </body>
 </html>
