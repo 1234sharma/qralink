@@ -30,4 +30,10 @@ public class CategoryBean {
 		CATEGORY_NAME = cATEGORY_NAME;
 	}
 
+	@Override
+	public String toString() {
+		return "CategoryBean [categoryId=" + categoryId + ", CATEGORY_NAME=" + CATEGORY_NAME + "]";
+	}
+	
+
 }

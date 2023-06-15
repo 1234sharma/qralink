@@ -57,7 +57,7 @@
                                         <label class="form-label fw-bold ">Categories Type</label>
                                     </div>
                                     <div class="col-md-6">                                                                                
-                                        <select class="form-select" aria-label="Default select example"id="categoryid" name="category">
+                                        <select class="form-select" aria-label="Default select example"id="categoryid" name="category" onChange="updateSubCategory(this.options[this.selectedIndex].value)">
                                             <option selected>Please Select</option>
                                         </select>
                                     </div>
@@ -67,11 +67,8 @@
                                         <label class="form-label fw-bold ">Sub-Categories Type</label>
                                     </div>
                                     <div class="col-md-6">                                                                                
-                                        <select class="form-select" aria-label="Default select example" name="subcategory">
+                                        <select class="form-select" aria-label="Default select example" id="subcategoryid" name="subcategory">
                                             <option selected>Please Select</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
                                         </select>
                                     </div>
                                 </div>
@@ -221,8 +218,6 @@
     let microcategory=[];
     window.onload=function loadvalues(){
            loadCategory();
-           loadSubCategory();
-           loadMicroCategory();
     }
     function loadCategory(){
         $.ajax({
@@ -247,6 +242,34 @@
 				}
 
 			});
+    }
+
+    function updateSubCategory(categoryid){
+        console.log(categoryid)
+        $.ajax({
+				type : "GET",
+				url : "/getsubcategories/"+categoryid,
+				success : function(data) {
+					// Ajax call completed successfully
+                   select = document.getElementById('subcategoryid');
+                   $("#subcategoryid").empty();
+                   console.log(JSON.stringify(data));
+                   alert("Details submitted succesfully "+ data[0].sub_CATEGORY_NAME);
+                  for (var i = 0; i<data.length; i++){
+                   var opt = document.createElement('option');
+                      opt.value = data[i].sub_CATEGORY_ID;
+                      opt.innerHTML = data[i].sub_CATEGORY_NAME;
+                      select.appendChild(opt);
+                   }
+					alert("Details submitted succesfully "+ category);
+				},
+				error : function(data) {
+					// Some error in ajax call
+					alert("Please Try Again");
+				}
+
+			});
+        
     }
    </script>
    	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>

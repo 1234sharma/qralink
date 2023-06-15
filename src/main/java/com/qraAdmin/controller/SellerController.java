@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,9 +26,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.qraAdmin.model.CategoryBean;
 import com.qraAdmin.model.ProductBean;
+import com.qraAdmin.model.SubCategoryBean;
+import com.qraAdmin.service.SellerService;
 import com.qraAdmin.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.websocket.server.PathParam;
 
 @Controller
 public class SellerController {
@@ -36,6 +40,8 @@ public class SellerController {
 
 	@Autowired
 	UserService userservice;
+	@Autowired
+	SellerService sellerservice;
 
 	@GetMapping("/sellerPage")
 	public ModelAndView sellerPage() {
@@ -118,8 +124,25 @@ public class SellerController {
 	@ResponseBody
 	public ResponseEntity<List<CategoryBean>> getCategories() {
 		List l = new ArrayList();
-		l.add(new CategoryBean(1, "food"));
-		l.add(new CategoryBean(2, "cloth"));
-		return new ResponseEntity<List<CategoryBean>>(l, HttpStatus.OK);
+		List<CategoryBean> cat= sellerservice.getCategorylist();
+		System.out.println(cat);
+		return new ResponseEntity<List<CategoryBean>>(cat, HttpStatus.OK);
+	}
+	@GetMapping("/getsubcategories/{categoryid}")
+	@ResponseBody
+	public ResponseEntity<List<SubCategoryBean>> getSubCategories(@PathVariable("categoryid") String catid) {
+		List l = new ArrayList();
+		System.out.println("category id is "+catid);
+		List<SubCategoryBean> cat= sellerservice.getSubCategorylist(Integer.parseInt(catid));
+		System.out.println(cat);
+		return new ResponseEntity<List<SubCategoryBean>>(cat, HttpStatus.OK);
+	}
+	@GetMapping("/getmicrocategories/{subcategoryid}")
+	@ResponseBody
+	public ResponseEntity<List<CategoryBean>> getMicroCategories(@PathParam("subcategoryid") String subcatid) {
+		List l = new ArrayList();
+		List<CategoryBean> cat= sellerservice.getCategorylist();
+		System.out.println(cat);
+		return new ResponseEntity<List<CategoryBean>>(cat, HttpStatus.OK);
 	}
 }
