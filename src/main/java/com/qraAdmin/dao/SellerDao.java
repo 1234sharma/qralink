@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.qraAdmin.model.CategoryBean;
+import com.qraAdmin.model.MicroCategoryBean;
 import com.qraAdmin.model.SubCategoryBean;
 
 @Repository
@@ -19,6 +20,7 @@ public class SellerDao {
 
 	public String getCategoryQuery = "select * from qralink.category";
     public String getSubCategoryQuery="SELECT * FROM qralink.subcategory where category_id=?";
+    public String getMicroCategoryQuery="SELECT * FROM qralink.microcategory where SUB_CATEGORY_ID=?";
 	public List<CategoryBean> getCategorylist() {
 		List<Map<String, Object>> l = jdbc.queryForList(getCategoryQuery);
 		List<CategoryBean> categories = new ArrayList<CategoryBean>();
@@ -41,5 +43,16 @@ public class SellerDao {
 		}
 		return subcategories;
 	}
-
+	public List<MicroCategoryBean> getMicroCategorylist(int subcategoryid) {
+		List<Map<String, Object>> l = jdbc.queryForList(getMicroCategoryQuery,subcategoryid);
+		System.out.println(l);
+		List<MicroCategoryBean> microcategories = new ArrayList<MicroCategoryBean>();
+		for (Map<String, Object> map : l) {
+			MicroCategoryBean cat = new MicroCategoryBean(Integer.parseInt(map.get("MICRO_CATEGORY_ID").toString()),
+					map.get("MICRO_CATEGORY_NAME").toString(),Integer.parseInt(map.get("SUB_CATEGORY_ID").toString()));
+			microcategories.add(cat);
+		}
+		return microcategories;
+	}
+	
 }

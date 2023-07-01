@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.qraAdmin.model.CategoryBean;
+import com.qraAdmin.model.MicroCategoryBean;
 import com.qraAdmin.model.ProductBean;
 import com.qraAdmin.model.SubCategoryBean;
 import com.qraAdmin.service.SellerService;
@@ -124,25 +125,27 @@ public class SellerController {
 	@ResponseBody
 	public ResponseEntity<List<CategoryBean>> getCategories() {
 		List l = new ArrayList();
-		List<CategoryBean> cat= sellerservice.getCategorylist();
+		List<CategoryBean> cat = sellerservice.getCategorylist();
 		System.out.println(cat);
 		return new ResponseEntity<List<CategoryBean>>(cat, HttpStatus.OK);
 	}
+
 	@GetMapping("/getsubcategories/{categoryid}")
 	@ResponseBody
 	public ResponseEntity<List<SubCategoryBean>> getSubCategories(@PathVariable("categoryid") String catid) {
 		List l = new ArrayList();
-		System.out.println("category id is "+catid);
-		List<SubCategoryBean> cat= sellerservice.getSubCategorylist(Integer.parseInt(catid));
+		System.out.println("category id is " + catid);
+		List<SubCategoryBean> cat = sellerservice.getSubCategorylist(Integer.parseInt(catid));
 		System.out.println(cat);
 		return new ResponseEntity<List<SubCategoryBean>>(cat, HttpStatus.OK);
 	}
+
 	@GetMapping("/getmicrocategories/{subcategoryid}")
 	@ResponseBody
-	public ResponseEntity<List<CategoryBean>> getMicroCategories(@PathParam("subcategoryid") String subcatid) {
+	public ResponseEntity<List<MicroCategoryBean>> getMicroCategories(@PathVariable("subcategoryid") String subcatid) {
 		List l = new ArrayList();
-		List<CategoryBean> cat= sellerservice.getCategorylist();
-		System.out.println(cat);
-		return new ResponseEntity<List<CategoryBean>>(cat, HttpStatus.OK);
+		List<MicroCategoryBean> microcategories = sellerservice.getMicroCategorylist(Integer.parseInt(subcatid));
+		System.out.println(microcategories);
+		return new ResponseEntity<List<MicroCategoryBean>>(microcategories, HttpStatus.OK);
 	}
 }

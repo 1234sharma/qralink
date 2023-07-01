@@ -14,27 +14,15 @@
 </head>
 <body>
 
-<div class='container'>
+<div class='container mt-4'>
     <div class="waper_my_account">
         <div class="container-fluid">
             <div class="clearfix">
                 <!-- ADD Product-->
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="new_panel">
-                        <div class="panel_heading">Add Product </div>
-                    </div>
-                </div>
                 <!--Alert Box-->
-                <div class="row_by">                
-                    <div class="row p-2 mb-0">
-                        <div class="col-md-12 alert_by">
-                            <div class="alert alert-primary" role="alert">Your Remaining Products:- 394</div>
-                        </div>           
-                    </div>
-                </div>
                 <!--Product Information Form-->
-                <form action="addProduct" method="POST" enctype="multipart/form-data"  class="m-3 mt-0" >
-                    <div class="new_panel mt-0"  ng-controller="ZipCodeCtrl">
+                <form action="addProduct" method="POST" enctype="multipart/form-data"  class="m-3 mt-4" >
+                    <div class="new_panel mt-4"  ng-controller="ZipCodeCtrl">
                         <div class="panel_heading">
                             <div class="fw-bold">Product Information</div>
                         </div>                
@@ -66,8 +54,8 @@
                                     <div class="col-md-6">                                        
                                         <label class="form-label fw-bold ">Sub-Categories Type</label>
                                     </div>
-                                    <div class="col-md-6">                                                                                
-                                        <select class="form-select" aria-label="Default select example" id="subcategoryid" name="subcategory">
+                                    <div class="col-md-6">                                                                          
+                                        <select class="form-select" aria-label="Default select example" id="subcategoryid" name="subcategory" onChange="updateMicroCategory(this.options[this.selectedIndex].value)">
                                             <option selected>Please Select</option>
                                         </select>
                                     </div>
@@ -77,11 +65,8 @@
                                         <label class="form-label fw-bold ">Micro-Categories Type</label>
                                     </div>
                                     <div class="col-md-6">                                                                                
-                                        <select class="form-select" aria-label="Default select example" name="microcategory">
+                                        <select class="form-select" aria-label="Default select example" id="microcategoryid" name="microcategory">
                                             <option selected>Please Select</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
                                         </select>
                                     </div>
                                 </div>  
@@ -259,6 +244,33 @@
                    var opt = document.createElement('option');
                       opt.value = data[i].sub_CATEGORY_ID;
                       opt.innerHTML = data[i].sub_CATEGORY_NAME;
+                      select.appendChild(opt);
+                   }
+					alert("Details submitted succesfully "+ category);
+				},
+				error : function(data) {
+					// Some error in ajax call
+					alert("Please Try Again");
+				}
+
+			});
+        
+    }
+    function updateMicroCategory(subcategoryid){
+        console.log(subcategoryid)
+        $.ajax({
+				type : "GET",
+				url : "/getmicrocategories/"+subcategoryid,
+				success : function(data) {
+					// Ajax call completed successfully
+                   select = document.getElementById('microcategoryid');
+                   $("#microcategoryid").empty();
+                   console.log("micro category "+JSON.stringify(data));
+                   alert("Details submitted succesfully "+ data[0].sub_CATEGORY_NAME);
+                  for (var i = 0; i<data.length; i++){
+                   var opt = document.createElement('option');
+                      opt.value = data[i].micro_CATEGORY_ID;
+                      opt.innerHTML = data[i].micro_CATEGORY_NAME;
                       select.appendChild(opt);
                    }
 					alert("Details submitted succesfully "+ category);

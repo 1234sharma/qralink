@@ -95,10 +95,10 @@ form {
 					if(data=="seller"){
 					window.location = "http://localhost:8089/sellerPage";
 					}
-					if(data=="buyer"){
+					else if(data=="buyer"){
 					window.location = "http://localhost:8089/qrahome";
 					}
-					if(data=="Admin"){
+					else if(data=="Admin"){
 					window.location = "http://localhost:8089/admin";
 					}
 					else
