@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.qraAdmin.dao.UserDao;
 import com.qraAdmin.model.ProductBean;
+import com.qraAdmin.model.QuotationBean;
 
 @Service
 public class UserService {
@@ -24,5 +25,11 @@ public class UserService {
 		count=userdao.addProduct(product);
 		return count;
 	}
+	public int postByReqQuote(QuotationBean quote) {
+		int count=0;
+		count=userdao.postByReqQuoteDao(quote);
+		return count;
+	}
 
+	
 }

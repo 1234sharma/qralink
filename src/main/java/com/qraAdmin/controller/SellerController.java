@@ -48,27 +48,20 @@ public class SellerController {
 	@GetMapping("/sellerPage")
 	public ModelAndView sellerPage(HttpServletRequest req) {
 		ModelAndView model = null;
-		int userid=0;
-		String usertype=null;
+		int userid = 0;
+		String usertype = null;
 		HttpSession session = req.getSession();
 		Object id = session.getAttribute("userid");
 		Object type = session.getAttribute("usertype");
-		if(id!=null && type!=null) {
-			 userid = Integer.parseInt(String.valueOf(session.getAttribute("userid")));
-			 usertype = String.valueOf(session.getAttribute("usertype"));	
+		if (id != null && type != null) {
+			userid = Integer.parseInt(String.valueOf(session.getAttribute("userid")));
+			usertype = String.valueOf(session.getAttribute("usertype"));
 		}
-		if (userid > 0 && usertype!=null && usertype.equals("seller")) {
+		if (userid > 0 && usertype != null && usertype.equals("seller")) {
 			model = new ModelAndView("Seller");
 		} else {
 			model = new ModelAndView("loginpage");
 		}
-		return model;
-	}
-
-	@PostMapping(path = "", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-	public ModelAndView addProduct(@ModelAttribute ProductBean product) {
-
-		ModelAndView model = new ModelAndView("adminDashbard");
 		return model;
 	}
 
@@ -81,53 +74,67 @@ public class SellerController {
 	@PostMapping("/addProduct")
 	public ModelAndView addproduct(HttpServletRequest request, @RequestParam("image1") MultipartFile image1,
 			@RequestParam("image2") MultipartFile image2) {
-		ModelAndView model = new ModelAndView("addproduct");
+		HttpSession session = request.getSession();
+		ModelAndView model = null;
+		int userid = 0;
+		String usertype = null;
+		Object id = session.getAttribute("userid");
+		Object type = session.getAttribute("usertype");
+		if (id != null && type != null) {
+			userid = Integer.parseInt(String.valueOf(session.getAttribute("userid")));
+			usertype = String.valueOf(session.getAttribute("usertype"));
+		}
+		if (userid > 0 && usertype != null && usertype.equals("seller")) {
 
-		String productName = request.getParameter("productName");
-		String brandName = request.getParameter("brandName");
-		String category = request.getParameter("category");
-		String subcategory = request.getParameter("subcategory");
-		String microcategory = request.getParameter("microcategory");
-		String productdesc = request.getParameter("productdesc");
-		String productprice = request.getParameter("productprice");
-		String modelnumber = request.getParameter("modelnumber");
-		String weight = request.getParameter("weight");
-		String shape = request.getParameter("shape");
-		String color = request.getParameter("color");
-		String material = request.getParameter("material");
-		String orderqnt = request.getParameter("orderqnt");
-		String uses = request.getParameter("uses");
-		Path fileNameAndPath1 = null;
-		Path fileNameAndPath2 = null;
-		String imagepath1 = "";
-		String imagePath2 = "";
-		if (image1 != null) {
-			fileNameAndPath1 = Paths.get("D:\\qrapics", "image1" + rand.nextInt(60000) + image1.getOriginalFilename());
-		}
-		if (!image2.isEmpty()) {
-			fileNameAndPath2 = Paths.get("D:\\qrapics", "image2" + rand.nextInt(60000) + image2.getOriginalFilename());
-		}
-		try {
-			if (fileNameAndPath1 != null) {
-				Files.write(fileNameAndPath1, image1.getBytes());
-				imagepath1 = fileNameAndPath1.toString();
-				System.out.println(fileNameAndPath1.toString());
+			String productName = request.getParameter("productName");
+			String brandName = request.getParameter("brandName");
+			String category = request.getParameter("category");
+			String subcategory = request.getParameter("subcategory");
+			String microcategory = request.getParameter("microcategory");
+			String productdesc = request.getParameter("productdesc");
+			String productprice = request.getParameter("productprice");
+			String modelnumber = request.getParameter("modelnumber");
+			String weight = request.getParameter("weight");
+			String shape = request.getParameter("shape");
+			String color = request.getParameter("color");
+			String material = request.getParameter("material");
+			String orderqnt = request.getParameter("orderqnt");
+			String uses = request.getParameter("uses");
+			Path fileNameAndPath1 = null;
+			Path fileNameAndPath2 = null;
+			String imagepath1 = "";
+			String imagePath2 = "";
+			if (image1 != null) {
+				fileNameAndPath1 = Paths.get("D:\\qrapics", "image1" + rand.nextInt(60000) + image1.getOriginalFilename());
 			}
-			if (fileNameAndPath2 != null) {
-				Files.write(fileNameAndPath2, image2.getBytes());
-				imagePath2 = fileNameAndPath2.toString();
-				System.out.println(fileNameAndPath2.toString());
+			if (!image2.isEmpty()) {
+				fileNameAndPath2 = Paths.get("D:\\qrapics", "image2" + rand.nextInt(60000) + image2.getOriginalFilename());
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ProductBean product = new ProductBean(productName, brandName, productprice, category, subcategory,
-				microcategory, productdesc, modelnumber, weight, shape, color, material, orderqnt, uses, imagepath1,
-				imagePath2);
-		System.out.println("count " + userservice.addProduct(product));
+			try {
+				if (fileNameAndPath1 != null) {
+					Files.write(fileNameAndPath1, image1.getBytes());
+					imagepath1 = fileNameAndPath1.toString();
+					System.out.println(fileNameAndPath1.toString());
+				}
+				if (fileNameAndPath2 != null) {
+					Files.write(fileNameAndPath2, image2.getBytes());
+					imagePath2 = fileNameAndPath2.toString();
+					System.out.println(fileNameAndPath2.toString());
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ProductBean product = new ProductBean(productName, brandName, productprice, category, subcategory,
+					microcategory, productdesc, modelnumber, weight, shape, color, material, orderqnt, uses, imagepath1,
+					imagePath2,userid,"N");
+			System.out.println("count " + userservice.addProduct(product));
 
-		return model;
+			return new ModelAndView("addproduct");
+
+		} else {
+			return new ModelAndView("loginpage");
+		}
 	}
 
 	@GetMapping("/getcategories")

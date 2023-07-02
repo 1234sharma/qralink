@@ -19,11 +19,12 @@ public class ProductBean {
 	private String uses;
 	private String pic1;
 	private String pic2;
-	
+    private int userid;
+    private String productlive;
 	public ProductBean(String productName, String brandName, String productPrice,
 			String categoryId, String subCategoryId, String microCategoryId, String productdesc, String modelnumber,
 			String weight, String shape, String color, String material, String orderqnt, String uses, String pic1,
-			String pic2) {
+			String pic2,int userid,String productlive) {
 		super();
 		this.productName = productName;
 		this.brandName = brandName;
@@ -41,6 +42,8 @@ public class ProductBean {
 		this.uses = uses;
 		this.pic1 = pic1;
 		this.pic2 = pic2;
+		this.userid=userid;
+		this.productlive=productlive;
 	}
 	public long getProductId() {
 		return productId;
@@ -145,6 +148,28 @@ public class ProductBean {
 	public void setPic2(String pic2) {
 		this.pic2 = pic2;
 	}
+	public int getUserid() {
+		return userid;
+	}
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+	public String getProductlive() {
+		return productlive;
+	}
+	public void setProductlive(String productlive) {
+		this.productlive = productlive;
+	}
+	@Override
+	public String toString() {
+		return "ProductBean [productId=" + productId + ", productName=" + productName + ", brandName=" + brandName
+				+ ", productPrice=" + productPrice + ", CategoryId=" + CategoryId + ", SubCategoryId=" + SubCategoryId
+				+ ", microCategoryId=" + microCategoryId + ", productdesc=" + productdesc + ", modelnumber="
+				+ modelnumber + ", weight=" + weight + ", shape=" + shape + ", color=" + color + ", material="
+				+ material + ", orderqnt=" + orderqnt + ", uses=" + uses + ", pic1=" + pic1 + ", pic2=" + pic2
+				+ ", userid=" + userid + ", productlive=" + productlive + "]";
+	}
+	
 
 	
 	

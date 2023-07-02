@@ -5,10 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<html xmlns="//www.w3.org/1999/xhtml" ng-app="DialToMe">
-<head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -74,7 +70,7 @@
 						<div class="prbs-inner-right">
 							<div class="prf-sec">
 								<form name="requirement_form" id="requirement_form"
-									method="post" action enctype="multipart/form-data">
+									method="post" action="postbyreqquote" enctype="multipart/form-data">
 									<div>
 										<div class="five columns aligncenter text">
 											<br />
@@ -168,13 +164,11 @@
 										</div>
 									</div>
 							</div>
-							<input type="hidden" name="valid_rqfs" value="7">
 							<div class="col-md-10 col-xs-12" style="margin-top: 0px;"></div>
 							<div>&ensp;</div>
 							<div class="textr">
 								<div class>
-									<button type="button" class="btn btn-warning btn-lg btn-block"
-										data-toggle="modal" data-target="#otpmodal">Post Buy
+									<button type="submit" class="btn btn-warning btn-lg btn-block">Post Buy
 										Requirment</button>
 								</div>
 							</div>
