@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qraAdmin.dao.UserDao;
+import com.qraAdmin.model.UserDetail;
 
 @Service
 public class AdminLoginService {
@@ -11,20 +12,20 @@ public class AdminLoginService {
 	@Autowired
 	UserDao userDao;
 
-	public String forpasswordvalidation(String username, String password) throws Exception {
+	public UserDetail forpasswordvalidation(String username, String password) throws Exception {
 		System.out.println("username" + username);
 		System.out.println("password" + password);
 		String usernameAdmin = "qralink@gmail.com";
 		String AdminuserPassword = "9044221797";
-		String userType = null;
+		UserDetail userdetail = null;
 		try {
-			userType = userDao.getUserIfExist(username, password);
-			System.out.println(userType);
+			userdetail = userDao.getUserIfExist(username, password);
+			System.out.println(userdetail);
 		} catch (Exception e) {
-			userType = null;
+			userdetail = null;
 		}
-		if (userType != null && !userType.equals("")) {
-			return userType;
+		if (userdetail != null) {
+			return userdetail;
 		} else {
 			throw new Exception();
 		}

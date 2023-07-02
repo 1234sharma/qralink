@@ -8,6 +8,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.qraAdmin.model.ProductBean;
+import com.qraAdmin.model.UserDetail;
+import com.qraAdmin.rowmapper.UserDetailRowMapper;
 @Repository
 public class UserDao {
 	@Autowired
@@ -51,6 +53,7 @@ public class UserDao {
     			+ ",usertype) VALUES(?,?,?,?,?,?,?,?,?)",name, mobileNumber,CompanyName,email, country, state, city, password, userType);
     	
     }catch (Exception e) {
+    	System.out.println("exception is "+e);
          count=0;
 	}
     	return count;
@@ -84,19 +87,19 @@ public class UserDao {
     	
     }
     
-    public String getUserIfExist(String username,String password) {
-    	String sql="SELECT usertype FROM qralink.userdetail where email=\""+username+"\" and pass=\""+password+"\"";
-    	String type="";
+    public UserDetail getUserIfExist(String username,String password) {
+    	String sql="SELECT * FROM qralink.userdetail where email=\""+username+"\" and pass=\""+password+"\"";
+    	UserDetail userdetail=null;
     	try {
     		System.out.println(sql);
-    	 type= jdbcTemplate.queryForObject(sql, String.class);
-    	 System.out.println(type);
+    		userdetail= jdbcTemplate.queryForObject(sql,new UserDetailRowMapper());
+    	 System.out.println(userdetail);
         }catch(Exception e) {
         	System.out.println(e);
-        	type=null;
+        	userdetail=null;
         }
     	
-    	return type;
+    	return userdetail;
     }
     
 }

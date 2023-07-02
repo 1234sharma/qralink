@@ -182,7 +182,7 @@ margin: auto;
 						</a>
 						<div
 							class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-							<a href="#" class="dropdown-item">Change Password</a> <a href="#"
+							<a href="#" class="dropdown-item">Change Password</a> <a href="/logout"
 								class="dropdown-item">Log Out</a>
 						</div>
 					</div>

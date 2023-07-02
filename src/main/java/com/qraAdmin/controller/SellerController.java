@@ -32,6 +32,7 @@ import com.qraAdmin.service.SellerService;
 import com.qraAdmin.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.websocket.server.PathParam;
 
 @Controller
@@ -45,8 +46,22 @@ public class SellerController {
 	SellerService sellerservice;
 
 	@GetMapping("/sellerPage")
-	public ModelAndView sellerPage() {
-		ModelAndView model = new ModelAndView("Seller");
+	public ModelAndView sellerPage(HttpServletRequest req) {
+		ModelAndView model = null;
+		int userid=0;
+		String usertype=null;
+		HttpSession session = req.getSession();
+		Object id = session.getAttribute("userid");
+		Object type = session.getAttribute("usertype");
+		if(id!=null && type!=null) {
+			 userid = Integer.parseInt(String.valueOf(session.getAttribute("userid")));
+			 usertype = String.valueOf(session.getAttribute("usertype"));	
+		}
+		if (userid > 0 && usertype!=null && usertype.equals("seller")) {
+			model = new ModelAndView("Seller");
+		} else {
+			model = new ModelAndView("loginpage");
+		}
 		return model;
 	}
 
@@ -60,12 +75,6 @@ public class SellerController {
 	@GetMapping("/addproductPage")
 	public ModelAndView addproductPage() {
 		ModelAndView model = new ModelAndView("addproduct");
-		return model;
-	}
-
-	@GetMapping("/sellerdash")
-	public ModelAndView sellerdashboard() {
-		ModelAndView model = new ModelAndView("Seller");
 		return model;
 	}
 
