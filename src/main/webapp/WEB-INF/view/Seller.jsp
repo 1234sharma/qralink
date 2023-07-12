@@ -120,7 +120,7 @@ margin: auto;
 							Product Management</a>
 						<div class="dropdown-menu bg-transparent border-0">
 							<a href="button.html" class="dropdown-item"> Product List</a> <a
-								href="typography.html" class="dropdown-item">Add Product</a> <a
+								href="addproductPage" class="dropdown-item">Add Product</a> <a
 								href="element.html" class="dropdown-item">Product Group
 								Management</a>
 						</div>

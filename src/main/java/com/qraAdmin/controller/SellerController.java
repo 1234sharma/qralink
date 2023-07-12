@@ -67,7 +67,13 @@ public class SellerController {
 
 	@GetMapping("/addproductPage")
 	public ModelAndView addproductPage() {
-		ModelAndView model = new ModelAndView("addproduct");
+		ModelAndView model = new ModelAndView("sellerDashboard");
+		return model;
+	}
+	
+	@GetMapping("/sellerdash")
+	public ModelAndView sellerdashboard() {
+		ModelAndView model = new ModelAndView("Seller");
 		return model;
 	}
 
