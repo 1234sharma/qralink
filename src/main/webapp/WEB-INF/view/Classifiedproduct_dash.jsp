@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html style="overflow-x: hidden;">
 
@@ -163,7 +164,7 @@
             <!-- Navbar End -->
 
 
-          <div><jsp:include page="/WEB-INF/view/Dashboard1.jsp" /></div> 
+          <div><jsp:include page="/WEB-INF/view/classifiedproduct.jsp" /></div> 
             
             
             <!-- Sale & Revenue End -->
@@ -176,7 +177,7 @@
                             &copy; <a href="http://disonictechnovation.com/">DISONIC TECHNOVATION PVT LTD</a>, All Right Reserved. 
                         </div>
                         <div class="col-12 col-sm-6 text-center text-sm-end">
-                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                            <!--/*** This template is free as long as you keep the footer authorâs credit link/attribution link/backlink. If you'd like to use the template without the footer authorâs credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
                             Designed By <a href="http://disonictechnovation.com/">DISONIC TECHNOVATION</a>
                         </div>
                     </div>

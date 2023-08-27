@@ -45,6 +45,26 @@ public class SellerController {
 	@Autowired
 	SellerService sellerservice;
 
+	@GetMapping("/CompanyProfile")
+	public ModelAndView CompanyProfile() {
+		ModelAndView model = new ModelAndView("CmpProfile");
+		return model;
+	}
+	
+	@GetMapping("/Information")
+	public ModelAndView CompanyProfile1() {
+		ModelAndView model = new ModelAndView("Information_dash");
+		return model;
+	}
+	
+	
+	
+	@GetMapping("/tradeproduct")
+	public ModelAndView TradeAndProduct() {
+		ModelAndView model = new ModelAndView("TradeNdProductMain");
+		return model;
+	}
+	
 	@GetMapping("/sellerPage")
 	public ModelAndView sellerPage(HttpServletRequest req) {
 		ModelAndView model = null;
@@ -67,7 +87,7 @@ public class SellerController {
 
 	@GetMapping("/addproductPage")
 	public ModelAndView addproductPage() {
-		ModelAndView model = new ModelAndView("sellerDashboard");
+		ModelAndView model = new ModelAndView("addproduct");
 		return model;
 	}
 	

@@ -91,12 +91,12 @@ margin: auto;
 					<a href="index.html" class="nav-item nav-link active"><i
 						class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
 					<div class="nav-item dropdown">
-						<a href="#" class="nav-link dropdown-toggle"
+						<a href="" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Company
 							profile</a>
 						<div class="dropdown-menu bg-transparent border-0">
 							<a
-								href="{pageContext.request.contextPath}/jsp/company_profile.jsp"
+								href="/CompanyProfile"
 								class="dropdown-item">Company Profile</a> <a
 								href="typography.html" class="dropdown-item">Trade &
 								production</a> <a href="element.html" class="dropdown-item">Information

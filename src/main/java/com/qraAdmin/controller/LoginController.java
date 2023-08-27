@@ -58,6 +58,23 @@ public class LoginController {
 		ModelAndView model = new ModelAndView("adminDashbard");
 		return model;
 	}
+	
+	@GetMapping("/SplNdProd")
+	public ModelAndView AdminDash1() {
+		ModelAndView model = new ModelAndView("categories_dash");
+		return model;
+	}
+	
+	@GetMapping("/ChangeAdminPassword")
+	public ModelAndView ChangeAdminPassword() {
+		ModelAndView model = new ModelAndView("ChangeAdminPassword");
+		return model;
+	}
+	@GetMapping("/Classifiedproduct")
+	public ModelAndView Classifiedproduct() {
+		ModelAndView model = new ModelAndView("Classifiedproduct_dash");
+		return model;
+	}
 
 	@PostMapping("/login")
 	@ResponseBody

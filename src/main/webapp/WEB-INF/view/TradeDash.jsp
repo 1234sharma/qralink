@@ -1,10 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html style="overflow-x: hidden;">
 
 <head>
+    
     <title>Admin Dashboard</title>
+   
+
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
@@ -25,7 +28,9 @@
 </head>
 
 <body>
-   <!-- Sidebar Start -->
+  
+
+        <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-secondary navbar-dark">
                 <a href="index.html" class="navbar-brand mx-4 mb-3">
@@ -51,10 +56,10 @@
                             <a href="/Tradecategories" class="dropdown-item">Show trade lead Category</a>
                         </div>
                     </div>
-                    <a href="/ChangeAdminPassword" class="nav-item nav-link"><i class="fa fa-th me-2"></i>General Settings </a>
-                    <a href="/Classifiedproduct" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Classified Categories</a>
+                    <a href="/ChangeAdminPassword" class="nav-item nav-link"><i class="fa fa-th me-2"></i>General Settings</a>
+                    <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
                     <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
-                    <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a> 
+                    <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -80,71 +85,9 @@
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
-<!--                 <form class="d-none d-md-flex ms-4"> -->
-<!--                     <input class="form-control bg-dark border-0" type="search" placeholder="Search"> -->
-<!--                 </form> -->
                 <div class="navbar-nav align-items-center ms-auto">
-<!--                     <div class="nav-item dropdown"> -->
-<!--                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> -->
-<!--                             <i class="fa fa-envelope me-lg-2"></i> -->
-<!--                             <span class="d-none d-lg-inline-flex">Message</span> -->
-<!--                         </a> -->
-<!--                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0"> -->
-<!--                             <a href="#" class="dropdown-item"> -->
-<!--                                 <div class="d-flex align-items-center"> -->
-<!--                                     <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;"> -->
-<!--                                     <div class="ms-2"> -->
-<!--                                         <h6 class="fw-normal mb-0">Jhon send you a message</h6> -->
-<!--                                         <small>15 minutes ago</small> -->
-<!--                                     </div> -->
-<!--                                 </div> -->
-<!--                             </a> -->
-<!--                             <hr class="dropdown-divider"> -->
-<!--                             <a href="#" class="dropdown-item"> -->
-<!--                                 <div class="d-flex align-items-center"> -->
-<!--                                     <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;"> -->
-<!--                                     <div class="ms-2"> -->
-<!--                                         <h6 class="fw-normal mb-0">Jhon send you a message</h6> -->
-<!--                                         <small>15 minutes ago</small> -->
-<!--                                     </div> -->
-<!--                                 </div> -->
-<!--                             </a> -->
-<!--                             <hr class="dropdown-divider"> -->
-<!--                             <a href="#" class="dropdown-item"> -->
-<!--                                 <div class="d-flex align-items-center"> -->
-<!--                                     <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;"> -->
-<!--                                     <div class="ms-2"> -->
-<!--                                         <h6 class="fw-normal mb-0">Jhon send you a message</h6> -->
-<!--                                         <small>15 minutes ago</small> -->
-<!--                                     </div> -->
-<!--                                 </div> -->
-<!--                             </a> -->
-<!--                             <hr class="dropdown-divider"> -->
-<!--                             <a href="#" class="dropdown-item text-center">See all message</a> -->
-<!--                         </div> -->
-<!--                     </div> -->
                     <div class="nav-item dropdown">
-<!--                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> -->
-<!--                             <i class="fa fa-bell me-lg-2"></i> -->
-<!--                             <span class="d-none d-lg-inline-flex">Notificatin</span> -->
-<!--                         </a> -->
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-<!--                             <a href="#" class="dropdown-item"> -->
-<!--                                 <h6 class="fw-normal mb-0">Profile updated</h6> -->
-<!--                                 <small>15 minutes ago</small> -->
-<!--                             </a> -->
-<!--                             <hr class="dropdown-divider"> -->
-<!--                             <a href="#" class="dropdown-item"> -->
-<!--                                 <h6 class="fw-normal mb-0">New user added</h6> -->
-<!--                                 <small>15 minutes ago</small> -->
-<!--                             </a> -->
-<!--                             <hr class="dropdown-divider"> -->
-<!--                             <a href="#" class="dropdown-item"> -->
-<!--                                 <h6 class="fw-normal mb-0">Password changed</h6> -->
-<!--                                 <small>15 minutes ago</small> -->
-<!--                             </a> -->
-<!--                             <hr class="dropdown-divider"> -->
-<!--                             <a href="#" class="dropdown-item text-center">See all notifications</a> -->
                         </div>
                     </div>
                     <div class="nav-item dropdown">
@@ -163,7 +106,7 @@
             <!-- Navbar End -->
 
 
-          <div><jsp:include page="/WEB-INF/view/Dashboard1.jsp" /></div> 
+          <div><jsp:include page="/WEB-INF/view/Tradecategories.jsp" /></div> 
             
             
             <!-- Sale & Revenue End -->
@@ -176,21 +119,14 @@
                             &copy; <a href="http://disonictechnovation.com/">DISONIC TECHNOVATION PVT LTD</a>, All Right Reserved. 
                         </div>
                         <div class="col-12 col-sm-6 text-center text-sm-end">
-                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                            <!--/*** This template is free as long as you keep the footer authorâs credit link/attribution link/backlink. If you'd like to use the template without the footer authorâs credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
                             Designed By <a href="http://disonictechnovation.com/">DISONIC TECHNOVATION</a>
                         </div>
                     </div>
                 </div>
             </div></div>
-            <!-- Footer End -->
-        
-        <!-- Content End -->
-
-
-        <!-- Back to Top -->
+            
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-    
-
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

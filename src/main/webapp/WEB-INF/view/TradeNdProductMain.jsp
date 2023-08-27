@@ -1,15 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-<meta charset="utf-8">
 <title>Admin Dashboard</title>
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<meta content="" name="keywords">
-<meta content="" name="description">
-
 <!-- Favicon -->
 <link href="img/favicon.ico" rel="icon">
 
@@ -96,7 +91,7 @@ margin: auto;
 							profile</a>
 						<div class="dropdown-menu bg-transparent border-0">
 							<a
-								href="{pageContext.request.contextPath}/jsp/company_profile.jsp"
+								href="/CompanyProfile"
 								class="dropdown-item">Company Profile</a> <a
 								href="typography.html" class="dropdown-item">Trade &
 								production</a> <a href="element.html" class="dropdown-item">Information
@@ -189,7 +184,8 @@ margin: auto;
 				</div>
 			</nav>
 			<!-- Navbar End -->
-			<%@include file="addproduct.jsp" %>
+			<jsp:include page="/WEB-INF/view/TradeNdProductMain.jsp" /> 
+
 <%-- 				<jsp:include page='addproduct.jsp'> --%>
 			<!-- Footer Start -->
 			<div class="container-fluid pt-4 px-4">
@@ -209,8 +205,7 @@ margin: auto;
 			<!-- Footer End -->
 		</div>
 		<!-- Content End -->
-
-
+        
 		<!-- Back to Top -->
 		<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
 			class="bi bi-arrow-up"></i></a>
