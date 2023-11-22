@@ -30,8 +30,8 @@ public class LoginController {
 	AdminLoginService adminservice;
 
 	@GetMapping("/loginPage")
-	public ModelAndView firstpage() {
-		ModelAndView model = new ModelAndView("homePage");
+	public ModelAndView firstpage() { 
+		ModelAndView model = new ModelAndView("loginpage");
 		return model;
 	}
 

@@ -31,7 +31,7 @@ public class BuyerController {
 	@PostMapping("/postbyreqquote")
 	public ModelAndView postByReqQuote(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		ModelAndView model = new ModelAndView("addproduct");
+		ModelAndView model = new ModelAndView("Home");
 		int userid = 0;
 		String usertype = null;
 		Object id = session.getAttribute("userid");

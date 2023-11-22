@@ -207,7 +207,7 @@ float: inline-end;
 											href="products.html">JOIN FREE</a></li>
 										<li class="nav-item"><a class="nav-link"
 											href="fashion.html">TRENDING CATEGORIES</a></li>
-										<li class="nav-item"><a class="nav-link" href="news.html">POST
+										<li class="nav-item"><a class="nav-link" href="http://localhost:8089/postbyreq">POST
 												BUY REQUIREMENT</a></li>
 										<li class="nav-item"><a class="nav-link"
 											href="contact.html">CONTACT US</a></li>
