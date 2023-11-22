@@ -31,19 +31,19 @@ public class LoginController {
 
 	@GetMapping("/loginPage")
 	public ModelAndView firstpage() {
-		ModelAndView model = new ModelAndView("loginpage");
+		ModelAndView model = new ModelAndView("homePage");
 		return model;
 	}
 
 	@GetMapping("/postbyreq")
 	public ModelAndView postbyrequirement() {
 		ModelAndView model = new ModelAndView("postByRequirement");
-		return model;
+		return model; 
 	}
 
 	@GetMapping("/homepage")
 	public ModelAndView homepage() {
-		ModelAndView model = new ModelAndView("Home");
+		ModelAndView model = new ModelAndView("homePage");
 		return model;
 	}
 

@@ -86,6 +86,11 @@
   animation-name: fade;
   animation-duration: 1.5s;
 }
+#see_more_btn{
+float: inline-end;
+    background-color: gold;
+    border: solid;
+}
 
 @keyframes fade {
   from {opacity: .4} 
@@ -100,7 +105,7 @@
 </style>
 </head>
 <!-- body -->
-<body class="main-layout" style="background-color:powderblue;">
+<body class="main-layout" style="background-color:powderblue;" onload="callAllloadFunction()">
 	<!-- header -->
 	<header>
 		<!-- header inner -->
@@ -261,41 +266,43 @@
 	<h1 class="six_box11" style="background-color:#000000; color: white; text-align: center;">TRENDING CATEGORIES</h1>
 	<div class="six_box">
 		<div class="container-fluid" >
-			<div class="row">
-				<div class="col-md-2 col-sm-4 pa_left">
-					<div class="six_probpx yellow_bg">
-						<i><img src="images/shoes.png" alt="#" /></i> <span>Shoes</span>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-4 pa_left">
-					<div class="six_probpx bluedark_bg">
-						<i><img src="images/underwear.png" alt="#" /></i> <span>underwear</span>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-4 pa_left">
-					<div class="six_probpx yellow_bg">
-						<i><img src="images/pent.png" alt="#" /></i> <span>Pante &
-							socks</span>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-4 pa_left">
-					<div class="six_probpx bluedark_bg">
-						<i><img src="images/t_shart.png" alt="#" /></i> <span>T-shirt
-							& tankstop</span>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-4 pa_left">
-					<div class="six_probpx yellow_bg">
-						<i><img src="images/jakit.png" alt="#" /></i> <span>cardigans
-							& jumpers</span>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-4 pa_left">
-					<div class="six_probpx bluedark_bg">
-						<i><img src="images/helbet.png" alt="#" /></i> <span>Top &
-							hat</span>
-					</div>
-				</div>
+			<div class="row" id="row_id">
+<!-- 				<div class="col-md-2 col-sm-4 pa_left"> -->
+<!-- 					<div class="six_probpx yellow_bg"> -->
+<!-- 						<i><img src="images/shoes.png" alt="#" /></i> <span>Shoes</span> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-md-2 col-sm-4 pa_left"> -->
+<!-- 					<div class="six_probpx bluedark_bg"> -->
+<!-- 						<i><img src="images/underwear.png" alt="#" /></i> <span>underwear</span> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-md-2 col-sm-4 pa_left"> -->
+<!-- 					<div class="six_probpx yellow_bg"> -->
+<!-- 						<i><img src="images/pent.png" alt="#" /></i> <span>Pante & -->
+<!-- 							socks</span> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-md-2 col-sm-4 pa_left"> -->
+<!-- 					<div class="six_probpx bluedark_bg"> -->
+<!-- 						<i><img src="images/t_shart.png" alt="#" /></i> <span>T-shirt -->
+<!-- 							& tankstop</span> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-md-2 col-sm-4 pa_left"> -->
+<!-- 					<div class="six_probpx yellow_bg"> -->
+<!-- 						<i><img src="images/jakit.png" alt="#" /></i> <span>cardigans -->
+<!-- 							& jumpers</span> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-md-2 col-sm-4 pa_left"> -->
+<!-- 					<div class="six_probpx bluedark_bg"> -->
+<!-- 						<i><img src="images/helbet.png" alt="#" /></i> <span>Top & -->
+<!-- 							hat</span> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+				
+				
 			</div>
 		</div>
 <!-- 		<div class="six_box11" style="background-color:#000000;"></div> -->
@@ -305,46 +312,50 @@
 	<h1 class="six_box11" style="background-color:#000000; color: white; text-align: center;">CATEGORIES</h1>
 	<div class="six_box">
 		<div class="container-fluid" >
-			<div class="row">
-				<div class="col-md-2 col-sm-4 pa_left">
-					<div class="six_probpx yellow_bg">
-						<i><img src="images/shoes.png" alt="#" /></i> <span>Shoes</span>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-4 pa_left">
-					<div class="six_probpx bluedark_bg">
-						<i><img src="images/underwear.png" alt="#" /></i> <span>underwear</span>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-4 pa_left">
-					<div class="six_probpx yellow_bg">
-						<i><img src="images/pent.png" alt="#" /></i> <span>Pante &
-							socks</span>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-4 pa_left">
-					<div class="six_probpx bluedark_bg">
-						<i><img src="images/t_shart.png" alt="#" /></i> <span>T-shirt
-							& tankstop</span>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-4 pa_left">
-					<div class="six_probpx yellow_bg">
-						<i><img src="images/jakit.png" alt="#" /></i> <span>cardigans
-							& jumpers</span>
-					</div>
-				</div>
-				<div class="col-md-2 col-sm-4 pa_left">
-					<div class="six_probpx bluedark_bg">
-						<i><img src="images/helbet.png" alt="#" /></i> <span>Top &
-							hat</span>
-					</div>
-				</div>
+			<div class="row" id="row_id2">
+			
+<!-- 				<div class="col-md-2 col-sm-4 pa_left"> -->
+<!-- 					<div class="six_probpx yellow_bg"> -->
+<!-- 						<i><img src="images/shoes.png" alt="#" /></i> <span>Shoes</span> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-md-2 col-sm-4 pa_left"> -->
+<!-- 					<div class="six_probpx bluedark_bg"> -->
+<!-- 						<i><img src="images/underwear.png" alt="#" /></i> <span>underwear</span> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-md-2 col-sm-4 pa_left"> -->
+<!-- 					<div class="six_probpx yellow_bg"> -->
+<!-- 						<i><img src="images/pent.png" alt="#" /></i> <span>Pante & -->
+<!-- 							socks</span> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-md-2 col-sm-4 pa_left"> -->
+<!-- 					<div class="six_probpx bluedark_bg"> -->
+<!-- 						<i><img src="images/t_shart.png" alt="#" /></i> <span>T-shirt -->
+<!-- 							& tankstop</span> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-md-2 col-sm-4 pa_left"> -->
+<!-- 					<div class="six_probpx yellow_bg"> -->
+<!-- 						<i><img src="images/jakit.png" alt="#" /></i> <span>cardigans -->
+<!-- 							& jumpers</span> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-md-2 col-sm-4 pa_left"> -->
+<!-- 					<div class="six_probpx bluedark_bg"> -->
+<!-- 						<i><img src="images/helbet.png" alt="#" /></i> <span>Top & -->
+<!-- 							hat</span> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+				
+				
 			</div>
 		</div>
 <!-- 		<div class="six_box11" style="background-color:#000000;"></div> -->
 	</div>
 	<h1 class="six_box11" style="background-color:#000000;"></h1>
+	<button id="see_more_btn" onclick="view_all()">SEE MORE</button>
 	<!-- end six_box section -->
 	<!-- project section -->
 	<div id="project" class="project">
@@ -703,6 +714,93 @@
 	  slides[slideIndex-1].style.display = "block";  
 	  dots[slideIndex-1].className += " active";
 	  setTimeout(showSlides, 2000); // Change image every 2 seconds
+	}
+	
+	function callAllloadFunction(){
+		showTrendingCategory();
+    	showCategory();
+    }
+	
+	var imgpath="C:/Users/AAKASH JAISWAL/Documents/Aakash/";
+	function showTrendingCategory(){
+		console.log("Inside Show Category!!!!!!!!!!!!");
+		 $.ajax({
+             type: "GET",
+             url: '/trendingCategory',
+             async: false,
+             success: function (response) {
+            	 for(var i = 0, size = 6; i < size ; i++) {  
+            		
+            		 var item = response[i];
+                     console.log("item vaules",item)
+                     var it = Object.keys(item);
+                     console.log("item Key Name",it);
+		     		 var itm = Object.values(item);
+                     console.log("item Object 1 values:",itm[0]);
+                     console.log("item Object 2 values:",itm[1]);
+                     $("#row_id").append("<div class=col-md-2 col-sm-4 pa_left><div class=six_probpx yellow_bg><i><img src='"+imgpath+""+itm[1]+"'  alt=# /></i> <a id=trendcat_id onclick=getTrendCatcard() href=subcategories <span>"+itm[1]+"</span></a></div></div>");
+           		  }	
+            	}
+    		 });
+	}
+	
+	
+	function getTrendCatcard(){
+// 		alert("Card Data Empty..");
+
+		 $.post("/gettrendcatdata",{CATEGORYID})
+		  	.done(function(retColData){
+		  		   colmnData = retColData;
+		  		   console.log("list of colmns :"+colmnData.length);
+		  		 	location.reload();
+		 	 })
+		  	.fail(function(xhr, status, error){
+		  		 console.log("error");
+		 	});
+	}
+	
+	function showCategory(){
+		console.log("Inside All Category!!!!!!!!!!!!");
+		 $.ajax({
+             type: "GET",
+             url: '/trendingCategory',
+             async: false,
+             success: function (response) {
+            	 for(var i = 0, size = 6; i < size ; i++) {  
+            		
+            		 var item = response[i];
+                     console.log("item vaules",item)
+                     var it = Object.keys(item);
+                     console.log("item Key Name",it);
+		     		 var itm = Object.values(item);
+                     console.log("item Object 1 values:",itm[0]);
+                     console.log("item Object 2 values:",itm[1]);
+                     $("#row_id2").append("<div class=col-md-2 col-sm-4 pa_left><div class=six_probpx yellow_bg><i><img src='"+imgpath+""+itm[1]+"'  alt=# /></i> <a onclick=getCatCard() href=subcategories <span>"+itm[1]+"</span></a></div></div>");
+           		  }	
+            	}
+    		 });
+	}
+	
+	function view_all(){
+		$.ajax({
+            type: "GET",
+            url: '/trendingCategory',
+            async: false,
+            success: function (response) {
+           	 for(var i = 0, size = response.length; i < size ; i++) {  
+           		
+           		 var item = response[i];
+                    console.log("item vaules",item)
+                    var it = Object.keys(item);
+                    console.log("item Key Name",it);
+		     		 var itm = Object.values(item);
+                    console.log("item Object 1 values:",itm[0]);
+                    console.log("item Object 2 values:",itm[1]);
+                    $("#row_id2").append("<div class=col-md-2 col-sm-4 pa_left><div class=six_probpx yellow_bg><i><img src='"+imgpath+""+itm[1]+"'  alt=# /></i> <span>"+itm[1]+"</span></div></div>");
+          		  }	
+           	}
+   		 });
+		
 	}
 	</script>
 </body>

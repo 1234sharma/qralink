@@ -45,17 +45,23 @@ public class SellerController {
 	@Autowired
 	SellerService sellerservice;
 
-	@GetMapping("/CompanyProfile")
-	public ModelAndView CompanyProfile() {
-		ModelAndView model = new ModelAndView("CmpProfile");
-		return model;
-	}
+//	@GetMapping("/CompanyProfile")
+//	public ModelAndView CompanyProfile() {
+//		ModelAndView model = new ModelAndView("CmpProfile");
+//		return model;
+//	}
 	
-	@GetMapping("/Information")
-	public ModelAndView CompanyProfile1() {
-		ModelAndView model = new ModelAndView("Information_dash");
-		return model;
-	}
+//	@GetMapping("/homepage")
+//	public ModelAndView CompanyProfile2() {
+//		ModelAndView model = new ModelAndView("homePage");
+//		return model;
+//	}
+	
+//	@GetMapping("/homepage")
+//	public ModelAndView CompanyProfile1() {
+//		ModelAndView model = new ModelAndView("homePage");
+//		return model;
+//	}
 	
 	
 	
