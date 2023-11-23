@@ -1,7 +1,8 @@
-package com.qraAdmin.model;
+package com.qraAdmin.DTO;
 
+import java.util.Arrays;
 
-public class ProductBean {
+public class ProductBeanDTO {
 	private long productId;
 	private String productName;
 	private String brandName;
@@ -17,18 +18,22 @@ public class ProductBean {
 	private String material;
 	private String orderqnt;
 	private String uses;
-	private String pic1;
-	private String pic2;
+	private byte[] pic1;
+	private byte[] pic2;
     private int userid;
     private String productlive;
-    public ProductBean() {
-		// TODO Auto-generated constructor stub
+    private String image1encode64;
+    private String image2encode64;
+    
+	public ProductBeanDTO() {
+		
 	}
-	public ProductBean(String productName, String brandName, String productPrice,
-			String categoryId, String subCategoryId, String microCategoryId, String productdesc, String modelnumber,
-			String weight, String shape, String color, String material, String orderqnt, String uses, String pic1,
-			String pic2,int userid,String productlive) {
+	public ProductBeanDTO(long productId, String productName, String brandName, String productPrice, String categoryId,
+			String subCategoryId, String microCategoryId, String productdesc, String modelnumber, String weight,
+			String shape, String color, String material, String orderqnt, String uses, byte[] pic1, byte[] pic2,
+			int userid, String productlive) {
 		super();
+		this.productId = productId;
 		this.productName = productName;
 		this.brandName = brandName;
 		this.productPrice = productPrice;
@@ -45,8 +50,21 @@ public class ProductBean {
 		this.uses = uses;
 		this.pic1 = pic1;
 		this.pic2 = pic2;
-		this.userid=userid;
-		this.productlive=productlive;
+		this.userid = userid;
+		this.productlive = productlive;
+	}
+	
+	public String getImage1encode64() {
+		return image1encode64;
+	}
+	public void setImage1encode64(String image1encode64) {
+		this.image1encode64 = image1encode64;
+	}
+	public String getImage2encode64() {
+		return image2encode64;
+	}
+	public void setImage2encode64(String image2encode64) {
+		this.image2encode64 = image2encode64;
 	}
 	public long getProductId() {
 		return productId;
@@ -72,7 +90,6 @@ public class ProductBean {
 	public void setProductPrice(String productPrice) {
 		this.productPrice = productPrice;
 	}
-	
 	public String getCategoryId() {
 		return CategoryId;
 	}
@@ -139,16 +156,16 @@ public class ProductBean {
 	public void setUses(String uses) {
 		this.uses = uses;
 	}
-	public String getPic1() {
+	public byte[] getPic1() {
 		return pic1;
 	}
-	public void setPic1(String pic1) {
+	public void setPic1(byte[] pic1) {
 		this.pic1 = pic1;
 	}
-	public String getPic2() {
+	public byte[] getPic2() {
 		return pic2;
 	}
-	public void setPic2(String pic2) {
+	public void setPic2(byte[] pic2) {
 		this.pic2 = pic2;
 	}
 	public int getUserid() {
@@ -165,15 +182,15 @@ public class ProductBean {
 	}
 	@Override
 	public String toString() {
-		return "ProductBean [productId=" + productId + ", productName=" + productName + ", brandName=" + brandName
+		return "ProductBeanDTO [productId=" + productId + ", productName=" + productName + ", brandName=" + brandName
 				+ ", productPrice=" + productPrice + ", CategoryId=" + CategoryId + ", SubCategoryId=" + SubCategoryId
 				+ ", microCategoryId=" + microCategoryId + ", productdesc=" + productdesc + ", modelnumber="
 				+ modelnumber + ", weight=" + weight + ", shape=" + shape + ", color=" + color + ", material="
-				+ material + ", orderqnt=" + orderqnt + ", uses=" + uses + ", pic1=" + pic1 + ", pic2=" + pic2
-				+ ", userid=" + userid + ", productlive=" + productlive + "]";
+				+ material + ", orderqnt=" + orderqnt + ", uses=" + uses + ", pic1=" + Arrays.toString(pic1) + ", pic2="
+				+ Arrays.toString(pic2) + ", userid=" + userid + ", productlive=" + productlive + ", image1encode64="
+				+ image1encode64 + ", image2encode64=" + image2encode64 + "]";
 	}
-	
 
-	
-	
+    
+    
 }

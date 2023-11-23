@@ -1,22 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="style.css" rel="stylesheet"/>
-    <title>Product</title>
-</head>
+<html>
 <body>
-
-<div class='container mt-4'>
+	<%@ include file="/responsivenav.jsp"%>
+<div class="card mt-4" style="margin-left: 300px">
+  <div class="card-header">
+    ADD PRODUCT
+  </div>
+  <div class="card-body">
+    <div class='container mt-4 border'>
     <div class="waper_my_account">
         <div class="container-fluid">
+        <h1>Add Product</h1>
             <div class="clearfix">
                 <!-- ADD Product-->
                 <!--Alert Box-->
@@ -31,13 +24,13 @@
                                 <div class="col-md-6 col-xs-12">
                                     <div class="from-group required">
                                         <label class="form-label fw-bold ">Product Name:</label><span class="element">*</span>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1" name="productName" placeholder="Product Name">
+                                        <input type="text" class="form-control" style="background-color: white" id="exampleFormControlInput1" name="productName" placeholder="Product Name">
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-xs-12">
                                     <div class="from-group">
                                         <label class="form-label fw-bold">Brand Name:</label><span class="element">*</span>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1" name="brandName" placeholder="Brand Name">
+                                        <input type="text" class="form-control" style="background-color: white" id="exampleFormControlInput1" name="brandName" placeholder="Brand Name">
                                     </div>
                                 </div>  
                                 <div class="col-md-12 mt-3">
@@ -45,7 +38,7 @@
                                         <label class="form-label fw-bold ">Categories Type</label>
                                     </div>
                                     <div class="col-md-6">                                                                                
-                                        <select class="form-select" aria-label="Default select example"id="categoryid" name="category" onChange="updateSubCategory(this.options[this.selectedIndex].value)">
+                                        <select class="form-select" style="background-color: white" aria-label="Default select example"id="categoryid" name="category" onChange="updateSubCategory(this.options[this.selectedIndex].value)">
                                             <option selected>Please Select</option>
                                         </select>
                                     </div>
@@ -55,7 +48,7 @@
                                         <label class="form-label fw-bold ">Sub-Categories Type</label>
                                     </div>
                                     <div class="col-md-6">                                                                          
-                                        <select class="form-select" aria-label="Default select example" id="subcategoryid" name="subcategory" onChange="updateMicroCategory(this.options[this.selectedIndex].value)">
+                                        <select class="form-select" style="background-color: white" aria-label="Default select example" id="subcategoryid" name="subcategory" onChange="updateMicroCategory(this.options[this.selectedIndex].value)">
                                             <option selected>Please Select</option>
                                         </select>
                                     </div>
@@ -65,7 +58,7 @@
                                         <label class="form-label fw-bold ">Micro-Categories Type</label>
                                     </div>
                                     <div class="col-md-6">                                                                                
-                                        <select class="form-select" aria-label="Default select example" id="microcategoryid" name="microcategory">
+                                        <select class="form-select" style="background-color: white" aria-label="Default select example" id="microcategoryid" name="microcategory">
                                             <option selected>Please Select</option>
                                         </select>
                                     </div>
@@ -73,18 +66,18 @@
                                 <div class="col-md-12 mt-2">
                                     <label for="exampleFormControlTextarea1" class="form-label fw-bold">Product Description:</label>
                                     <span class=""> Use  To expand</span>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" placeholder="Product Info" name="productdesc"></textarea>
+                                    <textarea class="form-control" style="background-color: white" id="exampleFormControlTextarea1" rows="2" placeholder="Product Info" name="productdesc"></textarea>
                                 </div>      
                                 <div class="col-md-4 col-lg-3 mt-2">
                                     <div class="from-group">                                                                                
                                         <label class="form-label fw-bold ">Default Currency</label>
-                                        <input class="form-control" type="text" placeholder="Rs" aria-label="Disabled input example" name="currency" disabled>
+                                        <input class="form-control" style="background-color: white" type="text" placeholder="Rs" aria-label="Disabled input example" name="currency" disabled>
                                     </div>                                
                                 </div>
                                 <div class="col-md-4 mt-2">
                                     <div class="from-group">
                                         <label class="form-label fw-bold">Product Price </label><span class="element">*</span>
-                                        <input type="text" class="form-control" id="product_price" placeholder="Product Price" name="productprice">
+                                        <input type="text" style="background-color: white" class="form-control" id="product_price" placeholder="Product Price" name="productprice">
                                     </div>
                                 </div>
                                
@@ -99,31 +92,31 @@
                                                 <div class="col-md-4 col-md-4">
                                                     <div class="from-group">
                                                         <label class="form-label fw-bold">Model number:</label>
-                                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="modelnumber">
+                                                        <input type="text" style="background-color: white" class="form-control" id="exampleFormControlInput1" placeholder="" name="modelnumber">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 col-md-4 mt-2">
                                                     <div class="from-group">
                                                         <label class="form-label fw-bold">Net Weight</label>
-                                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="weight">
+                                                        <input type="text" style="background-color: white" class="form-control" id="exampleFormControlInput1" placeholder="" name="weight">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 col-md-4 mt-2">
                                                     <div class="from-group">
                                                         <label class="form-label fw-bold">Shape</label>
-                                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="shape">
+                                                        <input type="text" style="background-color: white" class="form-control" id="exampleFormControlInput1" placeholder="" name="shape">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 col-md-4 mt-2">
                                                     <div class="from-group">
                                                         <label class="form-label fw-bold">Color</label>
-                                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="color">
+                                                        <input type="text" style="background-color: white" class="form-control" id="exampleFormControlInput1" placeholder="" name="color">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 mt-2">
                                                     <div class="from-group">
                                                         <label class="form-label fw-bold">Material</label>
-                                                        <select class="form-select" aria-label="Default select example" name="material">
+                                                        <select class="form-select" style="background-color: white" aria-label="Default select example" name="material">
                                                             <option selected>Please select</option>
                                                             <option value="1">Textiles</option>
                                                             <option value="2">Metals</option>
@@ -141,14 +134,14 @@
                                                 <div class="col-md-4 col-md-4 mt-2">
                                                     <div class="from-group">
                                                         <label class="form-label fw-bold">Minimum Order Quantity :</label>
-                                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder=""name="orderqnt">
+                                                        <input type="text" style="background-color: white" class="form-control" id="exampleFormControlInput1" placeholder=""name="orderqnt">
                                                     </div>
                                                 </div> 
                                                 
                                                 <div class="col-md-4 col-md-4 mt-2">
                                                     <div class="from-group">
                                                         <label class="form-label fw-bold">Usage/Application</label>
-                                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="uses">
+                                                        <input type="text" style="background-color: white" class="form-control" id="exampleFormControlInput1" placeholder="" name="uses">
                                                     </div>
                                                 </div>                                             
                                             </div>
@@ -197,6 +190,10 @@
         </div>
    </div>    
    </div>
+    
+  </div>
+</div>
+
    <script>
     let category=[];
     let subCategory=[];

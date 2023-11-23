@@ -106,6 +106,10 @@ float: inline-end;
 </head>
 <!-- body -->
 <body class="main-layout" style="background-color:powderblue;" onload="callAllloadFunction()">
+<%
+String username=(String)session.getAttribute("username");
+String usertype=(String)session.getAttribute("usertype");
+%>
 	<!-- header -->
 	<header>
 		<!-- header inner -->
@@ -202,15 +206,28 @@ float: inline-end;
 										<li class="nav-item "><a class="nav-link"
 											href="index.html">HOME</a></li>
 										<li class="nav-item"><a class="nav-link"
-											href="about.html">SIGN IN</a></li>
-										<li class="nav-item"><a class="nav-link"
 											href="products.html">JOIN FREE</a></li>
 										<li class="nav-item"><a class="nav-link"
 											href="fashion.html">TRENDING CATEGORIES</a></li>
-										<li class="nav-item"><a class="nav-link" href="http://localhost:8089/postbyreq">POST
+										<li class="nav-item"><a class="nav-link" href="/postbyreq">POST
 												BUY REQUIREMENT</a></li>
 										<li class="nav-item"><a class="nav-link"
 											href="contact.html">CONTACT US</a></li>
+											<%if(username==null||username.isEmpty()){ %>
+										<li class="nav-item"><a class="nav-link"
+											href="/loginPage">SIGN IN</a></li>
+											<%}else{ %>
+											<li class="nav-item"><a class="nav-link"
+											href="/loginPage">SIGN OUT</a></li>
+											<% }%>
+											<%if(usertype!=null&&usertype.equalsIgnoreCase("seller")){ %>
+										<li class="nav-item"><a class="nav-link"
+											href="/sellerdash">Seller DashBoard</a></li>
+											<%}else if(usertype!=null&&usertype=="admin"){ %>
+											<li class="nav-item"><a class="nav-link"
+											href="/sellerPage">Admin DashBorad</a></li>
+											<% }%>
+											
 									</ul>
 								</div>
 							</nav>

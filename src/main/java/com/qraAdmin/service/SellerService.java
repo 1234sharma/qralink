@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 import com.qraAdmin.dao.SellerDao;
 import com.qraAdmin.model.CategoryBean;
 import com.qraAdmin.model.MicroCategoryBean;
+import com.qraAdmin.model.ProductBean;
+import com.qraAdmin.model.QuotationBean;
 import com.qraAdmin.model.SubCategoryBean;
+import com.qraAdmin.model.UserDetail;
 
 @Service
 public class SellerService {
@@ -35,5 +38,24 @@ public class SellerService {
 		List<MicroCategoryBean> microcategories = sellerdao.getMicroCategorylist(subcategoryId);
 
 		return microcategories;
+	}
+	public UserDetail getUserDetail(int userId) {
+
+		UserDetail userDetail = sellerdao.getUserDetail(userId);
+
+		return userDetail;
+	}
+	
+	public List<ProductBean> getProductListOfCurrentUser(int userId) {
+
+		List<ProductBean> productlist = sellerdao.getProductList(userId);
+
+		return productlist;
+	}
+	public List<QuotationBean> getAvailableApprovedCustomerQuote() {
+
+		List<QuotationBean> quotationlist = sellerdao.getAvailableApprovedCustomerQuote();
+
+		return quotationlist;
 	}
 }
