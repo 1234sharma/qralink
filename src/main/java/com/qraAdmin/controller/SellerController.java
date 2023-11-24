@@ -22,6 +22,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -87,7 +88,7 @@ public class SellerController {
 		HttpSession session = req.getSession();
 		Object id = session.getAttribute("userid");
 		Object type = session.getAttribute("usertype");
-		System.out.println(id+""+type);
+		System.out.println(id + "" + type);
 		if (id != null && type != null) {
 			userid = Integer.parseInt(String.valueOf(session.getAttribute("userid")));
 			usertype = String.valueOf(session.getAttribute("usertype"));
@@ -111,9 +112,21 @@ public class SellerController {
 		ModelAndView model = new ModelAndView("Seller");
 		return model;
 	}
+
 	@GetMapping("/productList")
 	public ModelAndView productList() {
 		ModelAndView model = new ModelAndView("productList");
+		return model;
+	}
+
+	@GetMapping("/availableQuotesPage")
+	public ModelAndView availableQuotesPage() {
+		ModelAndView model = new ModelAndView("availableQuotes");
+		return model;
+	}
+	@GetMapping("/myQuotesPage")
+	public ModelAndView myQuotes() {
+		ModelAndView model = new ModelAndView("myquotes");
 		return model;
 	}
 	@PostMapping("/addProduct")
@@ -177,7 +190,7 @@ public class SellerController {
 					imagePath2, userid, "N");
 			System.out.println("count " + userservice.addProduct(product));
 
-			return new ModelAndView("addproduct");
+			return new ModelAndView("productList");
 
 		} else {
 			return new ModelAndView("loginpage");
@@ -202,13 +215,15 @@ public class SellerController {
 		System.out.println(cat);
 		return new ResponseEntity<List<SubCategoryBean>>(cat, HttpStatus.OK);
 	}
+
 	@GetMapping("/getImageByte/{image1}/{image2}")
 	@ResponseBody
-	public ResponseEntity<List<byte[]>> getImageByte(@PathVariable("image1") String image1,@PathVariable("image2") String image2) {
+	public ResponseEntity<List<byte[]>> getImageByte(@PathVariable("image1") String image1,
+			@PathVariable("image2") String image2) {
 		byte[] imagebyte1;
 		byte[] imagebyte2;
-		List<byte[]> bytearray=new ArrayList<>();
-		System.out.println(image1+"   "+image2);
+		List<byte[]> bytearray = new ArrayList<>();
+		System.out.println(image1 + "   " + image2);
 		try {
 			imagebyte1 = Files.readAllBytes(Paths.get(image1));
 			imagebyte2 = Files.readAllBytes(Paths.get(image2));
@@ -221,6 +236,7 @@ public class SellerController {
 		}
 		return new ResponseEntity<List<byte[]>>(bytearray, HttpStatus.OK);
 	}
+
 	@GetMapping("/getmicrocategories/{subcategoryid}")
 	@ResponseBody
 	public ResponseEntity<List<MicroCategoryBean>> getMicroCategories(@PathVariable("subcategoryid") String subcatid) {
@@ -242,22 +258,22 @@ public class SellerController {
 	@GetMapping("/getProductListOfCurrentUser")
 	@ResponseBody
 	public ResponseEntity<List<ProductBeanDTO>> getProductListofCurrentUser(HttpServletRequest req) throws IOException {
-		HttpSession ses=req.getSession();
-		List<ProductBeanDTO> productdtos=new ArrayList<>();
+		HttpSession ses = req.getSession();
+		List<ProductBeanDTO> productdtos = new ArrayList<>();
 		System.out.println(ses.getAttribute("userid"));
 		if (ses.getAttribute("userid") != null) {
 			String userId = String.valueOf(ses.getAttribute("userid"));
 			List<ProductBean> productList = sellerservice.getProductListOfCurrentUser(Integer.parseInt(userId));
 			System.out.println(productList);
-			for(ProductBean prod:productList) {
-				ProductBeanDTO dto=new ProductBeanDTO();
-				System.out.println(prod.getPic1());
-				System.out.println(prod.getPic2());
-				if(prod.getPic1()!=null||!prod.getPic1().isEmpty()) {
+			for (ProductBean prod : productList) {
+				ProductBeanDTO dto = new ProductBeanDTO();
+				// System.out.println(prod.getPic1());
+				// System.out.println(prod.getPic2());
+				if (prod.getPic1() != null || !prod.getPic1().isEmpty()) {
 					dto.setPic1(getbyte(prod.getPic1()));
 					dto.setImage1encode64(convertIntoBase64(dto.getPic1()));
 				}
-				if(prod.getPic2()!=null||!prod.getPic2().isEmpty()) {
+				if (!prod.getPic2().trim().isEmpty()) {
 					dto.setPic2(getbyte(prod.getPic2()));
 					dto.setImage2encode64(convertIntoBase64(dto.getPic2()));
 				}
@@ -278,36 +294,68 @@ public class SellerController {
 				dto.setUserid(prod.getUserid());
 				dto.setUses(prod.getUses());
 				dto.setWeight(prod.getWeight());
-				
+
 				productdtos.add(dto);
 			}
-			System.out.println("product dto "+productdtos);
+			// System.out.println("product dto " + productdtos);
 			return new ResponseEntity<List<ProductBeanDTO>>(productdtos, HttpStatus.OK);
 		} else {
 			return null;
 		}
 	}
-	
+
 	@GetMapping("/availableApprovedCustomerQuote")
 	@ResponseBody
-	public ResponseEntity<List<QuotationBean>> getAvailableApprovedCustomerQuote() {
+	public ResponseEntity<List<QuotationBean>> getAvailableApprovedCustomerQuote(HttpServletRequest req) {
+		if (req.getSession().getAttribute("userid") != null) {
 			List<QuotationBean> quotations = sellerservice.getAvailableApprovedCustomerQuote();
 			System.out.println(quotations);
 			return new ResponseEntity<List<QuotationBean>>(quotations, HttpStatus.OK);
-		
+		} else {
+			return null;
+		}
+
 	}
-	
+	@GetMapping("/myQuotes")
+	@ResponseBody
+	public ResponseEntity<List<QuotationBean>> getMyQuotes(HttpServletRequest req) {
+		if (req.getSession().getAttribute("userid") != null) {
+			List<QuotationBean> quotations = sellerservice.getMyQuotes(Integer.parseInt(String.valueOf(req.getSession().getAttribute("userid"))));
+			System.out.println(quotations);
+			return new ResponseEntity<List<QuotationBean>>(quotations, HttpStatus.OK);
+		} else {
+			return null;
+		}
+
+	}
+
+
+	@DeleteMapping("/deleteProduct/{productId}")
+	@ResponseBody
+	public ResponseEntity<Integer> deleteProductById(@PathVariable("productId") int productId, HttpServletRequest req) {
+		if (req.getSession().getAttribute("userid") != null) {
+			int count = sellerservice.deleteProductById(productId);
+			System.out.println(count);
+			return new ResponseEntity<Integer>(count, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Integer>(-1, HttpStatus.OK);
+		}
+
+	}
+
 	public byte[] getbyte(String path) throws IOException {
+		System.out.println(path);
 		BufferedImage bufferimage = ImageIO.read(new File(path));
-	      ByteArrayOutputStream output = new ByteArrayOutputStream();
-	      ImageIO.write(bufferimage, "jpg", output );
-	      byte [] data = output.toByteArray();
-	      return data;
+		ByteArrayOutputStream output = new ByteArrayOutputStream();
+		ImageIO.write(bufferimage, "png", output);
+		byte[] data = output.toByteArray();
+		System.out.println(data.length);
+		return data;
 	}
-	
-    public String convertIntoBase64(byte[] bytes) throws UnsupportedEncodingException{
-    	byte[] encodeBase64 = Base64.getEncoder().encode(bytes);
-        String base64Encoded = new String(encodeBase64, "UTF-8");
-        return base64Encoded;
+
+	public String convertIntoBase64(byte[] bytes) throws UnsupportedEncodingException {
+		byte[] encodeBase64 = Base64.getEncoder().encode(bytes);
+		String base64Encoded = new String(encodeBase64, "UTF-8");
+		return base64Encoded;
 	}
 }

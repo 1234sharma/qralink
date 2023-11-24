@@ -58,4 +58,17 @@ public class SellerService {
 
 		return quotationlist;
 	}
+	public List<QuotationBean> getMyQuotes(int userId) {
+
+		List<QuotationBean> quotationlist = sellerdao.getMyQuotes(userId);
+
+		return quotationlist;
+	}
+	
+	public int deleteProductById(int productId) {
+
+		int count = sellerdao.deleteProductById(productId);
+
+		return count;
+	}
 }

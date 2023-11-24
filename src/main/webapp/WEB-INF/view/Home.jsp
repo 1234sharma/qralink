@@ -135,56 +135,56 @@ String usertype=(String)session.getAttribute("usertype");
 										aria-hidden="true"></i> </a></li>
 							</ul>
 						</div>
-						<div class="col-md-4">
-							<div class="se_fonr1">
-								<form action="#">
-									<div class="select-box"
-										style="padding-right: 10px; width: 10rem">
-										<label for="select-box1" class="label select-box1"><span
-											class="label-desc">BUYERS</span> </label> <select id="select-box1"
-											class="select">
-											<option value="Choice 1">Post Buy Requirment</option>
-											<option value="Choice 1">By Product List</option>
-											<option value="Choice 2">By Supplier</option>
-											<!--                                     <option value="Choice 3">Neverl</option> -->
-										</select>
-									</div>
-								</form>
-								<div class="se_fonr1">
-									<form action="#">
-										<div class="select-box"
-											style="padding-right: 10px; width: 10rem">
-											<label for="select-box1" class="label select-box1"><span
-												class="label-desc">SUPPLIERS</span> </label> <select
-												id="select-box1" class="select">
-												<option value="Choice 1">Buy Lead</option>
-												<option value="Choice 1">Supplier Memberships</option>
-												<option value="Choice 2">Learning Center</option>
-												<option value="Choice 3">Certified Machinary</option>
-												<option value="Choice 1">Business Plan Suppliers</option>
-												<option value="Choice 2">Starter Plan Suppliers</option>
-												<option value="Choice 3">Platinum Plan Suppliers</option>
-											</select>
-										</div>
-									</form>
-								</div>
-								<div class="se_fonr1">
-									<form action="#">
-										<div class="select-box"
-											style="padding-right: 10px; width: 5rem">
-											<label for="select-box1" class="label select-box1"
-												style="color: #00008B">HELP</label> <select id="select-box1"
-												class="select">
-												<option value="Choice 1">I Am a Supplier</option>
-												<option value="Choice 1">I Am a New User</option>
-												<option value="Choice 2">How to Sell</option>
-												<option value="Choice 3">How to Buy</option>
-											</select>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
+<!-- 						<div class="col-md-4"> -->
+<!-- 							<div class="se_fonr1"> -->
+<!-- 								<form action="#"> -->
+<!-- 									<div class="select-box" -->
+<!-- 										style="padding-right: 10px; width: 10rem"> -->
+<!-- 										<label for="select-box1" class="label select-box1"><span -->
+<!-- 											class="label-desc">BUYERS</span> </label> <select id="select-box1" -->
+<!-- 											class="select"> -->
+<!-- 											<option value="Choice 1">Post Buy Requirment</option> -->
+<!-- 											<option value="Choice 1">By Product List</option> -->
+<!-- 											<option value="Choice 2">By Supplier</option> -->
+<!-- 											                                    <option value="Choice 3">Neverl</option> -->
+<!-- 										</select> -->
+<!-- 									</div> -->
+<!-- 								</form> -->
+<!-- 								<div class="se_fonr1"> -->
+<!-- 									<form action="#"> -->
+<!-- 										<div class="select-box" -->
+<!-- 											style="padding-right: 10px; width: 10rem"> -->
+<!-- 											<label for="select-box1" class="label select-box1"><span -->
+<!-- 												class="label-desc">SUPPLIERS</span> </label> <select -->
+<!-- 												id="select-box1" class="select"> -->
+<!-- 												<option value="Choice 1">Buy Lead</option> -->
+<!-- 												<option value="Choice 1">Supplier Memberships</option> -->
+<!-- 												<option value="Choice 2">Learning Center</option> -->
+<!-- 												<option value="Choice 3">Certified Machinary</option> -->
+<!-- 												<option value="Choice 1">Business Plan Suppliers</option> -->
+<!-- 												<option value="Choice 2">Starter Plan Suppliers</option> -->
+<!-- 												<option value="Choice 3">Platinum Plan Suppliers</option> -->
+<!-- 											</select> -->
+<!-- 										</div> -->
+<!-- 									</form> -->
+<!-- 								</div> -->
+<!-- 								<div class="se_fonr1"> -->
+<!-- 									<form action="#"> -->
+<!-- 										<div class="select-box" -->
+<!-- 											style="padding-right: 10px; width: 5rem"> -->
+<!-- 											<label for="select-box1" class="label select-box1" -->
+<!-- 												style="color: #00008B">HELP</label> <select id="select-box1" -->
+<!-- 												class="select"> -->
+<!-- 												<option value="Choice 1">I Am a Supplier</option> -->
+<!-- 												<option value="Choice 1">I Am a New User</option> -->
+<!-- 												<option value="Choice 2">How to Sell</option> -->
+<!-- 												<option value="Choice 3">How to Buy</option> -->
+<!-- 											</select> -->
+<!-- 										</div> -->
+<!-- 									</form> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 					</div>
 				</div>
 			</div>
@@ -206,7 +206,7 @@ String usertype=(String)session.getAttribute("usertype");
 										<li class="nav-item "><a class="nav-link"
 											href="index.html">HOME</a></li>
 										<li class="nav-item"><a class="nav-link"
-											href="products.html">JOIN FREE</a></li>
+											href="/registerPage">JOIN FREE</a></li>
 										<li class="nav-item"><a class="nav-link"
 											href="fashion.html">TRENDING CATEGORIES</a></li>
 										<li class="nav-item"><a class="nav-link" href="/postbyreq">POST
@@ -218,7 +218,7 @@ String usertype=(String)session.getAttribute("usertype");
 											href="/loginPage">SIGN IN</a></li>
 											<%}else{ %>
 											<li class="nav-item"><a class="nav-link"
-											href="/loginPage">SIGN OUT</a></li>
+											href="/logout">SIGN OUT</a></li>
 											<% }%>
 											<%if(usertype!=null&&usertype.equalsIgnoreCase("seller")){ %>
 										<li class="nav-item"><a class="nav-link"

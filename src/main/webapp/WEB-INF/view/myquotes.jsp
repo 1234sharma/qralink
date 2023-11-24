@@ -31,13 +31,11 @@
 					<thead class="thead-dark b" style="color: black;">
 						<tr>
 							<th scope="col">productName</th>
-							<th scope="col">brandName</th>
-							<th scope="col">productPrice</th>
-							<th scope="col">orderqnt</th>
-							<th scope="col">pic1</th>
-							<th scope="col">pic2</th>
-							<th scope="col">productlive</th>
-							<th scope="col">Action</th>
+							<th scope="col">Quantity</th>
+							<th scope="col">QuantityType</th>
+							<th scope="col">Email</th>
+							<th scope="col">PersonName</th>
+							<th scope="col">Mobile</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -60,7 +58,7 @@
 		function tabledataload() {
 			$
 					.ajax({
-						url : "/getProductListOfCurrentUser",
+						url : "/myQuotes",
 						type : 'GET',
 						success : function(data) {
 							console.log(data);
@@ -68,16 +66,12 @@
 								$('#datatable').DataTable().row
 										.add(
 												[
-														data[i].productName,
-														data[i].brandName,
-														data[i].productPrice,
-														data[i].orderqnt,
-														'<img alt="img" src="data:image/jpg;base64,'+data[i].image1encode64+'" width="100" height="100"/>',
-														'<img alt="img" src="data:image/png;base64,'+data[i].image2encode64+'" width="100" height="100"/>',
-														data[i].productlive,
-														'<button  class="btn btn-danger" onclick="deleteuser(`'
-																+ data[i].productId
-																+ '`)">DELETE</button>' ])
+														data[i].product_name,
+														data[i].quantiry,
+														data[i].quantity_type,
+														data[i].email,
+														data[i].person_name, 
+														data[i].mobile])
 										.draw();
 
 							}
@@ -116,7 +110,7 @@
 			}
 		}
 	</script>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 		crossorigin="anonymous"></script>
 	<script

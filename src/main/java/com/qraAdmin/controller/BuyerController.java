@@ -40,7 +40,7 @@ public class BuyerController {
 			userid = Integer.parseInt(String.valueOf(session.getAttribute("userid")));
 			usertype = String.valueOf(session.getAttribute("usertype"));
 		}
-		if (userid > 0 && usertype != null && usertype.equals("buyer")) {
+		if (userid > 0 && (usertype != null && (usertype.equals("buyer")||usertype.equals("seller")))) {
 			String productName = request.getParameter("product_name");
 			String estimated_quantity = request.getParameter("estimated_quantity");
 			String quantity_type = request.getParameter("quantity_type");

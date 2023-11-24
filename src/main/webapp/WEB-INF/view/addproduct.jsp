@@ -1,7 +1,7 @@
 <html>
 <body>
 	<%@ include file="/responsivenav.jsp"%>
-<div class="card mt-4" style="margin-left: 300px">
+<div class="card mt-4" style="margin-left: 275px">
   <div class="card-header">
     ADD PRODUCT
   </div>
@@ -9,7 +9,6 @@
     <div class='container mt-4 border'>
     <div class="waper_my_account">
         <div class="container-fluid">
-        <h1>Add Product</h1>
             <div class="clearfix">
                 <!-- ADD Product-->
                 <!--Alert Box-->
@@ -208,15 +207,12 @@
 				success : function(data) {
 					// Ajax call completed successfully
                    select = document.getElementById('categoryid');
-                   
-                   alert("Details submitted succesfully "+ data[0].category_NAME);
                   for (var i = 0; i<data.length; i++){
                    var opt = document.createElement('option');
                       opt.value = data[i].categoryId;
                       opt.innerHTML = data[i].category_NAME;
                       select.appendChild(opt);
                    }
-					alert("Details submitted succesfully "+ category);
 				},
 				error : function(data) {
 					// Some error in ajax call
@@ -236,14 +232,12 @@
                    select = document.getElementById('subcategoryid');
                    $("#subcategoryid").empty();
                    console.log(JSON.stringify(data));
-                   alert("Details submitted succesfully "+ data[0].sub_CATEGORY_NAME);
                   for (var i = 0; i<data.length; i++){
                    var opt = document.createElement('option');
                       opt.value = data[i].sub_CATEGORY_ID;
                       opt.innerHTML = data[i].sub_CATEGORY_NAME;
                       select.appendChild(opt);
                    }
-					alert("Details submitted succesfully "+ category);
 				},
 				error : function(data) {
 					// Some error in ajax call
@@ -263,14 +257,13 @@
                    select = document.getElementById('microcategoryid');
                    $("#microcategoryid").empty();
                    console.log("micro category "+JSON.stringify(data));
-                   alert("Details submitted succesfully "+ data[0].sub_CATEGORY_NAME);
                   for (var i = 0; i<data.length; i++){
                    var opt = document.createElement('option');
                       opt.value = data[i].micro_CATEGORY_ID;
                       opt.innerHTML = data[i].micro_CATEGORY_NAME;
                       select.appendChild(opt);
                    }
-					alert("Details submitted succesfully "+ category);
+
 				},
 				error : function(data) {
 					// Some error in ajax call

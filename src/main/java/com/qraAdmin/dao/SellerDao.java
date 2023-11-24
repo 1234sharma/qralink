@@ -27,7 +27,8 @@ public class SellerDao {
 	public String getUserDetail = "SELECT * FROM qralink.userdetail where userid=?";
 	public String getProductListOfUser = "SELECT * FROM qralink.productdetail where userid=?";
 	public String getApprovedQuotationList = "SELECT * FROM qralink.buyquotation where is_approved='N'";
-
+	public String getMyQuotes = "SELECT * FROM qralink.buyquotation where userid=?";
+	String deleteProductByIdquery="delete from qralink.productdetail where productId =?";
 	public List<CategoryBean> getCategorylist() {
 		List<Map<String, Object>> l = jdbc.queryForList(getCategoryQuery);
 		List<CategoryBean> categories = new ArrayList<CategoryBean>();
@@ -138,6 +139,38 @@ public class SellerDao {
 			quotationlist.add(quotation);
 		}
 		return quotationlist;
+	}
+	public List<QuotationBean> getMyQuotes(int userid) {
+		List<Map<String, Object>> quotations = jdbc.queryForList(getMyQuotes,userid);
+		System.out.println(quotations);
+		List<QuotationBean> quotationlist = new ArrayList<QuotationBean>();
+		for (Map<String, Object> map : quotations) {
+			QuotationBean quotation = new QuotationBean();
+			quotation.setQuoteId(Integer.parseInt(map.get("quoteId") == null ? null : map.get("quoteId").toString()));
+			quotation.setProduct_name(map.get("product_name") == null ? null : map.get("product_name").toString());
+			quotation.setQuantiry(Integer.parseInt(map.get("quantiry") == null ? null : map.get("quantiry").toString()));
+			quotation.setQuantity_type(map.get("quantity_typel") == null ? null : map.get("quantity_typel").toString());
+			quotation.setEmail((map.get("email") == null ? null : map.get("email").toString()));
+			quotation.setPerson_name((map.get("person_name") == null ? null : map.get("person_name").toString()));
+			quotation.setCompany_name((map.get("company_name") == null ? null : map.get("company_name").toString()));
+			quotation.setMobile((map.get("mobile") == null ? null : map.get("mobile").toString()));
+			quotation.setUserid((map.get("userid") == null ? 0 : Integer.parseInt(map.get("userid").toString())));
+			quotation.setIs_approved((map.get("is_approved") == null ? null : map.get("is_approved").toString()));
+			quotationlist.add(quotation);
+		}
+		return quotationlist;
+	}
+	public int deleteProductById(int productId) {
+		int delval=0;
+		try {
+		delval= jdbc.update(deleteProductByIdquery,productId);
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e);
+			return delval;
+		}
+		System.out.println("Delete row count  :"+delval);
+		return delval;
 	}
 
 }
