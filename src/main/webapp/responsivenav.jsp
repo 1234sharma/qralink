@@ -1,8 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
 <meta charset="utf-8">
 <title>Admin Dashboard</title>
@@ -39,80 +36,160 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
 	rel="stylesheet">
 
-
-<link href="${pageContext.request.contextPath}/css/style.css"
-	rel="stylesheet">
-<style type="text/css">
-.scrollit {
-	overflow: scroll;
-	height: 100px;
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+	margin: 0;
+	font-family: Arial
 }
 
-#centerinfo {
-	margin: auto;
-	width: 50%;
-	border: 3px solid green;
-	padding: 10px;
+.topnav1 {
+	overflow: hidden;
+	background-color: #333;
 }
 
-.tblinfo {
-	font-family: arial, sans-serif;
-	border-collapse: collapse;
-	width: 100%;
+.topnav1 a {
+	float: left;
+	display: block;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
 }
 
-.tdinfo, .thinfo {
-	border: 1px solid #dddddd;
+.active {
+	background-color: #04AA6D;
+	color: white;
+}
+
+.topnav1 .icon {
+	display: none;
+}
+
+.dropdown1 {
+	float: left;
+	overflow: hidden;
+}
+
+.dropdown1 .dropbtn1 {
+	font-size: 17px;
+	border: none;
+	outline: none;
+	color: white;
+	padding: 14px 16px;
+	background-color: inherit;
+	font-family: inherit;
+	margin: 0;
+}
+
+.dropdown-content1 {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.dropdown-content1 a {
+	float: none;
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
 	text-align: left;
-	padding: 8px;
 }
 
-.trinfo:nth-child(even) {
-	background-color: #dddddd;
+.topnav1 a:hover, .dropdown1:hover .dropbtn1 {
+	background-color: #555;
+	color: white;
+}
+
+.dropdown-content1 a:hover {
+	background-color: #ddd;
+	color: black;
+}
+
+.dropdown1:hover .dropdown-content1 {
+	display: block;
+}
+
+@media screen and (max-width: 600px) {
+	.topnav1 a:not(:first-child), .dropdown1 .dropbtn1 {
+		display: none;
+	}
+	.topnav1 a.icon {
+		float: right;
+		display: block;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.topnav1.responsive {
+		position: relative;
+	}
+	.topnav1.responsive .icon {
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+	.topnav1.responsive a {
+		float: none;
+		display: block;
+		text-align: left;
+	}
+	.topnav1.responsive .dropdown1 {
+		float: none;
+	}
+	.topnav1.responsive .dropdown-content1 {
+		position: relative;
+	}
+	.topnav1.responsive .dropdown1 .dropbtn1 {
+		display: block;
+		width: 100%;
+		text-align: left;
+	}
 }
 </style>
 </head>
+<body>
 
-<body style="background-color: white">
-	<div class="container-fluid position-relative d-flex p-0">
-		<!-- Sidebar Start -->
-		<div class="sidebar pe-4 pb-3">
-			<nav class="navbar  navbar-dark">
-				<span class="navbar-brand mx-4 mb-3">
-					<h3 class="text-primary">
-						<i class="fas fa-users me-2"></i>QRALINK
-					</h3>
-				</span>
-				<div class="d-flex align-items-center ms-4 mb-4">
-					<div class="position-relative">
-						<img class="rounded-circle" src="img/user.jpg" alt=""
-							style="width: 40px; height: 40px;">
-						<div
-							class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
-					</div>
-					<div class="ms-3">
-						<h6 class="mb-0">Qralink</h6>
-						<span>QraAdmin</span>
-					</div>
-				</div>
-				<div class="navbar-nav w-100">
-					<a href="index.html" class="nav-item nav-link active"><i
-						class="fa fa-tachometer-alt me-2"></i>Personal Details</a>
-					<a href="/addproductPage" class="nav-item nav-link "><i
-						class="fa fa-laptop me-2"></i>Add Product</a> 
-					<a href="/productList"
-						class="nav-item nav-link "><i class="fa fa-laptop me-2"></i>My
-						Products</a> 
-					<a href="/availableQuotesPage" class="nav-item nav-link"><i
-						class="fa fa-laptop me-2"></i>Req Quotes</a> 
-					<a href="/myQuotesPage"
-						class="nav-item nav-link"><i class="fa fa-laptop me-2"></i>My
-						Quotes</a>
-
-				</div>
-			</nav>
+	<div class="topnav1" id="myTopnav">
+	<div class=row>
+	<div class="col-8">
+		<a href="/" class="active fa fa-home">DashBoard</a> 
+		<a href="/addproductPage" class="fa fa-plus">Add Product</a> 
+		<a href="/productList" class="fa fa-list">My Products</a>
+	    <a href="/availableQuotesPage" class="fa fa-handshake-o">Requested Quotes</a> 
+		<a href="/myQuotesPage" class="fa fa-laptop">My Quotes</a>
+		<div class="dropdown1">
+			<button class="dropbtn1">
+				Dropdown <i class="fa fa-caret-down"></i>
+			</button>
+			<div class="dropdown-content1">
+				<a href="#">Link 1</a> <a href="#">Link 2</a> <a href="#">Link 3</a>
+			</div>
 		</div>
+		<a href="#about">About</a> <a href="javascript:void(0);"
+			style="font-size: 15px;" class="icon" onclick="myFunction()">&#9776;</a>
 	</div>
+	<div class="col-2 text-primary">
+	hello
+	</div>
+	</div>
+  </div>	
+	<script>
+		function myFunction() {
+			var x = document.getElementById("myTopnav");
+			if (x.className === "topnav1") {
+				x.className += " responsive";
+			} else {
+				x.className = "topnav1";
+			}
+		}
+	</script>
 	<script src="https://code.jquery.com/jquery-3.6.0.js"
 		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 		crossorigin="anonymous"></script>
@@ -123,3 +200,4 @@
 	<script
 		src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 </body>
+</html>

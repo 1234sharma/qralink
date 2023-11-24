@@ -1,14 +1,10 @@
 <html>
 <body>
 	<%@ include file="/responsivenav.jsp"%>
-<div class="card mt-4" style="margin-left: 275px">
-  <div class="card-header">
-    ADD PRODUCT
-  </div>
-  <div class="card-body">
-    <div class='container mt-4 border'>
-    <div class="waper_my_account">
-        <div class="container-fluid">
+	<div class=" container  row" style="margin-left: 50px">
+    <div class='container mt-4 border' style="height: 50%;width: 200%;">
+    <div class="waper_my_account" >
+        <div class="container-fluid" >
             <div class="clearfix">
                 <!-- ADD Product-->
                 <!--Alert Box-->
@@ -189,9 +185,8 @@
         </div>
    </div>    
    </div>
-    
-  </div>
-</div>
+   </div>   
+
 
    <script>
     let category=[];

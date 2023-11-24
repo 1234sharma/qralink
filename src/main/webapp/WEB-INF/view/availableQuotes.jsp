@@ -22,7 +22,7 @@
 </head>
 <body>
 	<%@ include file="/responsivenav.jsp"%>
-	<div class="card mt-4 px-5" style="margin-left: 260px">
+	<div class="card mt-4 px-5">
 		<div class="card-header">Product List</div>
 		<div class="card-body">
 			<div class="container-fluid " style="text-align: center">
