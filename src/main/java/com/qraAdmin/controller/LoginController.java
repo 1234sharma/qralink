@@ -31,7 +31,7 @@ public class LoginController {
 
 	@GetMapping("/loginPage")
 	public ModelAndView firstpage() { 
-		ModelAndView model = new ModelAndView("Dashboard1");
+		ModelAndView model = new ModelAndView("loginpage");
 		return model;
 	}
 

@@ -124,11 +124,31 @@ public class SellerController {
 		ModelAndView model = new ModelAndView("availableQuotes");
 		return model;
 	}
+
 	@GetMapping("/myQuotesPage")
 	public ModelAndView myQuotes() {
 		ModelAndView model = new ModelAndView("myquotes");
 		return model;
 	}
+
+	@GetMapping("/sellerDashboradpage")
+	public ModelAndView sellerDashBoardPage(HttpServletRequest req) {
+		ModelAndView model = null;
+		if (req.getSession().getAttribute("userid") != null) {
+			model = new ModelAndView("sellerDashBoard");
+			int userId = Integer.parseInt(String.valueOf(req.getSession().getAttribute("userid")));
+			List<ProductBean> productList = sellerservice.getProductListOfCurrentUser(userId);
+			List<QuotationBean> quotations = sellerservice.getAvailableApprovedCustomerQuote();
+			UserDetail user= sellerservice.getUserDetail(userId);
+			model.addObject("myproduct", productList);
+			model.addObject("quotations", quotations);
+			model.addObject("user", user);
+		} else {
+			return new ModelAndView("loginpage");
+		}
+		return model;
+	}
+
 	@PostMapping("/addProduct")
 	public ModelAndView addproduct(HttpServletRequest request, @RequestParam("image1") MultipartFile image1,
 			@RequestParam("image2") MultipartFile image2) {
@@ -249,10 +269,14 @@ public class SellerController {
 	@GetMapping("/getUserDetail")
 	@ResponseBody
 	public ResponseEntity<UserDetail> getUserDetail(HttpServletRequest req) {
-		String userId = (String) req.getSession().getAttribute("userid");
-		UserDetail userdetail = sellerservice.getUserDetail(Integer.parseInt("2"));
-		System.out.println(userdetail);
-		return new ResponseEntity<UserDetail>(userdetail, HttpStatus.OK);
+		if (req.getSession().getAttribute("userid") != null) {
+			String userId = (String) req.getSession().getAttribute("userid");
+			UserDetail userdetail = sellerservice.getUserDetail(Integer.parseInt(userId));
+			System.out.println(userdetail);
+			return new ResponseEntity<UserDetail>(userdetail, HttpStatus.OK);
+		} else {
+			return null;
+		}
 	}
 
 	@GetMapping("/getProductListOfCurrentUser")
@@ -316,11 +340,13 @@ public class SellerController {
 		}
 
 	}
+
 	@GetMapping("/myQuotes")
 	@ResponseBody
 	public ResponseEntity<List<QuotationBean>> getMyQuotes(HttpServletRequest req) {
 		if (req.getSession().getAttribute("userid") != null) {
-			List<QuotationBean> quotations = sellerservice.getMyQuotes(Integer.parseInt(String.valueOf(req.getSession().getAttribute("userid"))));
+			List<QuotationBean> quotations = sellerservice
+					.getMyQuotes(Integer.parseInt(String.valueOf(req.getSession().getAttribute("userid"))));
 			System.out.println(quotations);
 			return new ResponseEntity<List<QuotationBean>>(quotations, HttpStatus.OK);
 		} else {
@@ -328,7 +354,6 @@ public class SellerController {
 		}
 
 	}
-
 
 	@DeleteMapping("/deleteProduct/{productId}")
 	@ResponseBody

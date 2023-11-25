@@ -72,6 +72,7 @@ public class SellerDao {
 			for (Map<String, Object> map : userdetails) {
 				userdetail = new UserDetail();
 				userdetail.setUserid(Integer.parseInt(map.get("userid").toString()));
+				userdetail.setUsername((map.get("username").toString()));
 				userdetail.setMobile(map.get("mobile").toString());
 				userdetail.setCompanyname(map.get("companyname").toString());
 				userdetail.setEmail(map.get("email").toString());

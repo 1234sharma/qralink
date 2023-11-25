@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -162,16 +164,18 @@ body {
 String username=(String)session.getAttribute("username");
 String usertype=(String)session.getAttribute("usertype");
 %>
-	<div class="topnav1 mt-2" id="myTopnav">
+<div class="topnav1 mt-2" id="myTopnav">
 		<div class=row>
 			<div class="col-md-9">
 
-				<a href="/sellerDashboradpage" class="active fa fa-home">DashBoard</a>
-				<a href="/home" class="fa fa-home">Home</a>
-				<a href="/addproductPage" class="fa fa-plus">Add Product</a> <a
-					href="/productList" class="fa fa-list">My Products</a> <a
-					href="/availableQuotesPage" class="fa fa-handshake-o">Requested
-					Quotes</a> <a href="/myQuotesPage" class="fa fa-laptop">My Quotes</a>
+				<a href="/home" class="fa fa-home">HOME</a>
+				 <a href="/productList" class="fa fa-list">Trending Categories</a> 
+				 <a href="/postbyreq" class="fa fa-handshake-o">Post By Req</a>
+				<%if(usertype!=null&&usertype.equalsIgnoreCase("seller")){ %>
+				<a href="/sellerDashboradpage" class="fa fa-laptop">Seller Dashboard</a>
+				<%}else if(usertype!=null&&usertype=="admin"){ %>
+				<a href="/myQuotesPage" class="fa fa-laptop">Admin DashBoard</a>
+				<%} %>
 				<div class="dropdown1">
 					<button class="dropbtn1">
 						Categories <i class="fa fa-caret-down"></i>
@@ -182,15 +186,23 @@ String usertype=(String)session.getAttribute("usertype");
 						 <a href="#">Micro Categories</a>
 					</div>
 				</div>
-				<a href="#about">About</a> <a href="javascript:void(0);"
-					style="font-size: 15px;" class="icon" onclick="myFunction()">&#9776;</a>
+				<a href="#about">About</a> 
+				<a href="javascript:void(0);" style="font-size: 15px;" class="icon" onclick="myFunction()">&#9776;</a>
 			</div>
 			<div class="col-md-3 text-primary">
-				<a href="/logout" class="fa fa-plus">Log Out</a>
+           <%if(username.isEmpty()||username==null) {%>
+				 <a href="/registerPage" class="fa fa-plus">Join Free</a>
+				 <%} %>
+				 <%if(username.isEmpty()||username==null) {%>
+				<a href="/loginPage" class="fa fa-laptop">Sign in</a>
+				<%} else{%>
+				<a href="/logout" class="fa fa-laptop">Sign out</a>
+				<%} %>
 			</div>
+			
 		</div>
 	</div>
-	<script>
+<script>
 		function myFunction() {
 			var x = document.getElementById("myTopnav");
 			if (x.className === "topnav1") {

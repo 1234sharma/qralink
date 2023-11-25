@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,9 +19,6 @@
 	href="https://www.qralink.com/assets/new_css/css/awesomplete.css" />
 <link rel="stylesheet" type="text/css"
 	href="https://www.qralink.com/assets/new_css/css/bootstrap.css"
-	media="all" />
-<link rel="stylesheet" type="text/css"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
 	media="all" />
 <link rel="stylesheet" type="text/css"
 	href="https://www.qralink.com/assets/themes/css/style1.css" media="all" />
@@ -53,6 +48,9 @@
 	content="google-site-verification: google976d61c14e3aaa24.html" />
 </head>
 <body>
+<%@ include file="/headerpage.jsp"%>
+<%@ include file="/homeNavbar.jsp"%>
+<div class="container mt-5">
 	<div class="col-md-8">
 		<div class="row">
 			<div class="top-box">
@@ -179,6 +177,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 </body>
 </html>
 
