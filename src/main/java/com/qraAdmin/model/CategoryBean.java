@@ -1,39 +1,43 @@
 package com.qraAdmin.model;
 
 public class CategoryBean {
-	int categoryId;
+	int CATEGORYID;
 	String CATEGORY_NAME;
-
-	public CategoryBean(int categoryId, String cATEGORY_NAME) {
+	String CATEGORY_IMG;
+	String CATEGORY_Flag;
+	
+	public CategoryBean(int cATEGORYID, String cATEGORY_NAME, String cATEGORY_IMG, String cATEGORY_Flag) {
 		super();
-		this.categoryId = categoryId;
+		CATEGORYID = cATEGORYID;
 		CATEGORY_NAME = cATEGORY_NAME;
+		CATEGORY_IMG = cATEGORY_IMG;
+		CATEGORY_Flag = cATEGORY_Flag;
 	}
-
-	public CategoryBean() {
-
+	
+	public int getCATEGORYID() {
+		return CATEGORYID;
 	}
-
-	public int getCategoryId() {
-		return categoryId;
+	public void setCATEGORYID(int cATEGORYID) {
+		CATEGORYID = cATEGORYID;
 	}
-
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
-	}
-
 	public String getCATEGORY_NAME() {
 		return CATEGORY_NAME;
 	}
-
 	public void setCATEGORY_NAME(String cATEGORY_NAME) {
 		CATEGORY_NAME = cATEGORY_NAME;
 	}
-
-	@Override
-	public String toString() {
-		return "CategoryBean [categoryId=" + categoryId + ", CATEGORY_NAME=" + CATEGORY_NAME + "]";
+	public String getCATEGORY_IMG() {
+		return CATEGORY_IMG;
 	}
-	
+	public void setCATEGORY_IMG(String cATEGORY_IMG) {
+		CATEGORY_IMG = cATEGORY_IMG;
+	}
+	public String getCATEGORY_Flag() {
+		return CATEGORY_Flag;
+	}
+	public void setCATEGORY_Flag(String cATEGORY_Flag) {
+		CATEGORY_Flag = cATEGORY_Flag;
+	}
 
+	
 }

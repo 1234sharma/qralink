@@ -197,14 +197,14 @@ public class SellerController {
 			Path fileNameAndPath2 = null;
 			String imagepath1 = "";
 			String imagePath2 = "";
+			String path1="image1" + rand.nextInt(60000) + image1.getOriginalFilename().replaceAll("\\s", "");
+			String path2="image2" + rand.nextInt(60000) + image2.getOriginalFilename().replaceAll("\\s", "");
 			if (image1 != null) {
-				fileNameAndPath1 = Paths.get(filelocation,
-						"image1" + rand.nextInt(60000) + image1.getOriginalFilename().replaceAll("\\s", ""));
+				fileNameAndPath1 = Paths.get(filelocation,path1);
 			}
 			if (!image2.isEmpty()) {
-				fileNameAndPath2 = Paths.get(filelocation,
-						"image2" + rand.nextInt(60000) + image2.getOriginalFilename().replaceAll("\\s", ""));
-			}
+				fileNameAndPath2 = Paths.get(filelocation,path2);
+						}
 			try {
 				if (fileNameAndPath1 != null) {
 					Files.write(fileNameAndPath1, image1.getBytes());
@@ -221,8 +221,8 @@ public class SellerController {
 				e.printStackTrace();
 			}
 			ProductBean product = new ProductBean(productName, brandName, productprice, category, subcategory,
-					microcategory, productdesc, modelnumber, weight, shape, color, material, orderqnt, uses, imagepath1,
-					imagePath2, userid, "N");
+					microcategory, productdesc, modelnumber, weight, shape, color, material, orderqnt, uses, path1,
+					path2, userid, "N");
 			System.out.println("count " + userservice.addProduct(product));
 
 			return new ModelAndView("productList");
@@ -356,7 +356,7 @@ public class SellerController {
 
 	public byte[] getbyte(String path) throws IOException {
 		System.out.println(path);
-		BufferedImage bufferimage = ImageIO.read(new File(path));
+		BufferedImage bufferimage = ImageIO.read(new File(filelocation+"\\"+path));
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		ImageIO.write(bufferimage, "png", output);
 		byte[] data = output.toByteArray();
