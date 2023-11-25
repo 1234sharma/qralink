@@ -161,8 +161,8 @@ body {
 </head>
 <body>
 <%
-String username=(String)session.getAttribute("username");
-String usertype=(String)session.getAttribute("usertype");
+String username=session.getAttribute("username")==null?null:(String)session.getAttribute("username");
+String usertype=(String)session.getAttribute("usertype")==null?null:(String)session.getAttribute("usertype");
 %>
 <div class="topnav1 mt-2" id="myTopnav">
 		<div class=row>
@@ -190,10 +190,10 @@ String usertype=(String)session.getAttribute("usertype");
 				<a href="javascript:void(0);" style="font-size: 15px;" class="icon" onclick="myFunction()">&#9776;</a>
 			</div>
 			<div class="col-md-3 text-primary">
-           <%if(username.isEmpty()||username==null) {%>
+           <%if(username==null||username.isEmpty()) {%>
 				 <a href="/registerPage" class="fa fa-plus">Join Free</a>
 				 <%} %>
-				 <%if(username.isEmpty()||username==null) {%>
+				 <%if(username==null||username.isEmpty()) {%>
 				<a href="/loginPage" class="fa fa-laptop">Sign in</a>
 				<%} else{%>
 				<a href="/logout" class="fa fa-laptop">Sign out</a>

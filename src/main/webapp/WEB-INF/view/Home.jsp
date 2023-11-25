@@ -84,7 +84,7 @@
 /* Fading animation */
 .fade {
   animation-name: fade;
-  animation-duration: 1.5s;
+  animation-duration: 3s;
 }
 #see_more_btn{
 float: inline-end;
@@ -117,19 +117,19 @@ float: inline-end;
 
 			<div class="mySlides fade">
 <!-- 				<div class="numbertext">1 / 3</div> -->
-				<img src="${pageContext.request.contextPath}/img/qralink-img.png" style="width: 100%">
+				<img src="https://www.qralink.com/images/homebanner/1645065911.png" style="width: 100%">
 <!-- 				<div class="text">Caption Text</div> -->
 			</div>
 
 			<div class="mySlides fade">
 <!-- 				<div class="numbertext">2 / 3</div> -->
-				<img src="${pageContext.request.contextPath}/img/qralink-img.png" style="width: 100%">
+				<img src="https://www.qralink.com/images/homebanner/1645065648.png" style="width: 100%">
 <!-- 				<div class="text">Caption Two</div> -->
 			</div>
 
 			<div class="mySlides fade">
 <!-- 				<div class="numbertext">3 / 3</div> -->
-				<img src="${pageContext.request.contextPath}/img/qralink-img.png" style="width: 100%">
+				<img src="https://www.qralink.com/images/homebanner/1645067078.png" style="width: 100%">
 <!-- 				<div class="text">Caption Three</div> -->
 			</div>
 

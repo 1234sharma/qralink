@@ -17,6 +17,7 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapProperties.Credential;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -49,6 +50,9 @@ import jakarta.websocket.server.PathParam;
 @Controller
 public class SellerController {
 
+	@Value("${image.store.path}")
+	private String filelocation;
+	
 	Random rand = new Random();
 
 	@Autowired
@@ -194,11 +198,11 @@ public class SellerController {
 			String imagepath1 = "";
 			String imagePath2 = "";
 			if (image1 != null) {
-				fileNameAndPath1 = Paths.get("D:\\qrapics",
+				fileNameAndPath1 = Paths.get(filelocation,
 						"image1" + rand.nextInt(60000) + image1.getOriginalFilename().replaceAll("\\s", ""));
 			}
 			if (!image2.isEmpty()) {
-				fileNameAndPath2 = Paths.get("D:\\qrapics",
+				fileNameAndPath2 = Paths.get(filelocation,
 						"image2" + rand.nextInt(60000) + image2.getOriginalFilename().replaceAll("\\s", ""));
 			}
 			try {

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,9 @@ import com.qraAdmin.dao.AddCategoryDao;
 public class AdminController {
 	//for supply and product we use below jsp three time 
 
+	@Value("${image.store.path}")
+	private String filelocation;
+	
 	@Autowired
 	AddCategoryDao addCategoryDao;
 	
@@ -77,7 +81,7 @@ public class AdminController {
 	    System.out.println(catName);
 	    addCategoryDao.addCategories(cat_flg,fileName,catName);
 	    try {
-	    	 file.transferTo( new File("C:\\Users\\AAKASH JAISWAL\\Documents\\Aakash\\" + fileName));
+	    	 file.transferTo( new File(filelocation + fileName));
 //	      return ResponseEntity.status(HttpStatus.CREATED).body("File uploaded successfully.");
 	      
 	    } catch (Exception e) {
@@ -114,7 +118,7 @@ public class AdminController {
 	    System.out.println(catName);
 	    addCategoryDao.updateCategories(cat_flg,fileName,catName,srNo);
 	    try {
-	    	 file.transferTo( new File("C:\\Users\\AAKASH JAISWAL\\Documents\\Aakash\\" + fileName));
+	    	 file.transferTo( new File(filelocation + fileName));
 //	      return ResponseEntity.status(HttpStatus.CREATED).body("File uploaded successfully.");
 	      
 	    } catch (Exception e) {
@@ -153,7 +157,7 @@ public String SubFileUpload( @RequestParam("file") MultipartFile file,@RequestPa
   System.out.println("categoryName:"+categoryName);
   addCategoryDao.addSubCategories(fileName,subcatName,categoryName);
   try {
-  	 file.transferTo( new File("C:\\Users\\AAKASH JAISWAL\\Documents\\Aakash\\" + fileName));
+  	 file.transferTo( new File("filelocation" + fileName));
 //    return ResponseEntity.status(HttpStatus.CREATED).body("File uploaded successfully.");
     
   } catch (Exception e) {
@@ -188,7 +192,7 @@ public String editSubFileUpload( @RequestParam("file") MultipartFile file,@Reque
   System.out.println(subcatval);
   addCategoryDao.editSubCategories(cat_flg,fileName,subcatval,srnoval);
   try {
-  	 file.transferTo( new File("C:\\Users\\AAKASH JAISWAL\\Documents\\Aakash\\" + fileName));
+  	 file.transferTo( new File(filelocation + fileName));
 //    return ResponseEntity.status(HttpStatus.CREATED).body("File uploaded successfully.");
     
   } catch (Exception e) {
@@ -219,7 +223,7 @@ public String MicroFileUpload( @RequestParam("file") MultipartFile file,@Request
   System.out.println(selectSubcategory);
   addCategoryDao.addMicroCategories(fileName,microcatName,selectSubcategory);
   try {
-  	 file.transferTo( new File("C:\\Users\\AAKASH JAISWAL\\Documents\\Aakash\\" + fileName));
+  	 file.transferTo( new File("filelocation" + fileName));
 //    return ResponseEntity.status(HttpStatus.CREATED).body("File uploaded successfully.");
     
   } catch (Exception e) {
