@@ -130,6 +130,17 @@ public class SellerController {
 		ModelAndView model = new ModelAndView("myquotes");
 		return model;
 	}
+	
+	@GetMapping("/productDetailPage")
+	public ModelAndView productDetailPage() throws IOException {
+		ModelAndView model = new ModelAndView("productdetailpage");
+       ProductBean	prod = sellerservice.getProductByProductId(7);
+       if(prod!=null) {
+           ProductBeanDTO prodDto=  productBeanDTOConvert(prod);
+           model.addObject("product",prodDto);
+       }
+		return model;
+	}
 
 	@GetMapping("/sellerDashboradpage")
 	public ModelAndView sellerDashBoardPage(HttpServletRequest req) {
@@ -290,36 +301,7 @@ public class SellerController {
 			List<ProductBean> productList = sellerservice.getProductListOfCurrentUser(Integer.parseInt(userId));
 			System.out.println(productList);
 			for (ProductBean prod : productList) {
-				ProductBeanDTO dto = new ProductBeanDTO();
-				// System.out.println(prod.getPic1());
-				// System.out.println(prod.getPic2());
-				if (prod.getPic1() != null || !prod.getPic1().isEmpty()) {
-					dto.setPic1(getbyte(prod.getPic1()));
-					dto.setImage1encode64(convertIntoBase64(dto.getPic1()));
-				}
-				if (!prod.getPic2().trim().isEmpty()) {
-					dto.setPic2(getbyte(prod.getPic2()));
-					dto.setImage2encode64(convertIntoBase64(dto.getPic2()));
-				}
-				dto.setBrandName(prod.getBrandName());
-				dto.setCategoryId(prod.getCategoryId());
-				dto.setColor(prod.getColor());
-				dto.setMaterial(prod.getMaterial());
-				dto.setMicroCategoryId(prod.getMicroCategoryId());
-				dto.setModelnumber(prod.getModelnumber());
-				dto.setOrderqnt(prod.getOrderqnt());
-				dto.setProductdesc(prod.getProductdesc());
-				dto.setProductId(prod.getProductId());
-				dto.setProductlive(prod.getProductlive());
-				dto.setProductName(prod.getProductName());
-				dto.setProductPrice(prod.getProductPrice());
-				dto.setShape(prod.getShape());
-				dto.setSubCategoryId(prod.getSubCategoryId());
-				dto.setUserid(prod.getUserid());
-				dto.setUses(prod.getUses());
-				dto.setWeight(prod.getWeight());
-
-				productdtos.add(dto);
+				productdtos.add(productBeanDTOConvert(prod));
 			}
 			// System.out.println("product dto " + productdtos);
 			return new ResponseEntity<List<ProductBeanDTO>>(productdtos, HttpStatus.OK);
@@ -382,5 +364,38 @@ public class SellerController {
 		byte[] encodeBase64 = Base64.getEncoder().encode(bytes);
 		String base64Encoded = new String(encodeBase64, "UTF-8");
 		return base64Encoded;
+	}
+	
+	public ProductBeanDTO productBeanDTOConvert(ProductBean prod) throws IOException {
+		ProductBeanDTO dto = new ProductBeanDTO();
+		// System.out.println(prod.getPic1());
+		// System.out.println(prod.getPic2());
+		if (prod.getPic1() != null || !prod.getPic1().isEmpty()) {
+			dto.setPic1(getbyte(prod.getPic1()));
+			dto.setImage1encode64(convertIntoBase64(dto.getPic1()));
+		}
+		if (!prod.getPic2().trim().isEmpty()) {
+			dto.setPic2(getbyte(prod.getPic2()));
+			dto.setImage2encode64(convertIntoBase64(dto.getPic2()));
+		}
+		dto.setBrandName(prod.getBrandName());
+		dto.setCategoryId(prod.getCategoryId());
+		dto.setColor(prod.getColor());
+		dto.setMaterial(prod.getMaterial());
+		dto.setMicroCategoryId(prod.getMicroCategoryId());
+		dto.setModelnumber(prod.getModelnumber());
+		dto.setOrderqnt(prod.getOrderqnt());
+		dto.setProductdesc(prod.getProductdesc());
+		dto.setProductId(prod.getProductId());
+		dto.setProductlive(prod.getProductlive());
+		dto.setProductName(prod.getProductName());
+		dto.setProductPrice(prod.getProductPrice());
+		dto.setShape(prod.getShape());
+		dto.setSubCategoryId(prod.getSubCategoryId());
+		dto.setUserid(prod.getUserid());
+		dto.setUses(prod.getUses());
+		dto.setWeight(prod.getWeight());
+
+		return dto;
 	}
 }

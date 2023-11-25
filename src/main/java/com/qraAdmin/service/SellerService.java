@@ -52,6 +52,12 @@ public class SellerService {
 
 		return productlist;
 	}
+	public ProductBean getProductByProductId(int productid) {
+
+		ProductBean product = sellerdao.getProductByProductId(productid);
+
+		return product;
+	}
 	public List<QuotationBean> getAvailableApprovedCustomerQuote() {
 
 		List<QuotationBean> quotationlist = sellerdao.getAvailableApprovedCustomerQuote();
