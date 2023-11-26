@@ -1,15 +1,17 @@
 package com.qraAdmin.controller;
 
-import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,254 +19,300 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.qraAdmin.DTO.CategoryBeanDTO;
+import com.qraAdmin.DTO.MicroCategoryBeanDTO;
+import com.qraAdmin.DTO.SubCategoryBeanDTO;
 import com.qraAdmin.dao.AddCategoryDao;
-
+import com.qraAdmin.model.CategoryBean;
+import com.qraAdmin.model.MicroCategoryBean;
+import com.qraAdmin.model.SubCategoryBean;
+import com.qraAdmin.service.SellerService;
+import com.qraAdmin.service.UserService;
 
 @RestController
 public class AdminController {
-	//for supply and product we use below jsp three time 
+	// for supply and product we use below jsp three time
 
 	@Value("${image.store.path}")
 	private String filelocation;
-	
+
 	@Autowired
 	AddCategoryDao addCategoryDao;
-	
+
+	Random rand = new Random();
+
+	@Autowired
+	UserService userservice;
+	@Autowired
+	SellerService sellerservice;
+
 	@GetMapping("/dashboard")
 	public ModelAndView categories() {
 		ModelAndView model = new ModelAndView("Dashboard1");
 		return model;
 	}
-	
+
 	@GetMapping("/editcategories")
 	public ModelAndView Tradecategories() {
 		ModelAndView model = new ModelAndView("EditPage");
 		return model;
 	}
-	
-	//classified categories there is one more jsp use for Classified Sub Category(Used Packaging Machine) as shown below
+
+	// classified categories there is one more jsp use for Classified Sub
+	// Category(Used Packaging Machine) as shown below
 	@GetMapping("/addcategories")
 	public ModelAndView Classified_Category() {
 		ModelAndView model = new ModelAndView("AddCategories");
 		return model;
 	}
+
 //	
 	@GetMapping("/subcategories")
 	public ModelAndView Classified_SubCategory() {
 		ModelAndView model = new ModelAndView("SubCategories");
 		return model;
 	}
-	
+
 	@GetMapping("/microcategories")
 	public ModelAndView Classified_MicroCategory() {
 		ModelAndView model = new ModelAndView("MicroCategories");
 		return model;
 	}
+
 //	 
 //	//trade and product categories menu 
 //	
-	// for password change 
+	// for password change
 	@GetMapping("/changepassword")
 	public ModelAndView ChangePassword() {
 		ModelAndView model = new ModelAndView("ChangePassword");
 		return model;
 	}
-	
-	
-	@PostMapping("/upload") 
-	  public String handleFileUpload( @RequestParam("file") MultipartFile file,@RequestParam("catName") String catName) {
-		String cat_flg ="N";
-		String message1="File uploaded successfully!!";
-		String message2="File uploaded Failed!!";
-	    String fileName = file.getOriginalFilename();
-	    System.out.println(fileName);
-	    System.out.println(catName);
-	    addCategoryDao.addCategories(cat_flg,fileName,catName);
-	    try {
-	    	 file.transferTo( new File(filelocation + fileName));
-//	      return ResponseEntity.status(HttpStatus.CREATED).body("File uploaded successfully.");
-	      
-	    } catch (Exception e) {
-//	      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-	    	return message2;
-	    }
-//	    System.out.println(message1);
-//	    return ResponseEntity.ok(message1);
-	    return message1;
-	  }
-	
-	@GetMapping("/getdatatable")
-	public List<Map<String, Object>> getTableData(){
-	List<Map<String, Object>> listoftbl = new ArrayList<>();
-	listoftbl = addCategoryDao.getAllData();
-	System.out.println("Table Data list :"+listoftbl);
-	return listoftbl;
+
+	@PostMapping("/upload")
+	public String handleFileUpload(@RequestParam("file") MultipartFile file, @RequestParam("catName") String catName) {
+		String cat_flg = "N";
+		String message1 = "File uploaded successfully!!";
+		String message2 = "File uploaded Failed!!";
+		String fileName = rand.nextInt(60000) + file.getOriginalFilename().replaceAll("\\s", "");
+		Path fileNameAndPath1 = Paths.get(filelocation,fileName);
+		System.out.println(fileName);
+		System.out.println(catName);
+		addCategoryDao.addCategories(cat_flg, fileName, catName);
+		try {
+			Files.write(fileNameAndPath1, file.getBytes());
+		} catch (Exception e) {
+			return message2;
+		}
+		return message1;
 	}
-	
+
+	@GetMapping("/getdatatable")
+	public List<CategoryBeanDTO> getTableData() throws UnsupportedEncodingException, IOException {
+		List<CategoryBeanDTO> listoftbl = new ArrayList<>();
+		List<CategoryBean> categaries = sellerservice.getCategorylist();
+		if (categaries.size() > 0) {
+			for (CategoryBean cat : categaries) {
+				CategoryBeanDTO dto = new CategoryBeanDTO();
+				dto.setBase64EncodedImage(
+						sellerservice.convertIntoBase64(sellerservice.getbyte(cat.getCATEGORY_IMG())));
+				dto.setCATEGORYID(cat.getCATEGORYID());
+				dto.setCATEGORY_NAME(cat.getCATEGORY_NAME());
+				dto.setCATEGORY_IMG(cat.getCATEGORY_IMG());
+				dto.setCATEGORY_Flag(cat.getCATEGORY_Flag());
+				listoftbl.add(dto);
+			}
+		}
+		System.out.println("Table Data list :" + listoftbl);
+		return listoftbl;
+	}
+
 	@PostMapping("/getflgdata")
 	public int getFlagData(@RequestParam String CATEGORYID) {
 		int flag;
-		flag= addCategoryDao.getflag(CATEGORYID);
+		flag = addCategoryDao.getflag(CATEGORYID);
 		return flag;
 	}
 
-	@PostMapping("/editupdate") 
-	  public String editFileUpload( @RequestParam("file") MultipartFile file,@RequestParam("catName") String catName,@RequestParam("srNo") String srNo) {
-		String cat_flg ="N";
-		String message1="File uploaded successfully!!";
-		String message2="File uploaded Failed!!";
-	    String fileName = file.getOriginalFilename();
-	    System.out.println(fileName);
-	    System.out.println(catName);
-	    addCategoryDao.updateCategories(cat_flg,fileName,catName,srNo);
-	    try {
-	    	 file.transferTo( new File(filelocation + fileName));
+	@PostMapping("/editupdate")
+	public String editFileUpload(@RequestParam("file") MultipartFile file, @RequestParam("catName") String catName,
+			@RequestParam("srNo") String srNo) {
+		String cat_flg = "N";
+		String message1 = "File uploaded successfully!!";
+		String message2 = "File uploaded Failed!!";
+		String fileName = rand.nextInt(60000) + file.getOriginalFilename().replaceAll("\\s", "");
+		Path fileNameAndPath1 = Paths.get(filelocation,fileName);
+		try {
+			Files.write(fileNameAndPath1, file.getBytes());
 //	      return ResponseEntity.status(HttpStatus.CREATED).body("File uploaded successfully.");
-	      
-	    } catch (Exception e) {
+
+		} catch (Exception e) {
 //	      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-	    	return message2;
-	    }
+			return message2;
+		}
 //	    System.out.println(message1);
 //	    return ResponseEntity.ok(message1);
-	    return message1;
-	  }
+		return message1;
+	}
 
-@PostMapping("/getDelete")
-public int getDelData(@RequestParam String CATEGORYID) {
-	int flag;
-	flag= addCategoryDao.getDelVal(CATEGORYID);
-	return flag;
-}
+	@PostMapping("/getDelete")
+	public int getDelData(@RequestParam String CATEGORYID) {
+		int flag;
+		flag = addCategoryDao.getDelVal(CATEGORYID);
+		return flag;
+	}
 
-@GetMapping("/getcatnm")
-public List<String> getCategoriesNm(){
-	List<String> listofcatnm = new ArrayList<String>();
-	listofcatnm = addCategoryDao.getcatName();
-	System.out.println("cat name list :"+listofcatnm);
-	return listofcatnm;
-}
+	@GetMapping("/getcatnm")
+	public List<String> getCategoriesNm() {
+		List<String> listofcatnm = new ArrayList<String>();
+		listofcatnm = addCategoryDao.getcatName();
+		System.out.println("cat name list :" + listofcatnm);
+		return listofcatnm;
+	}
 
-@PostMapping("/subupload") 
-public String SubFileUpload( @RequestParam("file") MultipartFile file,@RequestParam("subcatName") String subcatName,@RequestParam("categoryName") String categoryName) {
-	String cat_flg ="N";
-	String message1="File uploaded successfully!!";
-	String message2="File uploaded Failed!!";
-  String fileName = file.getOriginalFilename();
-  System.out.println(fileName);
-  System.out.println(subcatName);
-//  System.out.println(cat_name);
-  System.out.println("categoryName:"+categoryName);
-  addCategoryDao.addSubCategories(fileName,subcatName,categoryName);
-  try {
-  	 file.transferTo( new File("filelocation" + fileName));
+	@PostMapping("/subupload")
+	public String SubFileUpload(@RequestParam("file") MultipartFile file, @RequestParam("subcatName") String subcatName,
+			@RequestParam("categoryId") int categoryId) {
+		String cat_flg = "N";
+		String message1 = "File uploaded successfully!!";
+		String message2 = "File uploaded Failed!!";
+		String fileName = rand.nextInt(60000) + file.getOriginalFilename().replaceAll("\\s", "");
+		Path fileNameAndPath1 = Paths.get(filelocation,fileName);
+		addCategoryDao.addSubCategories(fileName, subcatName, categoryId);
+		try {
+			Files.write(fileNameAndPath1, file.getBytes());
 //    return ResponseEntity.status(HttpStatus.CREATED).body("File uploaded successfully.");
-    
-  } catch (Exception e) {
+
+		} catch (Exception e) {
 //    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-  	return message2;
-  }
-  return message1;
-}
+			return message2;
+		}
+		return message1;
+	}
 
-@GetMapping("/getSubdatatable")
-public List<Map<String, Object>> getSubTableData(){
-List<Map<String, Object>> listoftbl = new ArrayList<>();
-listoftbl = addCategoryDao.getSubAllData();
-System.out.println("Sub Category Data list :"+listoftbl);
-return listoftbl;
-}
+	@GetMapping("/getSubdatatable")
+	public List<SubCategoryBeanDTO> getSubTableData() throws UnsupportedEncodingException {
+		List<SubCategoryBean> sublist= sellerservice.getAllSubCategorylist();
+		List<SubCategoryBeanDTO> sublistDto=new ArrayList<>();
+		if (sublist.size() > 0) {
+			for (SubCategoryBean subcat : sublist) {
+				SubCategoryBeanDTO dto = new SubCategoryBeanDTO();
+				dto.setBase64EncodedImage(
+						sellerservice.convertIntoBase64(sellerservice.getbyte(subcat.getSUB_CATEGORY_IMG())));
+				dto.setSUB_CATEGORY_ID(subcat.getSUB_CATEGORY_ID());
+				dto.setSUB_CATEGORY_NAME(subcat.getSUB_CATEGORY_NAME());
+				dto.setSUB_CATEGORY_IMG(subcat.getSUB_CATEGORY_IMG());
+				dto.setSUB_CATEGORY_FLG(subcat.getSUB_CATEGORY_FLG());
+				dto.setCATEGORY_ID(subcat.getCATEGORY_ID());
+				sublistDto.add(dto);
+			}
+		}
+		System.out.println("Sub Category Data list :" + sublistDto);
+		return sublistDto;
+	}
 
-@PostMapping("/getapprovedata")
-public int getApproveData(@RequestParam String SUB_CATEGORY_ID) {
-	int flag;
-	flag= addCategoryDao.getApproveflag(SUB_CATEGORY_ID);
-	return flag;
-}
+	@PostMapping("/getapprovedata")
+	public int getApproveData(@RequestParam String SUB_CATEGORY_ID) {
+		int flag;
+		flag = addCategoryDao.getApproveflag(SUB_CATEGORY_ID);
+		return flag;
+	}
 
-@PostMapping("/getSubEdit") 
-public String editSubFileUpload( @RequestParam("file") MultipartFile file,@RequestParam("subcatname") String subcatval,@RequestParam("srnum") String srnoval) {
-	String cat_flg ="N";
-	String message1="File uploaded successfully!!";
-	String message2="File uploaded Failed!!";
-  String fileName = file.getOriginalFilename();
-  System.out.println(fileName);
-  System.out.println(subcatval);
-  addCategoryDao.editSubCategories(cat_flg,fileName,subcatval,srnoval);
-  try {
-  	 file.transferTo( new File(filelocation + fileName));
+	@PostMapping("/getSubEdit")
+	public String editSubFileUpload(@RequestParam("file") MultipartFile file,
+			@RequestParam("subcatname") String subcatval, @RequestParam("srnum") String srnoval) {
+		String cat_flg = "N";
+		String message1 = "File uploaded successfully!!";
+		String message2 = "File uploaded Failed!!";
+		String fileName = rand.nextInt(60000) + file.getOriginalFilename().replaceAll("\\s", "");
+		Path fileNameAndPath1 = Paths.get(filelocation,fileName);
+		try {
+			Files.write(fileNameAndPath1, file.getBytes());
 //    return ResponseEntity.status(HttpStatus.CREATED).body("File uploaded successfully.");
-    
-  } catch (Exception e) {
+
+		} catch (Exception e) {
 //    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-  	return message2;
-  }
+			return message2;
+		}
 //  System.out.println(message1);
 //  return ResponseEntity.ok(message1);
-  return message1;
-}
+		return message1;
+	}
 
-@PostMapping("/getSubDelete")
-public int getSubDelData(@RequestParam String SUB_CATEGORY_ID) {
-	int flag;
-	flag= addCategoryDao.getSubDelVal(SUB_CATEGORY_ID);
-	return flag;
-}
+	@PostMapping("/getSubDelete")
+	public int getSubDelData(@RequestParam String SUB_CATEGORY_ID) {
+		int flag;
+		flag = addCategoryDao.getSubDelVal(SUB_CATEGORY_ID);
+		return flag;
+	}
 
 // Micro Category program started here.....
-@PostMapping("/microcatupload") 
-public String MicroFileUpload( @RequestParam("file") MultipartFile file,@RequestParam("microcatName") String microcatName,@RequestParam("selectSubCategory") String selectSubcategory) {
-	String cat_flg ="N";
-	String message1="File uploaded successfully!!";
-	String message2="File uploaded Failed!!";
-  String fileName = file.getOriginalFilename();
-  System.out.println(fileName);
-  System.out.println(microcatName);
-  System.out.println(selectSubcategory);
-  addCategoryDao.addMicroCategories(fileName,microcatName,selectSubcategory);
-  try {
-  	 file.transferTo( new File("filelocation" + fileName));
+	@PostMapping("/microcatupload")
+	public String MicroFileUpload(@RequestParam("file") MultipartFile file,
+			@RequestParam("microcatName") String microcatName,
+			@RequestParam("selectSubCategory") int selectSubcategory) {
+		String cat_flg = "N";
+		String message1 = "File uploaded successfully!!";
+		String message2 = "File uploaded Failed!!";
+		String fileName = rand.nextInt(60000) + file.getOriginalFilename().replaceAll("\\s", "");
+		Path fileNameAndPath1 = Paths.get(filelocation,fileName);
+		System.out.println(fileName);
+		System.out.println(microcatName);
+		System.out.println(selectSubcategory);
+		addCategoryDao.addMicroCategories(fileName, microcatName, selectSubcategory);
+		try {
+			Files.write(fileNameAndPath1, file.getBytes());
 //    return ResponseEntity.status(HttpStatus.CREATED).body("File uploaded successfully.");
-    
-  } catch (Exception e) {
+
+		} catch (Exception e) {
 //    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-  	return message2;
-  }
-  return message1;
+			return message2;
+		}
+		return message1;
+	}
+
+	@GetMapping("/getsubcatnm")
+	public List<String> getSubCategoriesNm() {
+		List<String> listofsubcatnm = new ArrayList<String>();
+		listofsubcatnm = addCategoryDao.getSubcatName();
+		System.out.println("cat name list :" + listofsubcatnm);
+		return listofsubcatnm;
+	}
+
+	@GetMapping("/getMicrodatatable")
+	public List<MicroCategoryBeanDTO> getMicroTableData() throws UnsupportedEncodingException {
+		List<Map<String, Object>> listoftbl = new ArrayList<>();
+		List<MicroCategoryBean> microlist= sellerservice.getAllMicroCategorylist();
+		List<MicroCategoryBeanDTO> microlistDto=new ArrayList<>();
+		if (microlist.size() > 0) {
+			for (MicroCategoryBean microcat : microlist) {
+				MicroCategoryBeanDTO dto = new MicroCategoryBeanDTO();
+				dto.setBase64EncodedImage(
+						sellerservice.convertIntoBase64(sellerservice.getbyte(microcat.getMICRO_CATEGORY_IMG())));
+				dto.setSUB_CATEGORY_ID(microcat.getMICRO_CATEGORY_ID());
+				dto.setMICRO_CATEGORY_IMG(microcat.getMICRO_CATEGORY_IMG());
+				dto.setMICRO_CATEGORY_FLG(microcat.getMICRO_CATEGORY_FLG());
+				dto.setMICRO_CATEGORY_NAME(microcat.getMICRO_CATEGORY_NAME());
+				dto.setMICRO_CATEGORY_ID(microcat.getMICRO_CATEGORY_ID());
+				microlistDto.add(dto);
+			}
+		}
+		System.out.println("Micro Category Data list :" + microlistDto);
+		return microlistDto;
+	}
+
+	@PostMapping("/getMicroApprove")
+	public int getMicroApproveData(@RequestParam String MICRO_CATEGORY_ID) {
+		int flag;
+		flag = addCategoryDao.getMicroApproveflag(MICRO_CATEGORY_ID);
+		return flag;
+	}
+
+	@PostMapping("/getMicroDelete")
+	public int getMicroDelData(@RequestParam String MICRO_CATEGORY_ID) {
+		int flag;
+		flag = addCategoryDao.getMicroDelVal(MICRO_CATEGORY_ID);
+		return flag;
+	}
+
 }
-
-
-@GetMapping("/getsubcatnm")
-public List<String> getSubCategoriesNm(){
-	List<String> listofsubcatnm = new ArrayList<String>();
-	listofsubcatnm = addCategoryDao.getSubcatName();
-	System.out.println("cat name list :"+listofsubcatnm);
-	return listofsubcatnm;
-}
-
-@GetMapping("/getMicrodatatable")
-public List<Map<String, Object>> getMicroTableData(){
-List<Map<String, Object>> listoftbl = new ArrayList<>();
-listoftbl = addCategoryDao.getMicroAllData();
-System.out.println("Micro Category Data list :"+listoftbl);
-return listoftbl;
-}
-
-@PostMapping("/getMicroApprove")
-public int getMicroApproveData(@RequestParam String MICRO_CATEGORY_ID) {
-	int flag;
-	flag= addCategoryDao.getMicroApproveflag(MICRO_CATEGORY_ID);
-	return flag;
-}
-
-
-
-@PostMapping("/getMicroDelete")
-public int getMicroDelData(@RequestParam String MICRO_CATEGORY_ID) {
-	int flag;
-	flag= addCategoryDao.getMicroDelVal(MICRO_CATEGORY_ID);
-	return flag;
-}
-
-}	
-

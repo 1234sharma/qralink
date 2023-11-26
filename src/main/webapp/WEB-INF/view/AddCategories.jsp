@@ -3,63 +3,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head> 
 <title> Ajax Spring File Upload Example </title> 
-
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"
-	rel="stylesheet">
-	<link
-	href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css"
-	rel="stylesheet">
-	
-	<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-	<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
-	<script 
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<style>
-body {font-family: Arial, Helvetica, sans-serif;}
-
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
-
-/* The Close Button */
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
-</style>
 </head> 
 <body>
+	<%@ include file="/responsivenav.jsp"%>
+	<div class="container mt-3">
 <form enctype= >
   <label for="fname">Categories :</label><br>
   <input type="text" id="fname" name="Add catogories"><br>
@@ -71,10 +18,10 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <br>
 <button id="view-button" onclick="getTblData()"> VIEW </button>
 <div id="data_table">
-<table id="example" class="table table-striped table-bordered" style="width:100%">
+<table id="example" class="table border display nowra text-center" style="width:100%">
         <thead>
             <tr>
-                <th>subSr.No</th>
+                <th>CATEGORY_ID</th>
                 <th>CATEGORY_NAME</th>
                 <th>CATEGORY_IMG</th>
                 <th>CATEGORY_FLAG</th>
@@ -86,13 +33,41 @@ body {font-family: Arial, Helvetica, sans-serif;}
         </table>
 </div>
 
+	<div class="modal" id="myModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Modal title</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<label for="fname1">Sr.No :</label><br> <input type="text"
+							id="srname" name="fname1" readonly><br> <label
+							for="fname1">SubCategories :</label><br> <input type="text"
+							id="catname" name="fname1"><br> <label
+							for="lname1">File Upload:</label><br> <input
+							id="fileupload1" type="file" name="fileupload1" />
+						<button id="upload-button" onclick="edtUpdate()">UPDATE</button>
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
 <div id="myModal" class="modal">
 
   <!-- Modal content -->
   <div class="modal-content">
     <span class="close">&times;</span>
  <form>
-  <label for="fname1">Sr.No :</label><br>
+  <label for="fname1">Category Id :</label><br>
   <input type="text" id="srname" name="fname1" readonly><br>
   <label for="fname1">Categories :</label><br>
   <input type="text" id="catname" name="fname1"><br>
@@ -102,7 +77,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 </form>
 </div>
 </div>
-
+</div>
 <script>
 // Get the modal
 var modal = document.getElementById("myModal");
@@ -132,6 +107,10 @@ var table=null;
 // var catname;
 // var catimg;
 // var catflg;
+
+window.onload = function loadvalues() {
+			getTblData();
+		}
 
 function uploadFile() {
 //  var val = document.querySelector('fname').value;
@@ -187,12 +166,12 @@ function getTblData(){
                console.log("item vaules:"+item);
                var tr = document.createElement("tr");
    		          $("#example").append(tr);
-   		       		$(tr).append("<td class=nr1>"+item.CATEGORYID+"</td>");
+   		       		$(tr).append("<td class=nr1>"+item.categoryid+"</td>");
 // 			   		$(tr).append("<td class=nr2 target=_blank><button id=catnmbtn onclick=getCategoryNm()>"+item.CATEGORY_NAME+"</button></td>");
-					$(tr).append("<td><a id=catnmbtn onclick=getCategoryNm() href=subcategories >"+item.CATEGORY_NAME+"</a></td>");
-			   		$(tr).append("<td class=nr3>"+item.CATEGORY_IMG+"</td>");
-			   		$(tr).append("<td class=nr4>"+item.CATEGORY_Flag+"</td>");
-			   		$(tr).append("<td><button id=aprove_btn onclick=approveBtn('"+item.CATEGORYID+"','"+item.CATEGORY_NAME+"','"+item.CATEGORY_IMG+"','"+item.CATEGORY_Flag+"')>Approve</button><button id=edt_btn onclick=editBtn('"+item.CATEGORYID+"','"+item.CATEGORY_NAME+"')>EDIT</button><button id=dlt_btn onclick=deleteBtn('"+item.CATEGORYID+"')>DELETE</button></td>");
+					$(tr).append("<td><a id=catnmbtn onclick=getCategoryNm() href=subcategories >"+item.category_NAME+"</a></td>");
+					$(tr).append("<td><img alt='img' src='data:image/jpg;base64,"+item.base64EncodedImage+"' width='100' height='100'/></td>");
+			   		$(tr).append("<td class=nr4>"+item.category_Flag+"</td>");
+			   		$(tr).append("<td><button id=aprove_btn onclick=approveBtn('"+item.categoryid+"','"+item.category_NAME+"','"+item.category_IMG+"','"+item.category_Flag+"')>Approve</button><button id=edt_btn onclick=editBtn('"+item.categoryid+"','"+item.category_NAME+"')>EDIT</button><button id=dlt_btn onclick=deleteBtn('"+item.categoryid+"')>DELETE</button></td>");
 						
      		  }	
     	   table =  new DataTable('#example');
@@ -281,7 +260,7 @@ function deleteBtn(CATEGORYID){
 	  	.done(function(retColData){
 	  		   colmnData = retColData;
 	  		   console.log("list of colmns :"+colmnData.length);
-	  		 	location.reload();
+	  		   location.reload();
 	 	 })
 	  	.fail(function(xhr, status, error){
 	  		 console.log("error");
@@ -295,6 +274,35 @@ function getCategoryNm(){
 
 
 </script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
+	<script src="https://code.jquery.com/jquery-3.6.0.js"
+		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+		crossorigin="anonymous"></script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+	<script
+		src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js">
+		
+	</script>
+	<script
+		src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js">
+		
+	</script>
 </body> 
 </html>

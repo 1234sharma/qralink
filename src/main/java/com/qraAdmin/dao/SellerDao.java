@@ -23,7 +23,9 @@ public class SellerDao {
 
 	public String getCategoryQuery = "select * from qralink.category";
 	public String getSubCategoryQuery = "SELECT * FROM qralink.subcategory where category_id=?";
+	public String getAllSubCategoryQuery = "SELECT * FROM qralink.subcategory";
 	public String getMicroCategoryQuery = "SELECT * FROM qralink.microcategory where SUB_CATEGORY_ID=?";
+	public String getAllMicroCategoryQuery = "SELECT * FROM qralink.microcategory";
 	public String getUserDetail = "SELECT * FROM qralink.userdetail where userid=?";
 	public String getProductListOfUser = "SELECT * FROM qralink.productdetail where userid=?";
 	public String getApprovedQuotationList = "SELECT * FROM qralink.buyquotation where is_approved='N'";
@@ -35,7 +37,7 @@ public class SellerDao {
 		List<CategoryBean> categories = new ArrayList<CategoryBean>();
 		for (Map<String, Object> map : l) {
 			CategoryBean cat = new CategoryBean(Integer.parseInt(map.get("CATEGORYID").toString()),
-					map.get("CATEGORY_NAME").toString());
+					map.get("CATEGORY_NAME").toString(),map.get("CATEGORY_IMG").toString(),map.get("CATEGORY_Flag").toString());
 			categories.add(cat);
 		}
 		return categories;
@@ -47,7 +49,18 @@ public class SellerDao {
 		List<SubCategoryBean> subcategories = new ArrayList<SubCategoryBean>();
 		for (Map<String, Object> map : l) {
 			SubCategoryBean cat = new SubCategoryBean(Integer.parseInt(map.get("SUB_CATEGORY_ID").toString()),
-					map.get("SUB_CATEGORY_NAME").toString(), Integer.parseInt(map.get("CATEGORY_ID").toString()));
+					map.get("SUB_CATEGORY_NAME").toString(), Integer.parseInt(map.get("CATEGORY_ID").toString()),map.get("SUB_CATEGORY_IMG").toString(),map.get("SUB_CATEGORY_FLG").toString());
+			subcategories.add(cat);
+		}
+		return subcategories;
+	}
+	public List<SubCategoryBean> getAllSubCategorylist() {
+		List<Map<String, Object>> l = jdbc.queryForList(getAllSubCategoryQuery);
+		System.out.println(l);
+		List<SubCategoryBean> subcategories = new ArrayList<SubCategoryBean>();
+		for (Map<String, Object> map : l) {
+			SubCategoryBean cat = new SubCategoryBean(Integer.parseInt(map.get("SUB_CATEGORY_ID").toString()),
+					map.get("SUB_CATEGORY_NAME").toString(), Integer.parseInt(map.get("CATEGORYID").toString()),map.get("SUB_CATEGORY_IMG").toString(),map.get("SUB_CATEGORY_FLG").toString());
 			subcategories.add(cat);
 		}
 		return subcategories;
@@ -59,12 +72,22 @@ public class SellerDao {
 		List<MicroCategoryBean> microcategories = new ArrayList<MicroCategoryBean>();
 		for (Map<String, Object> map : l) {
 			MicroCategoryBean cat = new MicroCategoryBean(Integer.parseInt(map.get("MICRO_CATEGORY_ID").toString()),
-					map.get("MICRO_CATEGORY_NAME").toString(), Integer.parseInt(map.get("SUB_CATEGORY_ID").toString()));
+					map.get("MICRO_CATEGORY_NAME").toString(), Integer.parseInt(map.get("SUB_CATEGORY_ID").toString()),map.get("MICRO_CATEGORY_IMG").toString(),map.get("MICRO_CATEGORY_FLG").toString());
 			microcategories.add(cat);
 		}
 		return microcategories;
 	}
-
+	public List<MicroCategoryBean> getAllMicroCategorylist() {
+		List<Map<String, Object>> l = jdbc.queryForList(getAllMicroCategoryQuery);
+		System.out.println(l);
+		List<MicroCategoryBean> microcategories = new ArrayList<MicroCategoryBean>();
+		for (Map<String, Object> map : l) {
+			MicroCategoryBean cat = new MicroCategoryBean(Integer.parseInt(map.get("MICRO_CATEGORY_ID").toString()),
+					map.get("MICRO_CATEGORY_NAME").toString(), Integer.parseInt(map.get("SUB_CATEGORY_ID").toString()),map.get("MICRO_CATEGORY_IMG").toString(),map.get("MICRO_CATEGORY_FLG").toString());
+			microcategories.add(cat);
+		}
+		return microcategories;
+	}
 	public UserDetail getUserDetail(int userId) {
 		UserDetail userdetail = null;
 		try {

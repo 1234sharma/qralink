@@ -33,7 +33,7 @@ public class AddCategoryDao {
 	}
 	public List<Map<String, Object>> getAllData() {
 		List<Map<String, Object>> tbldatalist = new ArrayList<>();
-		String query="select CATEGORYID,CATEGORY_NAME,CATEGORY_IMG,CATEGORY_Flag from qralink.category";
+		String query="select * from qralink.category";
 		tbldatalist = jdbcTemplate.queryForList(query);
 		return tbldatalist;
 	}
@@ -75,12 +75,12 @@ public class AddCategoryDao {
 		catnmlist = jdbcTemplate.queryForList(query,String.class);
 		return catnmlist;
 	}
-	public void addSubCategories(String fileName, String subcatName, String categoryName) {
+	public void addSubCategories(String fileName, String subcatName, int categoryId) {
 		int count=0;
 		String subflg="N";
-		 String query	= "INSERT INTO qralink.subcategory (SUB_CATEGORY_NAME, CATEGORY_NAME, SUB_CATEGORY_IMG, SUB_CATEGORY_FLG) VALUES (?, ?, ?,?)";
+		 String query	= "INSERT INTO qralink.subcategory (SUB_CATEGORY_NAME, CATEGORYID, SUB_CATEGORY_IMG, SUB_CATEGORY_FLG) VALUES (?, ?, ?,?)";
 	      //Creating a PreparedStatement object
-		 count= jdbcTemplate.update(query,subcatName,categoryName,fileName,subflg);
+		 count= jdbcTemplate.update(query,subcatName,categoryId,fileName,subflg);
 		 System.out.println("SUB Query is:"+query);
 		 System.out.println("count is:"+count);
 		 
@@ -129,12 +129,12 @@ public class AddCategoryDao {
 	}
 	
 	
-	public void addMicroCategories(String fileName, String microcatName, String selectSubcategory) {
+	public void addMicroCategories(String fileName, String microcatName, int subcategoryId) {
 		int count=0;
 		String subflg="N";
-		 String query	= "INSERT INTO qralink.microcategory (MICRO_CATEGORY_NAME, SUB_CATEGORY_NAME, MICRO_CATEGORY_IMG, MICRO_CATEGORY_FLG) VALUES (?, ?, ?,?)";
+		 String query	= "INSERT INTO qralink.microcategory (MICRO_CATEGORY_NAME, SUB_CATEGORY_ID, MICRO_CATEGORY_IMG, MICRO_CATEGORY_FLG) VALUES (?, ?, ?,?)";
 	      //Creating a PreparedStatement object
-		 count= jdbcTemplate.update(query,microcatName,selectSubcategory,fileName,subflg);
+		 count= jdbcTemplate.update(query,microcatName,subcategoryId,fileName,subflg);
 		 System.out.println("Microcategory Query is:"+query);
 		 System.out.println("count is:"+count);
 		

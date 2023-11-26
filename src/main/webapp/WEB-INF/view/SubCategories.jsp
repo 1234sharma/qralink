@@ -5,20 +5,23 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"
-	rel="stylesheet">
-	<link
-	href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css"
-	rel="stylesheet">
-	
-	<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-	<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
-	<script 
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
 </head>
-<body onload="getCatName();getSubCatTbl()">
+<body onload="loadCategory();getSubCatTbl()">
+<%@ include file="/responsivenav.jsp"%>
+<div class="container mt-3">
 <div class="center">
 		<table>
 			<tr>
@@ -55,23 +58,32 @@
         </table>
 </div>
 
-<div id="myModal" class="modal">
+	<div class="modal" id="myModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Modal title</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<label for="fname1">Sr.No :</label><br> <input type="text"
+							id="srnum" name="fname1" readonly><br> <label
+							for="fname1">SubCategories :</label><br> <input type="text"
+							id="subcatname" name="fname1"><br> <label
+							for="lname1">File Upload:</label><br> <input
+							id="fileupload1" type="file" name="fileupload1" />
+						<button id="upload-button" onclick="edtUpdate()">UPDATE</button>
+					</form>
 
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
- <form>
-  <label for="fname1">Sr.No :</label><br>
-  <input type="text" id="srnum" name="fname1" readonly><br>
-  <label for="fname1">SubCategories :</label><br>
-  <input type="text" id="subcatname" name="fname1"><br>
-  <label for="lname1">File Upload:</label><br>
-  <input id="fileupload1" type="file" name="fileupload1" /> 
-  <button id="upload-button" onclick="edtUpdate()"> UPDATE </button>
-</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-</div>
-
 
 <script>
 
@@ -108,7 +120,7 @@ function uploadSubCatFile() {
 // 	formData.append("cat_name", cat_val);
 	formData.append("subcatName", val);
   	formData.append("file", fileupload.files[0]);
-  	formData.append("categoryName", selectcategory);
+  	formData.append("categoryId", selectcategory);
   	
   let response = fetch('/subupload', {
     method: "POST", 
@@ -122,19 +134,45 @@ function uploadSubCatFile() {
 }
 </script>
 <script>
+function loadCategory() {
+	$.ajax({
+		type : "GET",
+		url : "/getcategories",
+		success : function(data) {
+			// Ajax call completed successfully
+			select = document.getElementById('categoryid');
+			for (var i = 0; i < data.length; i++) {
+	      		 console.log("response :"+data.length);
+	      		 var item = data[i];
+	               console.log("item vaules:"+item);
+	               var option = document.createElement("option");
+	               option.value=item.categoryid;
+	               option.innerHTML=item.category_NAME;
+	               $("#dropdown").append(option);
+			}
+		},
+		error : function(data) {
+			// Some error in ajax call
+			alert("Please Try Again");
+		}
+
+	});
+}
+
 function getCatName(){
 	 $.ajax({
 	       type: "GET",
 	       url:'/getcatnm',
 	       success: function (response) {
 	    	   console.log("response data :"+response)
-	      	 for(var i = 0, size = response.length; i < size ; i++) {  
+	      	 for(var i = 0, size = response.length; i < size ; i++) { 
 	      		 console.log("response :"+response.length);
 	      		 var item = response[i];
 	               console.log("item vaules:"+item);
 	               var option = document.createElement("option");
+	               option.value=item.categoryId;
+	               option.innerHTML=item.category_NAME;
 	               $("#dropdown").append(option);
-	              	 $(option).append(item);
 				}
 	   	},
 		 error: function (response) {
@@ -164,11 +202,11 @@ function getSubCatTbl(){
 		               console.log("SubCategory item vaules:"+item.SUB_CATEGORY_ID);
 		               var tr = document.createElement("tr");
 		   		          $("#sub-cat-table").append(tr);
-		   		       		$(tr).append("<td>"+item.SUB_CATEGORY_ID+"</td>");
-					   		$(tr).append("<td target=_blank><a  id=subcatnmbtn onclick=getSubCategoryNm() href=microcategories>"+item.SUB_CATEGORY_NAME+"</a></td>");
-					   		$(tr).append("<td>"+item.SUB_CATEGORY_IMG+"</td>");
-					   		$(tr).append("<td>"+item.SUB_CATEGORY_FLG+"</td>");
-					   		$(tr).append("<td><button id=aprove_btn onclick=approveBtn('"+item.SUB_CATEGORY_ID+"')>Approve</button><button id=edt_btn onclick=editBtn('"+item.SUB_CATEGORY_ID+"','"+item.SUB_CATEGORY_NAME+"')>EDIT</button><button id=dlt_btn onclick=deleteBtn('"+item.SUB_CATEGORY_ID+"')>DELETE</button></td>");
+		   		       		$(tr).append("<td>"+item.sub_CATEGORY_ID+"</td>");
+					   		$(tr).append("<td target=_blank><a  id=subcatnmbtn onclick=getSubCategoryNm() href=microcategories>"+item.sub_CATEGORY_NAME+"</a></td>");
+					   		$(tr).append("<td><img alt='img' src='data:image/jpg;base64,"+item.base64EncodedImage+"' width='100' height='100'/></td>");
+					   		$(tr).append("<td>"+item.sub_CATEGORY_FLG+"</td>");
+					   		$(tr).append("<td><button id=aprove_btn onclick=approveBtn('"+item.sub_CATEGORY_ID+"')>Approve</button><button id=edt_btn onclick=editBtn('"+item.sub_CATEGORY_ID+"','"+item.sub_CATEGORY_NAME+"')>EDIT</button><button id=dlt_btn onclick=deleteBtn('"+item.sub_CATEGORY_ID+"')>DELETE</button></td>");
 								
 					}
 		    	   table =  new DataTable('#sub-cat-table');
@@ -256,6 +294,35 @@ function getSubCategoryNm(){
 	 window.location.href='microcategories';
 }
 </script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
+	<script src="https://code.jquery.com/jquery-3.6.0.js"
+		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+		crossorigin="anonymous"></script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+	<script
+		src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js">
+		
+	</script>
+	<script
+		src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js">
+		
+	</script>
 </body>
 </html>
