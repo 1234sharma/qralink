@@ -77,18 +77,29 @@ button:hover, a:hover {
 	%>
 	<div class="row mt-4">
 		<div class="col-lg-3 mt-4">
-			<div class="card" style="width: 100%; height: 100%">
+		<div class="row">
+		<div class="col-lg-12">
+			<div class="card p-2">
+			<div class="card-header">User Detail</div>
+			<div>
+			<div class="container">
 				<i class="fa fa-users fa-5x mt-5" syle="" aria-hidden="true"></i>
-				<h1 class="mt-3"><%=user.getUsername()%></h1>
-				<p class="title mt-5"><%=user.getCity()%></p>
-				<pclass"mt-5"><%=user.getCompanyname()%></p>
-				<a class="mt-5" href="#"><i class="fa fa-dribbble" ></i></a> <a class="mt-5" href="#"><i
-					class="fa fa-twitter"></i></a> <a class="mt-5" href="#"><i
-					class="fa fa-linkedin"></i></a> <a class="mt-5" href="#"><i
-					class="fa fa-facebook"></i></a>
-				<p>
-					<button>Contact</button>
-				</p>
+				<h4 class="mt-3">Hi <%=user.getUsername()%></h4>
+				<p class="title mt-2"><%=user.getEmail()%></p>
+				<p class"mt-5"><%=user.getMobile()%></p>
+ 				<a class="mt-5" href="#"><i class="fa fa-dribbble" ></i></a> <a class="mt-5" href="#"><i 
+ 					class="fa fa-twitter"></i></a> <a class="mt-5" href="#"><i
+ 					class="fa fa-linkedin"></i></a> <a class="mt-5" href="#"><i 
+ 					class="fa fa-facebook"></i></a>
+					<button class="btn btn-primary btn-sm mt-4">Update profile</button>
+			 <div class="card-header mt-4"><i class="fa fa-location-arrow" syle="" aria-hidden="true"></i> City & State</div>
+			     <h6 class="mt-3"><%=user.getCity() %> , <%=user.getState() %></h6> 
+			 <div class="card-header mt-4"><i class="fa fa-map-marker" syle="" aria-hidden="true"></i> Country</div>
+			     <h6 class="mt-3"><%=user.getCountry() %></h6>
+			</div>
+			</div>
+			</div>
+			</div>
 			</div>
 		</div>
 		<div class="col-md-8">
@@ -346,6 +357,7 @@ button:hover, a:hover {
 <!-- 				</div> -->
 			</div>
 			<!--[if !IE]>end dashboard menu<![endif]-->
+		</div>
 		</div>
 	</div>
 </body>

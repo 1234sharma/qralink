@@ -22,7 +22,8 @@
 </head>
 <body>
 	<%@ include file="/responsivenav.jsp"%>
-	<div class="card mt-4 px-5">
+	<div class="container p-3">
+	<div class="card mt-4">
 		<div class="card-header">My Product List</div>
 		<div class="card-body">
 			<div class="container-fluid " style="text-align: center">
@@ -46,6 +47,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 	<script>
 		var table;
 		$(document).ready(function() {

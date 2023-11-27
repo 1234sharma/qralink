@@ -1,10 +1,11 @@
 <html>
 <body>
 	<%@ include file="/responsivenav.jsp"%>
-	<div class="card mt-4 px-5">
+	<div class="container p-3">
+	<div class="card mt-4">
 		<div class="card-header">Add Product</div>
 		<div class="card-body">
-			<div class=" container  row" style="margin-left: 50px">
+			<div class=" container  row">
 				<div class='container mt-4 border' style="height: 50%; width: 200%;">
 					<div class="waper_my_account">
 						<div class="container-fluid">
@@ -242,7 +243,7 @@
 			</div>
 		</div>
 	</div>
-
+</div>
 	<script>
 		let category = [];
 		let subCategory = [];
