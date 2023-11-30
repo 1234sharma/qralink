@@ -171,12 +171,7 @@ String usertype=(String)session.getAttribute("usertype")==null?null:(String)sess
 				<a href="/home" class="fa fa-home">HOME</a>
 				 <a href="/productList" class="fa fa-list">Trending Categories</a> 
 				 <a href="/postbyreq" class="fa fa-handshake-o">Post By Req</a>
-				<%if(usertype!=null&&usertype.equalsIgnoreCase("seller")){ %>
-				<a href="/sellerDashboradpage" class="fa fa-laptop">Seller Dashboard</a>
-				<%}else if(usertype!=null&&usertype=="admin"){ %>
-				<a href="/myQuotesPage" class="fa fa-laptop">Admin DashBoard</a>
-				<%} %>
-				<div class="dropdown1">
+				 <div class="dropdown1">
 					<button class="dropbtn1">
 						Categories <i class="fa fa-caret-down"></i>
 					</button>
@@ -187,6 +182,12 @@ String usertype=(String)session.getAttribute("usertype")==null?null:(String)sess
 					</div>
 				</div>
 				<a href="#about">About</a> 
+				<%if(usertype!=null&&usertype.equalsIgnoreCase("seller")){ %>
+				<a href="/sellerDashboradpage" class="fa fa-laptop">Seller Dashboard</a>
+				<%}else if(usertype!=null && usertype.equals("admin")){ %>
+				<a href="/adminDashboard" class="fa fa-laptop">Admin DashBoard</a>
+				<%} %>
+				
 				<a href="javascript:void(0);" style="font-size: 15px;" class="icon" onclick="myFunction()">&#9776;</a>
 			</div>
 			<div class="col-md-3 text-primary">

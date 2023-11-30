@@ -164,7 +164,7 @@ String usertype=(String)session.getAttribute("usertype");
 	<div class="topnav1 mt-2" id="myTopnav">
 		<div class=row>
 			<div class="col-md-9">
-
+              <%if(usertype != null && usertype.equalsIgnoreCase("seller")) {%>
 				<a href="/sellerDashboradpage" class="active fa fa-home">DashBoard</a>
 				<a href="/home" class="fa fa-home">Home</a>
 				<a href="/addproductPage" class="fa fa-plus">Add Product</a> <a
@@ -183,7 +183,45 @@ String usertype=(String)session.getAttribute("usertype");
 				</div>
 				<a href="#about">About</a> <a href="javascript:void(0);"
 					style="font-size: 15px;" class="icon" onclick="myFunction()">&#9776;</a>
+			<%}else if(usertype != null && usertype.equalsIgnoreCase("admin")){ %>
+			<a href="/adminDashboradpage" class="active fa fa-home">DashBoard</a>
+				<a href="/home" class="fa fa-home">Home</a>
+				<a href="/productList" class="fa fa-list">All Products</a> <a
+					href="/availableQuotesPage" class="fa fa-handshake-o">Requested
+					Quotes</a>
+			   <div class="dropdown1">
+					<button class="dropbtn1">
+						User And Customers <i class="fa fa-caret-down"></i>
+					</button>
+					<div class="dropdown-content1">
+						<a href="#">Show Users</a>
+					</div>
+				</div>
+				<div class="dropdown1">
+					<button class="dropbtn1">
+						Categories <i class="fa fa-caret-down"></i>
+					</button>
+					<div class="dropdown-content1">
+						<a href="#">Add Category</a>
+						<a href="#">Add SubCategory</a> 
+						<a href="#">Add MicroCategory</a> 
+					</div>
+				</div>
+				<div class="dropdown1">
+					<button class="dropbtn1">
+						Approval Center <i class="fa fa-caret-down"></i>
+					</button>
+					<div class="dropdown-content1">
+						<a href="#">Product Approval</a>
+						 <a href="#">Trade Buy</a> 
+						 <a href="#">Trade Sell</a>
+					</div>
+				</div>
+				<a href="#about">About</a> <a href="javascript:void(0);"
+					style="font-size: 15px;" class="icon" onclick="myFunction()">&#9776;</a>
+			<%} %>		
 			</div>
+			
 			<div class="col-md-3 text-primary">
 				<a href="/logout" class="fa fa-plus">Log Out</a>
 			</div>

@@ -93,13 +93,13 @@ form {
 					console.log(data);
 					// Ajax call completed successfully
 					if(data=="seller"){
-					window.location = "http://localhost:8089/sellerPage";
+					window.location = "http://localhost:8089/";
 					}
 					else if(data=="buyer"){
-					window.location = "http://localhost:8089/qrahome";
+					window.location = "http://localhost:8089/";
 					}
-					else if(data=="Admin"){
-					window.location = "http://localhost:8089/admin";
+					else if(data=="admin"){
+					window.location = "http://localhost:8089/";
 					}
 					else
 						{

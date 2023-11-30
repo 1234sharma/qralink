@@ -1,5 +1,7 @@
 package com.qraAdmin.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapProperties.Credential;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.qraAdmin.dao.UserDao;
+import com.qraAdmin.model.ProductBean;
+import com.qraAdmin.model.QuotationBean;
 import com.qraAdmin.model.UserDetail;
 import com.qraAdmin.service.AdminLoginService;
 import com.qraAdmin.service.UserService;
@@ -34,6 +38,11 @@ public class LoginController {
 		ModelAndView model = new ModelAndView("loginpage");
 		return model;
 	}
+	@GetMapping("/")
+	public ModelAndView defaultPage() { 
+		ModelAndView model = new ModelAndView("Home");
+		return model;
+	}
 
 	@GetMapping("/postbyreq")
 	public ModelAndView postbyrequirement() {
@@ -53,11 +62,6 @@ public class LoginController {
 		return model;
 	}
 
-	@GetMapping("/admin")
-	public ModelAndView AdminDash() {
-		ModelAndView model = new ModelAndView("adminDashbard");
-		return model;
-	}
 	
 	@GetMapping("/SplNdProd")
 	public ModelAndView AdminDash1() {

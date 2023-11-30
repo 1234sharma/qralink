@@ -12,6 +12,8 @@ import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,11 +25,17 @@ import com.qraAdmin.DTO.CategoryBeanDTO;
 import com.qraAdmin.DTO.MicroCategoryBeanDTO;
 import com.qraAdmin.DTO.SubCategoryBeanDTO;
 import com.qraAdmin.dao.AddCategoryDao;
+import com.qraAdmin.dao.AdminDao;
 import com.qraAdmin.model.CategoryBean;
 import com.qraAdmin.model.MicroCategoryBean;
+import com.qraAdmin.model.ProductBean;
+import com.qraAdmin.model.QuotationBean;
 import com.qraAdmin.model.SubCategoryBean;
+import com.qraAdmin.model.UserDetail;
 import com.qraAdmin.service.SellerService;
 import com.qraAdmin.service.UserService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 public class AdminController {
@@ -39,6 +47,9 @@ public class AdminController {
 	@Autowired
 	AddCategoryDao addCategoryDao;
 
+	@Autowired
+	AdminDao adminDao;
+
 	Random rand = new Random();
 
 	@Autowired
@@ -48,7 +59,38 @@ public class AdminController {
 
 	@GetMapping("/dashboard")
 	public ModelAndView categories() {
-		ModelAndView model = new ModelAndView("Dashboard1");
+		ModelAndView model = new ModelAndView("adminDashboard");
+		return model;
+	}
+
+	@GetMapping("/adminDashboard")
+	public ModelAndView AdminDash(HttpServletRequest req) {
+		ModelAndView model = null;
+		if (req.getSession().getAttribute("userid") != null) {
+			model = new ModelAndView("adminDashboard");
+			int userId = Integer.parseInt(String.valueOf(req.getSession().getAttribute("userid")));
+			List<QuotationBean> approvedQuotations = sellerservice.getAvailableApprovedCustomerQuote();
+			List<ProductBean> allproducts = adminDao.getAllProducts();
+			List<UserDetail> listOfAdmins = adminDao.getListOfAdmins();
+			List<UserDetail> listOfBuyers = adminDao.getListOfBuyers();
+			List<UserDetail> listOfSellers = adminDao.getListOfsellers();
+			List<ProductBean> unapprovedProducts = adminDao.getlistOfUnapprovedProducts();
+			List<UserDetail> allusers = adminDao.getListOfUsers();
+			UserDetail user= sellerservice.getUserDetail(userId);
+			List<QuotationBean> unapprovedQuotation = adminDao.getUnApprovedCustomerQuote();
+			model.addObject("user", user);
+			model.addObject("approvedQuotations", approvedQuotations);
+			model.addObject("allproducts", allproducts);
+			model.addObject("listOfAdmins", listOfAdmins);
+			model.addObject("listOfBuyers", listOfBuyers);
+			model.addObject("listOfSellers", listOfSellers);
+			model.addObject("unapprovedProducts", unapprovedProducts);
+			model.addObject("allusers", allusers);
+			model.addObject("unapprovedQuotation", unapprovedQuotation);
+
+		} else {
+			return new ModelAndView("loginpage");
+		}
 		return model;
 	}
 
@@ -95,7 +137,7 @@ public class AdminController {
 		String message1 = "File uploaded successfully!!";
 		String message2 = "File uploaded Failed!!";
 		String fileName = rand.nextInt(60000) + file.getOriginalFilename().replaceAll("\\s", "");
-		Path fileNameAndPath1 = Paths.get(filelocation,fileName);
+		Path fileNameAndPath1 = Paths.get(filelocation, fileName);
 		System.out.println(fileName);
 		System.out.println(catName);
 		addCategoryDao.addCategories(cat_flg, fileName, catName);
@@ -141,7 +183,7 @@ public class AdminController {
 		String message1 = "File uploaded successfully!!";
 		String message2 = "File uploaded Failed!!";
 		String fileName = rand.nextInt(60000) + file.getOriginalFilename().replaceAll("\\s", "");
-		Path fileNameAndPath1 = Paths.get(filelocation,fileName);
+		Path fileNameAndPath1 = Paths.get(filelocation, fileName);
 		try {
 			Files.write(fileNameAndPath1, file.getBytes());
 //	      return ResponseEntity.status(HttpStatus.CREATED).body("File uploaded successfully.");
@@ -177,7 +219,7 @@ public class AdminController {
 		String message1 = "File uploaded successfully!!";
 		String message2 = "File uploaded Failed!!";
 		String fileName = rand.nextInt(60000) + file.getOriginalFilename().replaceAll("\\s", "");
-		Path fileNameAndPath1 = Paths.get(filelocation,fileName);
+		Path fileNameAndPath1 = Paths.get(filelocation, fileName);
 		addCategoryDao.addSubCategories(fileName, subcatName, categoryId);
 		try {
 			Files.write(fileNameAndPath1, file.getBytes());
@@ -192,8 +234,8 @@ public class AdminController {
 
 	@GetMapping("/getSubdatatable")
 	public List<SubCategoryBeanDTO> getSubTableData() throws UnsupportedEncodingException {
-		List<SubCategoryBean> sublist= sellerservice.getAllSubCategorylist();
-		List<SubCategoryBeanDTO> sublistDto=new ArrayList<>();
+		List<SubCategoryBean> sublist = sellerservice.getAllSubCategorylist();
+		List<SubCategoryBeanDTO> sublistDto = new ArrayList<>();
 		if (sublist.size() > 0) {
 			for (SubCategoryBean subcat : sublist) {
 				SubCategoryBeanDTO dto = new SubCategoryBeanDTO();
@@ -225,7 +267,7 @@ public class AdminController {
 		String message1 = "File uploaded successfully!!";
 		String message2 = "File uploaded Failed!!";
 		String fileName = rand.nextInt(60000) + file.getOriginalFilename().replaceAll("\\s", "");
-		Path fileNameAndPath1 = Paths.get(filelocation,fileName);
+		Path fileNameAndPath1 = Paths.get(filelocation, fileName);
 		try {
 			Files.write(fileNameAndPath1, file.getBytes());
 //    return ResponseEntity.status(HttpStatus.CREATED).body("File uploaded successfully.");
@@ -255,7 +297,7 @@ public class AdminController {
 		String message1 = "File uploaded successfully!!";
 		String message2 = "File uploaded Failed!!";
 		String fileName = rand.nextInt(60000) + file.getOriginalFilename().replaceAll("\\s", "");
-		Path fileNameAndPath1 = Paths.get(filelocation,fileName);
+		Path fileNameAndPath1 = Paths.get(filelocation, fileName);
 		System.out.println(fileName);
 		System.out.println(microcatName);
 		System.out.println(selectSubcategory);
@@ -282,8 +324,8 @@ public class AdminController {
 	@GetMapping("/getMicrodatatable")
 	public List<MicroCategoryBeanDTO> getMicroTableData() throws UnsupportedEncodingException {
 		List<Map<String, Object>> listoftbl = new ArrayList<>();
-		List<MicroCategoryBean> microlist= sellerservice.getAllMicroCategorylist();
-		List<MicroCategoryBeanDTO> microlistDto=new ArrayList<>();
+		List<MicroCategoryBean> microlist = sellerservice.getAllMicroCategorylist();
+		List<MicroCategoryBeanDTO> microlistDto = new ArrayList<>();
 		if (microlist.size() > 0) {
 			for (MicroCategoryBean microcat : microlist) {
 				MicroCategoryBeanDTO dto = new MicroCategoryBeanDTO();
@@ -313,6 +355,78 @@ public class AdminController {
 		int flag;
 		flag = addCategoryDao.getMicroDelVal(MICRO_CATEGORY_ID);
 		return flag;
+	}
+
+	@GetMapping("/getUnApprovedProduct")
+	public ResponseEntity<List<ProductBean>> getUnApprovedProduct(HttpServletRequest req) {
+		List<ProductBean> products = null;
+		if (req.getSession().getAttribute("usertype") != null
+				&& String.valueOf(req.getSession().getAttribute("usertype")).equals("admin")) {
+			products = adminDao.getlistOfUnapprovedProducts();
+		}
+		return new ResponseEntity<List<ProductBean>>(products, HttpStatus.OK);
+
+	}
+
+	@GetMapping("/getUnApprovedQuotes")
+	public ResponseEntity<List<QuotationBean>> getUnApprovedQuotes(HttpServletRequest req) {
+		List<QuotationBean> quotations = null;
+		if (req.getSession().getAttribute("usertype") != null
+				&& String.valueOf(req.getSession().getAttribute("usertype")).equals("admin")) {
+			quotations = adminDao.getUnApprovedCustomerQuote();
+		}
+		return new ResponseEntity(quotations, HttpStatus.OK);
+	}
+
+	@GetMapping("/getListOfUsers")
+	public ResponseEntity<List<UserDetail>> getListOfUsers(HttpServletRequest req) {
+		List<UserDetail> users = null;
+		if (req.getSession().getAttribute("usertype") != null
+				&& String.valueOf(req.getSession().getAttribute("usertype")).equals("admin")) {
+			users = adminDao.getListOfUsers();
+		}
+		return new ResponseEntity<List<UserDetail>>(users, HttpStatus.OK);
+	}
+
+	@GetMapping("/getListOfBuyers")
+	public ResponseEntity<List<UserDetail>> getListOfBuyers(HttpServletRequest req) {
+		List<UserDetail> users = null;
+		if (req.getSession().getAttribute("usertype") != null
+				&& String.valueOf(req.getSession().getAttribute("usertype")).equals("admin")) {
+			users = adminDao.getListOfBuyers();
+		}
+		return new ResponseEntity<List<UserDetail>>(users, HttpStatus.OK);
+	}
+
+	@GetMapping("/getListOfSellers")
+	public ResponseEntity<List<UserDetail>> getListOfSellers(HttpServletRequest req) {
+		List<UserDetail> users = null;
+		if (req.getSession().getAttribute("usertype") != null
+				&& String.valueOf(req.getSession().getAttribute("usertype")).equals("admin")) {
+			users = adminDao.getListOfsellers();
+		}
+		return new ResponseEntity<List<UserDetail>>(users, HttpStatus.OK);
+	}
+
+	@GetMapping("/getListOfAdmins")
+	public ResponseEntity<List<UserDetail>> getListOfAdmins(HttpServletRequest req) {
+		List<UserDetail> users = null;
+		if (req.getSession().getAttribute("usertype") != null
+				&& String.valueOf(req.getSession().getAttribute("usertype")).equals("admin")) {
+			users = adminDao.getListOfAdmins();
+		}
+		return new ResponseEntity<List<UserDetail>>(users, HttpStatus.OK);
+	}
+
+	@GetMapping("/getAllProducts")
+	public ResponseEntity<List<ProductBean>> getAllProducts(HttpServletRequest req) {
+		List<ProductBean> products = null;
+		if (req.getSession().getAttribute("usertype") != null
+				&& String.valueOf(req.getSession().getAttribute("usertype")).equals("admin")) {
+			products = adminDao.getAllProducts();
+		}
+		return new ResponseEntity<List<ProductBean>>(products, HttpStatus.OK);
+
 	}
 
 }
