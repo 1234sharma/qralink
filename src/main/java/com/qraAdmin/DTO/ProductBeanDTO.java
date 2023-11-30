@@ -18,8 +18,8 @@ public class ProductBeanDTO {
 	private String material;
 	private String orderqnt;
 	private String uses;
-	private byte[] pic1;
-	private byte[] pic2;
+	private String pic1;
+	private String pic2;
     private int userid;
     private String productlive;
     private String image1encode64;
@@ -30,7 +30,7 @@ public class ProductBeanDTO {
 	}
 	public ProductBeanDTO(long productId, String productName, String brandName, String productPrice, String categoryId,
 			String subCategoryId, String microCategoryId, String productdesc, String modelnumber, String weight,
-			String shape, String color, String material, String orderqnt, String uses, byte[] pic1, byte[] pic2,
+			String shape, String color, String material, String orderqnt, String uses, String pic1, String pic2,
 			int userid, String productlive) {
 		super();
 		this.productId = productId;
@@ -156,16 +156,16 @@ public class ProductBeanDTO {
 	public void setUses(String uses) {
 		this.uses = uses;
 	}
-	public byte[] getPic1() {
+	public String getPic1() {
 		return pic1;
 	}
-	public void setPic1(byte[] pic1) {
+	public void setPic1(String pic1) {
 		this.pic1 = pic1;
 	}
-	public byte[] getPic2() {
+	public String getPic2() {
 		return pic2;
 	}
-	public void setPic2(byte[] pic2) {
+	public void setPic2(String pic2) {
 		this.pic2 = pic2;
 	}
 	public int getUserid() {
@@ -186,9 +186,9 @@ public class ProductBeanDTO {
 				+ ", productPrice=" + productPrice + ", CategoryId=" + CategoryId + ", SubCategoryId=" + SubCategoryId
 				+ ", microCategoryId=" + microCategoryId + ", productdesc=" + productdesc + ", modelnumber="
 				+ modelnumber + ", weight=" + weight + ", shape=" + shape + ", color=" + color + ", material="
-				+ material + ", orderqnt=" + orderqnt + ", uses=" + uses + ", pic1=" + Arrays.toString(pic1) + ", pic2="
-				+ Arrays.toString(pic2) + ", userid=" + userid + ", productlive=" + productlive + ", image1encode64="
-				+ image1encode64 + ", image2encode64=" + image2encode64 + "]";
+				+ material + ", orderqnt=" + orderqnt + ", uses=" + uses + ", pic1=" + pic1 + ", pic2=" + pic2
+				+ ", userid=" + userid + ", productlive=" + productlive + ", image1encode64=" + image1encode64
+				+ ", image2encode64=" + image2encode64 + "]";
 	}
 
     

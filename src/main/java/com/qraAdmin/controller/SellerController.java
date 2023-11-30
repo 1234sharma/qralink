@@ -258,27 +258,6 @@ public class SellerController {
 		return new ResponseEntity<List<SubCategoryBean>>(cat, HttpStatus.OK);
 	}
 
-	@GetMapping("/getImageByte/{image1}/{image2}")
-	@ResponseBody
-	public ResponseEntity<List<byte[]>> getImageByte(@PathVariable("image1") String image1,
-			@PathVariable("image2") String image2) {
-		byte[] imagebyte1;
-		byte[] imagebyte2;
-		List<byte[]> bytearray = new ArrayList<>();
-		System.out.println(image1 + "   " + image2);
-		try {
-			imagebyte1 = Files.readAllBytes(Paths.get(image1));
-			imagebyte2 = Files.readAllBytes(Paths.get(image2));
-			bytearray.add(imagebyte1);
-			bytearray.add(imagebyte2);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
-		return new ResponseEntity<List<byte[]>>(bytearray, HttpStatus.OK);
-	}
-
 	@GetMapping("/getmicrocategories/{subcategoryid}")
 	@ResponseBody
 	public ResponseEntity<List<MicroCategoryBean>> getMicroCategories(@PathVariable("subcategoryid") String subcatid) {

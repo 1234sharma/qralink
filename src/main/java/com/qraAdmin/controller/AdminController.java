@@ -62,6 +62,15 @@ public class AdminController {
 		ModelAndView model = new ModelAndView("adminDashboard");
 		return model;
 	}
+	@GetMapping("/productListForApproval")
+	public ModelAndView productListForApproval(HttpServletRequest req) {
+		if (req.getSession().getAttribute("userid") != null) {
+		ModelAndView model = new ModelAndView("productListApproval");
+		return model;
+		}
+		return new ModelAndView("loginpage");
+	}
+	
 
 	@GetMapping("/adminDashboard")
 	public ModelAndView AdminDash(HttpServletRequest req) {
@@ -156,8 +165,6 @@ public class AdminController {
 		if (categaries.size() > 0) {
 			for (CategoryBean cat : categaries) {
 				CategoryBeanDTO dto = new CategoryBeanDTO();
-				dto.setBase64EncodedImage(
-						sellerservice.convertIntoBase64(sellerservice.getbyte(cat.getCATEGORY_IMG())));
 				dto.setCATEGORYID(cat.getCATEGORYID());
 				dto.setCATEGORY_NAME(cat.getCATEGORY_NAME());
 				dto.setCATEGORY_IMG(cat.getCATEGORY_IMG());
@@ -239,8 +246,6 @@ public class AdminController {
 		if (sublist.size() > 0) {
 			for (SubCategoryBean subcat : sublist) {
 				SubCategoryBeanDTO dto = new SubCategoryBeanDTO();
-				dto.setBase64EncodedImage(
-						sellerservice.convertIntoBase64(sellerservice.getbyte(subcat.getSUB_CATEGORY_IMG())));
 				dto.setSUB_CATEGORY_ID(subcat.getSUB_CATEGORY_ID());
 				dto.setSUB_CATEGORY_NAME(subcat.getSUB_CATEGORY_NAME());
 				dto.setSUB_CATEGORY_IMG(subcat.getSUB_CATEGORY_IMG());
@@ -329,9 +334,7 @@ public class AdminController {
 		if (microlist.size() > 0) {
 			for (MicroCategoryBean microcat : microlist) {
 				MicroCategoryBeanDTO dto = new MicroCategoryBeanDTO();
-				dto.setBase64EncodedImage(
-						sellerservice.convertIntoBase64(sellerservice.getbyte(microcat.getMICRO_CATEGORY_IMG())));
-				dto.setSUB_CATEGORY_ID(microcat.getMICRO_CATEGORY_ID());
+	     		dto.setSUB_CATEGORY_ID(microcat.getMICRO_CATEGORY_ID());
 				dto.setMICRO_CATEGORY_IMG(microcat.getMICRO_CATEGORY_IMG());
 				dto.setMICRO_CATEGORY_FLG(microcat.getMICRO_CATEGORY_FLG());
 				dto.setMICRO_CATEGORY_NAME(microcat.getMICRO_CATEGORY_NAME());

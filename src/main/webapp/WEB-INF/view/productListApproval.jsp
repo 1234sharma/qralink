@@ -62,7 +62,7 @@
 		function tabledataload() {
 			$
 					.ajax({
-						url : "/getProductListOfCurrentUser",
+						url : "/getUnApprovedProduct",
 						type : 'GET',
 						success : function(data) {
 							console.log(data);
@@ -74,12 +74,16 @@
 														data[i].brandName,
 														data[i].productPrice,
 														data[i].orderqnt,
-														'<img alt="img" src="data:image/jpg;base64,'+data[i].image1encode64+'" width="100" height="100"/>',
-														'<img alt="img" src="data:image/png;base64,'+data[i].image2encode64+'" width="100" height="100"/>',
+														'<img alt="img" src="images/'+data[i].pic1+'" width="100" height="100"/>',
+														'<img alt="img" src="images/'+data[i].pic2+'" width="100" height="100"/>',
 														data[i].productlive,
-														'<button  class="btn btn-danger" onclick="deleteuser(`'
+														'<div class="row"><div class="col-md-3"><button  class="btn btn-danger" onclick="deleteuser(`'
 																+ data[i].productId
-																+ '`)">DELETE</button>' ])
+																+ '`)">DELETE</button><div><div class="col-md-3 mt-2"><button  class="btn btn-primary" onclick="deleteuser(`'
+																+ data[i].productId
+																+ '`)">UPDATE</button><div><div class="col-md-3 mt-2"><button  class="btn btn-success" onclick="deleteuser(`'
+																+ data[i].productId
+																+ '`)">APPROVE</button><div></div>' ])
 										.draw();
 
 							}

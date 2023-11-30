@@ -169,7 +169,7 @@ function getTblData(){
    		       		$(tr).append("<td class=nr1>"+item.categoryid+"</td>");
 // 			   		$(tr).append("<td class=nr2 target=_blank><button id=catnmbtn onclick=getCategoryNm()>"+item.CATEGORY_NAME+"</button></td>");
 					$(tr).append("<td><a id=catnmbtn onclick=getCategoryNm() href=subcategories >"+item.category_NAME+"</a></td>");
-					$(tr).append("<td><img alt='img' src='data:image/jpg;base64,"+item.base64EncodedImage+"' width='100' height='100'/></td>");
+					$(tr).append("<td><img alt='img' src='/images/"+item.category_IMG+"' width='100' height='100'/></td>");
 			   		$(tr).append("<td class=nr4>"+item.category_Flag+"</td>");
 			   		$(tr).append("<td><button id=aprove_btn onclick=approveBtn('"+item.categoryid+"','"+item.category_NAME+"','"+item.category_IMG+"','"+item.category_Flag+"')>Approve</button><button id=edt_btn onclick=editBtn('"+item.categoryid+"','"+item.category_NAME+"')>EDIT</button><button id=dlt_btn onclick=deleteBtn('"+item.categoryid+"')>DELETE</button></td>");
 						

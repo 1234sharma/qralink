@@ -204,7 +204,7 @@ function getSubCatTbl(){
 		   		          $("#sub-cat-table").append(tr);
 		   		       		$(tr).append("<td>"+item.sub_CATEGORY_ID+"</td>");
 					   		$(tr).append("<td target=_blank><a  id=subcatnmbtn onclick=getSubCategoryNm() href=microcategories>"+item.sub_CATEGORY_NAME+"</a></td>");
-					   		$(tr).append("<td><img alt='img' src='data:image/jpg;base64,"+item.base64EncodedImage+"' width='100' height='100'/></td>");
+					   		$(tr).append("<td><img alt='img' src='images/"+item.sub_CATEGORY_IMG+"' width='100' height='100'/></td>");
 					   		$(tr).append("<td>"+item.sub_CATEGORY_FLG+"</td>");
 					   		$(tr).append("<td><button id=aprove_btn onclick=approveBtn('"+item.sub_CATEGORY_ID+"')>Approve</button><button id=edt_btn onclick=editBtn('"+item.sub_CATEGORY_ID+"','"+item.sub_CATEGORY_NAME+"')>EDIT</button><button id=dlt_btn onclick=deleteBtn('"+item.sub_CATEGORY_ID+"')>DELETE</button></td>");
 								

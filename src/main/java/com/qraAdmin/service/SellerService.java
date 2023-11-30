@@ -134,14 +134,16 @@ public class SellerService {
 		ProductBeanDTO dto = new ProductBeanDTO();
 		// System.out.println(prod.getPic1());
 		// System.out.println(prod.getPic2());
-		if (prod.getPic1() != null || !prod.getPic1().isEmpty()) {
-			dto.setPic1(getbyte(prod.getPic1()));
-			dto.setImage1encode64(convertIntoBase64(dto.getPic1()));
-		}
-		if (!prod.getPic2().trim().isEmpty()) {
-			dto.setPic2(getbyte(prod.getPic2()));
-			dto.setImage2encode64(convertIntoBase64(dto.getPic2()));
-		}
+//		if (prod.getPic1() != null || !prod.getPic1().isEmpty()) {
+//			dto.setPic1(getbyte(prod.getPic1()));
+//			dto.setImage1encode64(convertIntoBase64(dto.getPic1()));
+//		}
+//		if (!prod.getPic2().trim().isEmpty()) {
+//			dto.setPic2(getbyte(prod.getPic2()));
+//			dto.setImage2encode64(convertIntoBase64(dto.getPic2()));
+//		}
+		dto.setPic1(prod.getPic1());
+		dto.setPic2(prod.getPic2());
 		dto.setBrandName(prod.getBrandName());
 		dto.setCategoryId(prod.getCategoryId());
 		dto.setColor(prod.getColor());
