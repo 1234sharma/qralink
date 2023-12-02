@@ -152,7 +152,7 @@ button:hover, a:hover {
 										</div>
 									</div>
 						</div>
-						<a href="#" class="btn btn-primary">VIEW <i class="fa fa-arrow-circle-right"></i></a>
+						<a href="/quotesForApproval" class="btn btn-primary">VIEW <i class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
 				<div class="col-md-3">
@@ -239,9 +239,9 @@ button:hover, a:hover {
 				</div>
 				<div class="col-md-3">
 					<div class="card">
-						<div class="card-header">Add Product</div>
+						<div class="card-header">All Product</div>
 						<div class="card-body">
-							<h5 class="card-title">Add Product</h5>
+							<h5 class="card-title">All Product</h5>
 									<div class="row">
 										<div class="col-xs-3">
 											<i class="fa fa-thumbs-o-up fa-5x"></i>
@@ -253,7 +253,7 @@ button:hover, a:hover {
 										</div>
 									</div>
 						</div>
-						<a href="#" class="btn btn-primary">VIEW <i class="fa fa-arrow-circle-right"></i></a>
+						<a href="/allProductListPage" class="btn btn-primary">VIEW <i class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
 <!-- 				<div class="col-md-3"> -->

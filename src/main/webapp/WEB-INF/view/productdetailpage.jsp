@@ -116,17 +116,17 @@ text-color {
 			<div class="col-md-5">
 				<div class="main-img">
 					<img class="img-fluid"
-						src="data:image/jpg;base64,<%=product.getImage2encode64()%>"
+						src="images/<%=product.getPic1()%>"
 						alt="ProductS">
 					<div class="row my-3 previews">
 						<div class="col-md-3">
 							<img class="w-100"
-								src="data:image/jpg;base64,<%=product.getImage1encode64()%>"
+								src="images/<%=product.getPic1()%>"
 								alt="Sale">
 						</div>
 						<div class="col-md-3">
 							<img class="w-100"
-								src="data:image/jpg;base64,<%=product.getImage2encode64()%>"
+								src="images/<%=product.getPic2()%>"
 								alt="Sale">
 						</div>
 						</div>

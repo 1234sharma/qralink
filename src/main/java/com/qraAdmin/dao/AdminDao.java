@@ -25,6 +25,7 @@ public class AdminDao {
 	public String getlistOfSellers = "SELECT * FROM qralink.userdetail where userid='seller'";
 	public String getlistOfAdmins = "SELECT * FROM qralink.userdetail where userid='admin'";
 	public String getAllProduct = "SELECT * FROM qralink.productdetail";
+	public String updateToggelApproveStatus="update qralink.productdetail set productlive  = CASE WHEN productlive = 'N' THEN 'Y' WHEN productlive = 'Y' THEN 'N' else productlive END where productId=?";
 	public List<ProductBean> getlistOfUnapprovedProducts() {
 		List<Map<String, Object>> products = jdbc.queryForList(getListOfUnapprovedProduct);
 		System.out.println(products);
@@ -218,6 +219,11 @@ public class AdminDao {
 			productlist.add(product);
 		}
 		return productlist;
+	}
+	public int toggelApproveStatus(int productId) {
+		int count=0;
+    	 count= jdbc.update(updateToggelApproveStatus, productId);
+    	 return count;
 	}
 
 

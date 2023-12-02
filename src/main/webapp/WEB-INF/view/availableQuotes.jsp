@@ -24,7 +24,7 @@
 	<%@ include file="/responsivenav.jsp"%>
 	<div class="container p-3">
 	<div class="card mt-4">
-		<div class="card-header">Product List</div>
+		<div class="card-header">Available Quotes</div>
 		<div class="card-body">
 			<div class="container-fluid " style="text-align: center">
 				<table class="table border display nowra text-center" id="datatable"

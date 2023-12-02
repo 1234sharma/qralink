@@ -14,9 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -70,7 +74,23 @@ public class AdminController {
 		}
 		return new ModelAndView("loginpage");
 	}
+	@GetMapping("/allProductListPage")
+	public ModelAndView allProductListPage(HttpServletRequest req) {
+		if (req.getSession().getAttribute("userid") != null) {
+		ModelAndView model = new ModelAndView("allProductList");
+		return model;
+		}
+		return new ModelAndView("loginpage");
+	}
 	
+	@GetMapping("/quotesForApproval")
+	public ModelAndView quotesForApproval(HttpServletRequest req) {
+		if (req.getSession().getAttribute("userid") != null) {
+		ModelAndView model = new ModelAndView("quotesForApproval");
+		return model;
+		}
+		return new ModelAndView("loginpage");
+	}
 
 	@GetMapping("/adminDashboard")
 	public ModelAndView AdminDash(HttpServletRequest req) {
@@ -191,6 +211,7 @@ public class AdminController {
 		String message2 = "File uploaded Failed!!";
 		String fileName = rand.nextInt(60000) + file.getOriginalFilename().replaceAll("\\s", "");
 		Path fileNameAndPath1 = Paths.get(filelocation, fileName);
+		addCategoryDao.updateCategories(cat_flg,fileName,catName,srNo);
 		try {
 			Files.write(fileNameAndPath1, file.getBytes());
 //	      return ResponseEntity.status(HttpStatus.CREATED).body("File uploaded successfully.");
@@ -273,6 +294,7 @@ public class AdminController {
 		String message2 = "File uploaded Failed!!";
 		String fileName = rand.nextInt(60000) + file.getOriginalFilename().replaceAll("\\s", "");
 		Path fileNameAndPath1 = Paths.get(filelocation, fileName);
+		addCategoryDao.editSubCategories(cat_flg,fileName,subcatval,srnoval);
 		try {
 			Files.write(fileNameAndPath1, file.getBytes());
 //    return ResponseEntity.status(HttpStatus.CREATED).body("File uploaded successfully.");
@@ -432,4 +454,16 @@ public class AdminController {
 
 	}
 
+	@PutMapping("/toggelApproveStatus/{productId}")
+	@ResponseBody
+	public ResponseEntity<Integer> toggelApproveStatus(@PathVariable("productId") int productId, HttpServletRequest req) {
+		if (req.getSession().getAttribute("userid") != null) {
+			int count = adminDao.toggelApproveStatus(productId);
+			System.out.println(count);
+			return new ResponseEntity<Integer>(count, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Integer>(-1, HttpStatus.OK);
+		}
+
+	}
 }

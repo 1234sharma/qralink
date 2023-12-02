@@ -184,9 +184,9 @@ String usertype=(String)session.getAttribute("usertype");
 				<a href="#about">About</a> <a href="javascript:void(0);"
 					style="font-size: 15px;" class="icon" onclick="myFunction()">&#9776;</a>
 			<%}else if(usertype != null && usertype.equalsIgnoreCase("admin")){ %>
-			<a href="/adminDashboradpage" class="active fa fa-home">DashBoard</a>
+			<a href="/adminDashboard" class="active fa fa-home">DashBoard</a>
 				<a href="/home" class="fa fa-home">Home</a>
-				<a href="/productList" class="fa fa-list">All Products</a> <a
+				<a href="/allProductListPage" class="fa fa-list">All Products</a> <a
 					href="/availableQuotesPage" class="fa fa-handshake-o">Requested
 					Quotes</a>
 			   <div class="dropdown1">

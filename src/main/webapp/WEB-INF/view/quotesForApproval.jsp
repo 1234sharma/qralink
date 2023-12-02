@@ -24,7 +24,7 @@
 	<%@ include file="/responsivenav.jsp"%>
 	<div class="container p-3">
 	<div class="card mt-4">
-		<div class="card-header">Products For Approval</div>
+		<div class="card-header">Quotes For Approval</div>
 		<div class="card-body">
 			<div class="container-fluid " style="text-align: center">
 				<table class="table border display nowra text-center" id="datatable"
@@ -32,13 +32,13 @@
 					<thead class="thead-dark b" style="color: black;">
 						<tr>
 							<th scope="col">productName</th>
-							<th scope="col">brandName</th>
-							<th scope="col">productPrice</th>
-							<th scope="col">orderqnt</th>
-							<th scope="col">pic1</th>
-							<th scope="col">pic2</th>
-							<th scope="col">productlive</th>
-							<th scope="col">Action</th>
+							<th scope="col">Quantity</th>
+							<th scope="col">QuantityType</th>
+							<th scope="col">Email</th>
+							<th scope="col">PersonName</th>
+							<th scope="col">Mobile</th>
+							<th scope="col">Approved</th>
+							<th scope="col">Action</th>							
 						</tr>
 					</thead>
 					<tbody>
@@ -47,7 +47,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div>	
 	<script>
 		var table;
 		$(document).ready(function() {
@@ -62,7 +62,7 @@
 		function tabledataload() {
 			$
 					.ajax({
-						url : "/getUnApprovedProduct",
+						url : "/getUnApprovedQuotes",
 						type : 'GET',
 						success : function(data) {
 							console.log(data);
@@ -70,18 +70,18 @@
 								$('#datatable').DataTable().row
 										.add(
 												[
-														data[i].productName,
-														data[i].brandName,
-														data[i].productPrice,
-														data[i].orderqnt,
-														'<img alt="img" src="images/'+data[i].pic1+'" width="100" height="100"/>',
-														'<img alt="img" src="images/'+data[i].pic2+'" width="100" height="100"/>',
-														data[i].productlive,
+														data[i].product_name,
+														data[i].quantiry,
+														data[i].quantity_type,
+														data[i].email,
+														data[i].person_name, 
+														data[i].mobile,
+														data[i].is_approved,
 														'<div class="row"><div class="col-md-3"><button  class="btn btn-danger" onclick="deleteProduct(`'
-																+ data[i].productId
-																+ '`)">DELETE</button><div><div class="col-md-3 mt-2"><div><div class="col-md-3 mt-2"><button  class="btn btn-success" onclick="ApproveOrDisApproveProduct(`'
-																+ data[i].productId
-																+ '`)">APPROVE</button><div></div>' ])
+														+ data[i].productId
+														+ '`)">DELETE</button><div><div class="col-md-3 mt-2"><div><div class="col-md-3 mt-2"><button  class="btn btn-success" onclick="ApproveOrDisApproveProduct(`'
+														+ data[i].productId
+														+ '`)">APPROVE</button><div></div>'])
 										.draw();
 
 							}
@@ -93,7 +93,7 @@
 					});
 		}
 
-		function deleteProduct(val) {
+		function deleteuser(val) {
 			var result = confirm("Are you sure ? Want to delete?" + val);
 			if (result) {
 				$.ajax({
@@ -112,31 +112,6 @@
 					},
 					error : function() {
 						console.log('error');
-					}
-				});
-
-			} else {
-				return;
-			}
-		}
-		function ApproveOrDisApproveProduct(val) {
-			if (val) {
-				$.ajax({
-					url : "toggelApproveStatus/" + val,
-					type : 'PUT',
-					success : function(data) {
-						if (data == -1) {
-							window.location = "http://localhost:8089/qrahome";
-						} else if (data == 0) {
-							alert("Unable To Update The Status...");
-						} else {
-							alert("Status Updated Succesfully")
-							table.clear().draw();
-							tabledataload();
-						}
-					},
-					error : function(e) {
-						console.log('error '+e);
 					}
 				});
 
