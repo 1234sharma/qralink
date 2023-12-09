@@ -22,7 +22,7 @@ public class SellerDao {
 	JdbcTemplate jdbc;
 
 	public String getCategoryQuery = "select * from qralink.category";
-	public String getSubCategoryQuery = "SELECT * FROM qralink.subcategory where category_id=?";
+	public String getSubCategoryQuery = "SELECT * FROM qralink.subcategory where CATEGORYID=?";
 	public String getAllSubCategoryQuery = "SELECT * FROM qralink.subcategory";
 	public String getMicroCategoryQuery = "SELECT * FROM qralink.microcategory where SUB_CATEGORY_ID=?";
 	public String getAllMicroCategoryQuery = "SELECT * FROM qralink.microcategory";
@@ -40,6 +40,7 @@ public class SellerDao {
 					map.get("CATEGORY_NAME").toString(),map.get("CATEGORY_IMG").toString(),map.get("CATEGORY_Flag").toString());
 			categories.add(cat);
 		}
+		System.out.println(categories);
 		return categories;
 	}
 
@@ -49,7 +50,7 @@ public class SellerDao {
 		List<SubCategoryBean> subcategories = new ArrayList<SubCategoryBean>();
 		for (Map<String, Object> map : l) {
 			SubCategoryBean cat = new SubCategoryBean(Integer.parseInt(map.get("SUB_CATEGORY_ID").toString()),
-					map.get("SUB_CATEGORY_NAME").toString(), Integer.parseInt(map.get("CATEGORY_ID").toString()),map.get("SUB_CATEGORY_IMG").toString(),map.get("SUB_CATEGORY_FLG").toString());
+					map.get("SUB_CATEGORY_NAME").toString(), Integer.parseInt(map.get("CATEGORYID").toString()),map.get("SUB_CATEGORY_IMG").toString(),map.get("SUB_CATEGORY_FLG").toString());
 			subcategories.add(cat);
 		}
 		return subcategories;

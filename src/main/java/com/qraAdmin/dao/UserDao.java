@@ -20,7 +20,7 @@ public class UserDao {
 	String insertproductQuery = "INSERT INTO QRALINK.productdetail(" + "productName," + "brandName," + "productPrice,"
 			+ "CategoryId," + "SubCategoryId," + "microCategoryId," + "productdesc," + "modelnumber," + "weight,"
 			+ "shape," + "color," + "material," + "orderqnt," + "uses," + "pic1,"
-			+ "pic2,userid,productlive) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			+ "pic2,userid,productlive,currencyType) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	String postByReqSQLQuery = "INSERT INTO `qralink`.`buyquotation` (`product_name`, `quantiry`, `quantity_typel`, "
 			+ "`email`, `person_name`, `company_name`, `mobile`, `userid`, `is_approved`) VALUES(?,?,?,?,?,?,?,?,?)";
 
@@ -55,7 +55,7 @@ public class UserDao {
 					product.getMicroCategoryId(), product.getProductdesc(), product.getModelnumber(),
 					product.getWeight(), product.getShape(), product.getColor(), product.getMaterial(),
 					product.getOrderqnt(), product.getUses(), product.getPic1(), product.getPic2(), product.getUserid(),
-					product.getProductlive());
+					product.getProductlive(),product.getCurrencyType());
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

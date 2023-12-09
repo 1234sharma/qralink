@@ -193,6 +193,7 @@ public class SellerController {
 			String material = request.getParameter("material");
 			String orderqnt = request.getParameter("orderqnt");
 			String uses = request.getParameter("uses");
+			String currencyType = request.getParameter("currencyType");
 			Path fileNameAndPath1 = null;
 			Path fileNameAndPath2 = null;
 			String imagepath1 = "";
@@ -222,7 +223,7 @@ public class SellerController {
 			}
 			ProductBean product = new ProductBean(productName, brandName, productprice, category, subcategory,
 					microcategory, productdesc, modelnumber, weight, shape, color, material, orderqnt, uses, path1,
-					path2, userid, "N");
+					path2, userid, "N",currencyType);
 			System.out.println("count " + userservice.addProduct(product));
 
 			return new ModelAndView("productList");
