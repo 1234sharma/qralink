@@ -194,7 +194,7 @@ String usertype=(String)session.getAttribute("usertype");
 						User And Customers <i class="fa fa-caret-down"></i>
 					</button>
 					<div class="dropdown-content1">
-						<a href="#">Show Users</a>
+						<a href="/allUserListPage">Show Users</a>
 					</div>
 				</div>
 				<div class="dropdown1">
@@ -202,9 +202,9 @@ String usertype=(String)session.getAttribute("usertype");
 						Categories <i class="fa fa-caret-down"></i>
 					</button>
 					<div class="dropdown-content1">
-						<a href="#">Add Category</a>
-						<a href="#">Add SubCategory</a> 
-						<a href="#">Add MicroCategory</a> 
+						<a href="/addcategories">Add Category</a>
+						<a href="/subcategories">Add SubCategory</a> 
+						<a href="/microcategories">Add MicroCategory</a> 
 					</div>
 				</div>
 				<div class="dropdown1">

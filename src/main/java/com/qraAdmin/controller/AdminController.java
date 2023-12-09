@@ -82,6 +82,14 @@ public class AdminController {
 		}
 		return new ModelAndView("loginpage");
 	}
+	@GetMapping("/allUserListPage")
+	public ModelAndView allUserListPage(HttpServletRequest req) {
+		if (req.getSession().getAttribute("userid") != null) {
+		ModelAndView model = new ModelAndView("allUserList");
+		return model;
+		}
+		return new ModelAndView("loginpage");
+	}
 	
 	@GetMapping("/quotesForApproval")
 	public ModelAndView quotesForApproval(HttpServletRequest req) {
@@ -466,4 +474,30 @@ public class AdminController {
 		}
 
 	}
+	
+	@PutMapping("/usertoggelApproveStatus/{userid}")
+	@ResponseBody
+	public ResponseEntity<Integer> usertoggelApproveStatus(@PathVariable("userid") int userid, HttpServletRequest req) {
+		if (req.getSession().getAttribute("userid") != null) {
+			int count = adminDao.usertoggelApproveStatus(userid);
+			System.out.println(count);
+			return new ResponseEntity<Integer>(count, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Integer>(-1, HttpStatus.OK);
+		}
+
+	}
+	@DeleteMapping("/deleteuser/{userId}")
+	@ResponseBody
+	public ResponseEntity<Integer> deleteProductById(@PathVariable("userId") int userId, HttpServletRequest req) {
+		if (req.getSession().getAttribute("userid") != null) {
+			int count = adminDao.deleteUserById(userId);
+			System.out.println(count);
+			return new ResponseEntity<Integer>(count, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Integer>(-1, HttpStatus.OK);
+		}
+
+	}
+
 }

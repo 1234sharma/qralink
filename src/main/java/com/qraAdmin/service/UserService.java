@@ -14,9 +14,9 @@ public class UserService {
 	UserDao userdao;
 	
 	
-	public int userRegister(String name,String mobile,String companyName,String email,String country,String state,String city ,String password,String usertype )
+	public int userRegister(String name,String mobile,String companyName,String email,String country,String state,String city ,String password,String usertype,String active )
 	{
-		return userdao.registerUser(name, mobile, companyName, email, country, state, city, password, usertype);
+		return userdao.registerUser(name, mobile, companyName, email, country, state, city, password, usertype,active);
 		
 	}
 	

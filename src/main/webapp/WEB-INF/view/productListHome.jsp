@@ -146,7 +146,7 @@ float: inline-end;
 	<!-- end banner -->
 	<!-- six_box section -->
 	<br>
-	<h1 class="six_box11" style="background-color:#000000; color: white; text-align: center;">TRENDING CATEGORIES</h1>
+	<h1 class="six_box11" style="background-color:#000000; color: white; text-align: center;">Products Available Under this category</h1>
 	<div class="six_box">
 		<div class="container-fluid" >
 			<div class="row" id="row_id">
@@ -157,7 +157,6 @@ float: inline-end;
 					</div>
 				</div>
 			<%}%>			
-				
 			</div>
 		</div>
 <!-- 		<div class="six_box11" style="background-color:#000000;"></div> -->

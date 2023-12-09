@@ -26,6 +26,8 @@ public class AdminDao {
 	public String getlistOfAdmins = "SELECT * FROM qralink.userdetail where userid='admin'";
 	public String getAllProduct = "SELECT * FROM qralink.productdetail";
 	public String updateToggelApproveStatus="update qralink.productdetail set productlive  = CASE WHEN productlive = 'N' THEN 'Y' WHEN productlive = 'Y' THEN 'N' else productlive END where productId=?";
+	public String userupdateToggelApproveStatus="update qralink.userdetail set active  = CASE WHEN active = 'N' THEN 'Y' WHEN active = 'Y' THEN 'N' else active END where userid=?";
+	String deleteUserByIdquery="delete from qralink.userdetail where userid =?";
 	public List<ProductBean> getlistOfUnapprovedProducts() {
 		List<Map<String, Object>> products = jdbc.queryForList(getListOfUnapprovedProduct);
 		System.out.println(products);
@@ -98,6 +100,7 @@ public class AdminDao {
 				userdetail.setCity(map.get("city").toString());
 				userdetail.setPass(map.get("pass").toString());
 				userdetail.setUsertype(map.get("usertype").toString());
+				userdetail.setActive(map.get("active").toString());
 				listOfUserdetails.add(userdetail);
 			}
 		} catch (Exception e) {
@@ -125,6 +128,7 @@ public class AdminDao {
 				userdetail.setCity(map.get("city").toString());
 				userdetail.setPass(map.get("pass").toString());
 				userdetail.setUsertype(map.get("usertype").toString());
+				userdetail.setActive(map.get("active").toString());
 				listOfUserdetails.add(userdetail);
 			}
 		} catch (Exception e) {
@@ -152,6 +156,7 @@ public class AdminDao {
 				userdetail.setCity(map.get("city").toString());
 				userdetail.setPass(map.get("pass").toString());
 				userdetail.setUsertype(map.get("usertype").toString());
+				userdetail.setActive(map.get("active").toString());
 				listOfUserdetails.add(userdetail);
 			}
 		} catch (Exception e) {
@@ -179,6 +184,7 @@ public class AdminDao {
 				userdetail.setCity(map.get("city").toString());
 				userdetail.setPass(map.get("pass").toString());
 				userdetail.setUsertype(map.get("usertype").toString());
+				userdetail.setActive(map.get("active").toString());
 				listOfUserdetails.add(userdetail);
 			}
 		} catch (Exception e) {
@@ -225,6 +231,24 @@ public class AdminDao {
     	 count= jdbc.update(updateToggelApproveStatus, productId);
     	 return count;
 	}
-
+	
+	public int usertoggelApproveStatus(int userId) {
+		int count=0;
+    	 count= jdbc.update(userupdateToggelApproveStatus, userId);
+    	 return count;
+	}
+	
+	public int deleteUserById(int userId) {
+		int delval=0;
+		try {
+		delval= jdbc.update(deleteUserByIdquery,userId);
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e);
+			return delval;
+		}
+		System.out.println("Delete row count  :"+delval);
+		return delval;
+	}
 
 }

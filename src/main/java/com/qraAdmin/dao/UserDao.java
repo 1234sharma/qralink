@@ -32,13 +32,13 @@ public class UserDao {
 	}
 
 	public int registerUser(String name, String mobileNumber, String CompanyName, String email, String country,
-			String state, String city, String password, String userType) {
+			String state, String city, String password, String userType,String active) {
 		int count = 0;
 		try {
 			count = jdbcTemplate.update(
 					"INSERT INTO QRALINK.USERDETAIL(username" + ",mobile" + ",companyname" + ",email" + ",country"
-							+ ",state" + ",city" + ",pass" + ",usertype) VALUES(?,?,?,?,?,?,?,?,?)",
-					name, mobileNumber, CompanyName, email, country, state, city, password, userType);
+							+ ",state" + ",city" + ",pass" + ",usertype" + ",active) VALUES(?,?,?,?,?,?,?,?,?,?)",
+					name, mobileNumber, CompanyName, email, country, state, city, password, userType,active);
 
 		} catch (Exception e) {
 			System.out.println("exception is " + e);
@@ -80,7 +80,7 @@ public class UserDao {
 	}
 
 	public UserDetail getUserIfExist(String username, String password) {
-		String sql = "SELECT * FROM qralink.userdetail where email=\"" + username + "\" and pass=\"" + password + "\"";
+		String sql = "SELECT * FROM qralink.userdetail where active=\"Y\"and email=\"" + username + "\" and pass=\"" + password + "\"";
 		UserDetail userdetail = null;
 		try {
 			System.out.println(sql);

@@ -12,6 +12,7 @@ public class UserDetail {
 	String city;
 	String pass;
 	String usertype;
+	String active;
 
 	public UserDetail() {
 
@@ -24,7 +25,6 @@ public class UserDetail {
 		this.email = email;
 		this.usertype = usertype;
 	}
-
 	public UserDetail(int userid, String username, String mobile, String companyname, String email, String country,
 			String state, String city, String pass, String usertype) {
 		super();
@@ -120,11 +120,22 @@ public class UserDetail {
 		this.usertype = usertype;
 	}
 
+
+	public String getActive() {
+		return active;
+	}
+
+	public void setActive(String active) {
+		this.active = active;
+	}
+
 	@Override
 	public String toString() {
 		return "UserDetail [userid=" + userid + ", username=" + username + ", mobile=" + mobile + ", companyname="
 				+ companyname + ", email=" + email + ", country=" + country + ", state=" + state + ", city=" + city
-				+ ", pass=" + pass + ", usertype=" + usertype + "]";
+				+ ", pass=" + pass + ", usertype=" + usertype + ", active=" + active + "]";
 	}
+	
+	
 
 }

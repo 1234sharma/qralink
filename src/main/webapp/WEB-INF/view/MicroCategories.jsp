@@ -22,12 +22,17 @@
 <body onload="loadSubCategory();getMicroCatTbl()">
 <%@ include file="/responsivenav.jsp"%>
 <div class="container mt-3">
+<div class="container">
+<div class="card mt-4">
+		<div class="card-header">Add Micro Categories</div>
+		<div class="card-body">
+
 <div class="center">
 		<table>
 			<tr>
-				<th>SUBCATEGORIES NAME:</th>
+				<th>SubCategory Name:</th>
 				<td><select id="microdropdown" onchange="showSubCategoriesData()">
-						<option value="none" selected disabled>SELECT SUBCATEGORY</option>
+						<option value="none" selected disabled>Select Sub Category</option>
 				</select></td>
 			</tr>
 		</table>
@@ -57,7 +62,9 @@
                   </tbody>
         </table>
 </div>
-
+</div>
+</div>
+</div>
 <div id="myModal" class="modal">
 
   <!-- Modal content -->

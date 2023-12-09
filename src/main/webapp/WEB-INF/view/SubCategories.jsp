@@ -21,6 +21,11 @@
 </head>
 <body onload="loadCategory();getSubCatTbl()">
 <%@ include file="/responsivenav.jsp"%>
+<div class="container">
+<div class="card mt-4">
+		<div class="card-header">Add SubCategory</div>
+		<div class="card-body">
+	
 <div class="container mt-3">
 <div class="center">
 		<table>
@@ -57,7 +62,9 @@
                   </tbody>
         </table>
 </div>
-
+</div>
+</div>
+</div>
 	<div class="modal" id="myModal" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -84,7 +91,6 @@
 		</div>
 	</div>
 </div>
-
 <script>
 
 //Get the modal

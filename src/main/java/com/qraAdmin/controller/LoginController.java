@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.qraAdmin.dao.UserDao;
+import com.qraAdmin.model.CategoryBean;
 import com.qraAdmin.model.ProductBean;
 import com.qraAdmin.model.QuotationBean;
 import com.qraAdmin.model.UserDetail;
 import com.qraAdmin.service.AdminLoginService;
+import com.qraAdmin.service.SellerService;
 import com.qraAdmin.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -32,6 +34,9 @@ public class LoginController {
 
 	@Autowired(required = true)
 	AdminLoginService adminservice;
+	
+	@Autowired
+	SellerService sellerservice;
 
 	@GetMapping("/loginPage")
 	public ModelAndView firstpage() { 
@@ -39,8 +44,10 @@ public class LoginController {
 		return model;
 	}
 	@GetMapping("/")
-	public ModelAndView defaultPage() { 
+	public ModelAndView defaultPage() {
 		ModelAndView model = new ModelAndView("Home");
+		List<CategoryBean> categaries = sellerservice.getCategorylist();
+		model.addObject("categories", categaries);
 		return model;
 	}
 
@@ -124,7 +131,7 @@ public class LoginController {
 				+ "" + state + " " + city + " " + password);
 
 		int statuscount = userService.userRegister(name, mobileNumber, CompanyName, email, country, state, city,
-				password, userType);
+				password, userType,"N");
 		if (statuscount == 0) {
 			model = new ModelAndView("registerPage");
 		} else {

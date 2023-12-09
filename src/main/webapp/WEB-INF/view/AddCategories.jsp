@@ -6,11 +6,15 @@
 </head> 
 <body>
 	<%@ include file="/responsivenav.jsp"%>
-	<div class="container mt-3">
+<div class="container mt-3">
+<div class="card mt-4">
+ <div class="card-header">Add Categories</div>
+  <div class="card-body">
+	
 <form enctype= >
   <label for="fname">Categories :</label><br>
   <input type="text" id="fname" name="Add catogories"><br>
-  <label for="lname">File Upload:</label><br>
+  <label class="mt-2" for="lname">File Upload:</label><br>
   <input id="fileupload" type="file" name="fileupload" /> 
 <button id="upload-button" onclick="uploadFile()"> Upload </button>
 <!--   <input type="submit" value="Submit"> -->
@@ -58,7 +62,8 @@
 			</div>
 		</div>
 	</div>
-
+</div>
+</div>
 
 
 <div id="myModal" class="modal">
@@ -169,7 +174,7 @@ function getTblData(){
    		       		$(tr).append("<td class=nr1>"+item.categoryid+"</td>");
 // 			   		$(tr).append("<td class=nr2 target=_blank><button id=catnmbtn onclick=getCategoryNm()>"+item.CATEGORY_NAME+"</button></td>");
 					$(tr).append("<td><a id=catnmbtn onclick=getCategoryNm() href=subcategories >"+item.category_NAME+"</a></td>");
-					$(tr).append("<td><img alt='img' src='/images/"+item.category_IMG+"' width='100' height='100'/></td>");
+					$(tr).append("<td><img alt='img' src='images/"+item.category_IMG+"' width='100' height='100'/></td>");
 			   		$(tr).append("<td class=nr4>"+item.category_Flag+"</td>");
 			   		$(tr).append("<td><button id=aprove_btn onclick=approveBtn('"+item.categoryid+"','"+item.category_NAME+"','"+item.category_IMG+"','"+item.category_Flag+"')>Approve</button><button id=edt_btn onclick=editBtn('"+item.categoryid+"','"+item.category_NAME+"')>EDIT</button><button id=dlt_btn onclick=deleteBtn('"+item.categoryid+"')>DELETE</button></td>");
 						

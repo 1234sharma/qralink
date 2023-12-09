@@ -15,8 +15,6 @@ public class AdminLoginService {
 	public UserDetail forpasswordvalidation(String username, String password) throws Exception {
 		System.out.println("username" + username);
 		System.out.println("password" + password);
-		String usernameAdmin = "qralink@gmail.com";
-		String AdminuserPassword = "9044221797";
 		UserDetail userdetail = null;
 		try {
 			userdetail = userDao.getUserIfExist(username, password);

@@ -171,7 +171,7 @@ button:hover, a:hover {
 										</div>
 									</div>
 						</div>
-						<a href="#" class="btn btn-primary">VIEW <i class="fa fa-arrow-circle-right"></i></a>
+						<a href="/allUserListPage" class="btn btn-primary">VIEW <i class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
 			<div class="row">
