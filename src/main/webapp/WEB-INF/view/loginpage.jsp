@@ -45,7 +45,7 @@ form {
 		<section class="row justify-content-center">
 			<!--Making the form responsive-->
 			<section class="col-12 col-sm-6 col-md-4">
-				<form class="form-container">
+				<form class="form-container" id="loginForm">
 					<!--Binding the label and input together-->
 					<div class="form-group">
 						<h4 class="text-center font-weight-bold">
@@ -55,18 +55,20 @@ form {
 						<label for="Inputuser1">Username</label> <input type="email"
 							class="form-control" id="Inputuser1"
 							aria-describeby="usernameHelp" placeholder="Enter username">
+							<p id="Username-error-message" class="Username-error-message"></p>
 					</div>
 					<!--Binding the label and input together-->
 					<div class="form-group">
 						<label for="InputPassword1">Password</label> <input
 							type="password" class="form-control" id="InputPassword1"
 							placeholder="Password">
+							<p id="UserPassword-error-message" class="UserPassword-error-message"></p>
 					</div>
 					<button type="button" class="btn btn-primary btn-block"
-						onclick="passdatatocontroller();">Sign in</button>
+						onclick="passdatatocontroller(); validateUsername(); validateUserPassword(); ">Sign in</button>
 					<div class="form-footer">
 						<p>
-							Don't have an account? <a href="#">Sign Up</a>
+							Don't have an account? <a href="/registerPage">Sign Up</a>
 						</p>
 					</div>
 				</form>
@@ -115,6 +117,54 @@ form {
 			});
 
 	}
+  
+  		function validateUsername() {
+    		  var UsernameInput   = document.querySelector('#Inputuser1');
+     		 var Username  = UsernameInput.value;
+    		  var errorMessage = document.querySelector('#Username-error-message');
+      
+    		  if (Username.trim() === '') {
+    		  	errorMessage.innerText = 'Please enter a Username';
+    		  	errorMessage.style.color = 'red';
+    		  	UsernameInput.style.borderColor = 'red';
+    		  } else {
+        			errorMessage.innerText = '';
+        			UsernameInput.style.borderColor = '';
+   		   }
+		  }
+  		
+ 		 function validateUserPassword() {
+    		  var UserPasswordInput = document.querySelector('#InputPassword1');
+     		 var UserPassword = UserPasswordInput.value;
+     		 var errorMessage = document.querySelector('#UserPassword-error-message');
+      
+    		  if (UserPassword.trim() === '') {
+      			errorMessage.innerText = 'Please enter a Paassword';
+      			errorMessage.style.color = 'red';
+      			UserPasswordInput.style.borderColor = 'red';
+    		  } else {
+    		      errorMessage.innerText = '';
+    		      UserPasswordInput.style.borderColor = '';
+     		 }
+  		}
+ 		 
+ 		var loginForm = document.getElementById('loginForm');
+
+ 		loginForm.addEventListener('input', function (event) {
+ 		    if (event.target.id === 'Inputuser1') {
+ 		        validateUsername();
+ 		    } else if (event.target.id === 'InputPassword1') {
+ 		        validateUserPassword();
+ 		    }
+ 		});
+ 		
+ 		loginForm.addEventListener('keydown', function (event) {
+ 	        if (event.key === 'Enter') {
+ 	            passdatatocontroller();
+ 	            validateUsername();
+ 	            validateUserPassword();
+ 	        }
+ 	    });
   </script>
 </body>
 </html>
