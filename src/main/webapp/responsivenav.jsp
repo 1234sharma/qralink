@@ -166,7 +166,7 @@ String usertype=(String)session.getAttribute("usertype");
 			<div class="col-md-9">
               <%if(usertype != null && usertype.equalsIgnoreCase("seller")) {%>
 				<a href="/sellerDashboradpage" class="active fa fa-home">DashBoard</a>
-				<a href="/home" class="fa fa-home">Home</a>
+				<a href="/" class="fa fa-home">Home</a>
 				<a href="/addproductPage" class="fa fa-plus">Add Product</a> <a
 					href="/productList" class="fa fa-list">My Products</a> <a
 					href="/availableQuotesPage" class="fa fa-handshake-o">Requested
