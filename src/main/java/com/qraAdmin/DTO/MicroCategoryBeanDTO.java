@@ -79,4 +79,13 @@ public class MicroCategoryBeanDTO {
 		SUB_CATEGORY_NAME = sUB_CATEGORY_NAME;
 	}
 
+	@Override
+	public String toString() {
+		return "MicroCategoryBeanDTO [MICRO_CATEGORY_ID=" + MICRO_CATEGORY_ID + ", MICRO_CATEGORY_NAME="
+				+ MICRO_CATEGORY_NAME + ", SUB_CATEGORY_ID=" + SUB_CATEGORY_ID + ", MICRO_CATEGORY_IMG="
+				+ MICRO_CATEGORY_IMG + ", MICRO_CATEGORY_FLG=" + MICRO_CATEGORY_FLG + ", SUB_CATEGORY_NAME="
+				+ SUB_CATEGORY_NAME + ", base64EncodedImage=" + base64EncodedImage + "]";
+	}
+
+	
 }

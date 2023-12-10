@@ -45,24 +45,35 @@ public class SellerService {
 
 		return subcategories;
 	}
+
+	public List<SubCategoryBean> getMicroCategorylistbyCategoryId(int subcategoryId) {
+
+		List<SubCategoryBean> subcategories = sellerdao.getSubCategorylist(subcategoryId);
+
+		return subcategories;
+	}
+
 	public List<SubCategoryBean> getAllSubCategorylist() {
 
 		List<SubCategoryBean> subcategories = sellerdao.getAllSubCategorylist();
 
 		return subcategories;
 	}
+
 	public List<MicroCategoryBean> getMicroCategorylist(int subcategoryId) {
 
 		List<MicroCategoryBean> microcategories = sellerdao.getMicroCategorylist(subcategoryId);
 
 		return microcategories;
 	}
+
 	public List<MicroCategoryBean> getAllMicroCategorylist() {
 
 		List<MicroCategoryBean> microcategories = sellerdao.getAllMicroCategorylist();
 
 		return microcategories;
 	}
+
 	public UserDetail getUserDetail(int userId) {
 
 		UserDetail userDetail = sellerdao.getUserDetail(userId);
@@ -107,14 +118,14 @@ public class SellerService {
 
 	public byte[] getbyte(String path) {
 		System.out.println(filelocation + "\\" + path);
-		try{
+		try {
 			BufferedImage bufferimage = ImageIO.read(new File(filelocation + "\\" + path));
 			ByteArrayOutputStream output = new ByteArrayOutputStream();
 			ImageIO.write(bufferimage, "png", output);
 			byte[] data = output.toByteArray();
 			System.out.println(data.length);
 			return data;
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println(e);
 			return null;
 		}
@@ -164,5 +175,50 @@ public class SellerService {
 
 		return dto;
 	}
+
+	public List<ProductBean> getproductByCategoryId(int categoryId) {
+
+		List<ProductBean> products = sellerdao.getProductByCategoryId(categoryId);
+
+		return products;
+	}
+
+	public List<ProductBean> getproductBySubCategoryId(int subcategoryId) {
+
+		List<ProductBean> products = sellerdao.getProductBySubCategoryId(subcategoryId);
+
+		return products;
+	}
+	public List<ProductBean> getproductByMicroCategoryId(int microcategoryid) {
+
+		List<ProductBean> products = sellerdao.getProductByMicroCategoryId(microcategoryid);
+
+		return products;
+	}
+	public CategoryBean getCategoryByCategoryId(int categoryId) {
+
+		CategoryBean cat = sellerdao.getCategoryByCategoryId(categoryId);
+
+		return cat;
+	}
+
+	public SubCategoryBean getSubCategoryBySubCategoryId(int subcategoryId) {
+
+		SubCategoryBean subcat = sellerdao.getSubCategoryBySubCategoryId(subcategoryId);
+
+		return subcat;
+	}
+	
+	public MicroCategoryBean getMicroCategoryByMicroategoryId(int microcategoryId) {
+
+		MicroCategoryBean microcat = sellerdao.getMicroCategoryByMicroategoryId(microcategoryId);
+
+		return microcat;
+	}
+	
+	
+	
+	
+	
 
 }

@@ -39,5 +39,11 @@ public class CategoryBean {
 		CATEGORY_Flag = cATEGORY_Flag;
 	}
 
+	@Override
+	public String toString() {
+		return "CategoryBean [CATEGORYID=" + CATEGORYID + ", CATEGORY_NAME=" + CATEGORY_NAME + ", CATEGORY_IMG="
+				+ CATEGORY_IMG + ", CATEGORY_Flag=" + CATEGORY_Flag + "]";
+	}
+
 	
 }

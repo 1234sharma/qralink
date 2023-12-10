@@ -10,13 +10,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.qraAdmin.dao.UserDao;
 import com.qraAdmin.model.CategoryBean;
+import com.qraAdmin.model.MicroCategoryBean;
 import com.qraAdmin.model.ProductBean;
 import com.qraAdmin.model.QuotationBean;
+import com.qraAdmin.model.SubCategoryBean;
 import com.qraAdmin.model.UserDetail;
 import com.qraAdmin.service.AdminLoginService;
 import com.qraAdmin.service.SellerService;
@@ -50,7 +53,7 @@ public class LoginController {
 		model.addObject("categories", categaries);
 		return model;
 	}
-
+	
 	@GetMapping("/postbyreq")
 	public ModelAndView postbyrequirement() {
 		ModelAndView model = new ModelAndView("postByRequirement");
@@ -148,5 +151,41 @@ public class LoginController {
 		session.removeAttribute("username");
 		session.removeAttribute("usertype");
 		return new ModelAndView("loginpage");
+	}
+	
+	@GetMapping("/subCategoryListHome/{categoryId}")
+	public ModelAndView subCategoryListHome(@PathVariable("categoryId") int categoryId,HttpServletRequest request) {
+		ModelAndView model=new ModelAndView("SubcategoryListHome");
+		List<SubCategoryBean> subcategories= sellerservice.getSubCategorylist(categoryId);
+		List<ProductBean> products= sellerservice.getproductByCategoryId(categoryId);
+		CategoryBean category= sellerservice.getCategoryByCategoryId(categoryId);
+		System.out.println(category);
+		model.addObject("subcategories", subcategories);
+		model.addObject("products", products);
+		model.addObject("category", category);
+		return model;
+		
+	}
+	@GetMapping("/microCategoryListHome/{subcategoryId}")
+	public ModelAndView microCategoryListHome(@PathVariable("subcategoryId") int subcategoryId,HttpServletRequest request) {
+		ModelAndView model=new ModelAndView("MicrocategoryListHome");
+		List<MicroCategoryBean> microcategories= sellerservice.getMicroCategorylist(subcategoryId);
+		List<ProductBean> products= sellerservice.getproductBySubCategoryId(subcategoryId);
+		SubCategoryBean subcategory= sellerservice.getSubCategoryBySubCategoryId(subcategoryId);
+		model.addObject("microcategories", microcategories);
+		model.addObject("products", products);
+		model.addObject("subcategory", subcategory);
+		return model;
+		
+	}
+	
+	@GetMapping("/microCategoryProductListHome/{microcategoryId}")
+	public ModelAndView microCategoryProductListHome(@PathVariable("microcategoryId") int microcategoryId,HttpServletRequest request) {
+		ModelAndView model=new ModelAndView("MicrocategoryProductListHome");
+		List<ProductBean> products= sellerservice.getproductByMicroCategoryId(microcategoryId);
+		MicroCategoryBean microcategory= sellerservice.getMicroCategoryByMicroategoryId(microcategoryId);
+		model.addObject("products", products);
+		model.addObject("microcategory", microcategory);
+		return model;
 	}
 }

@@ -135,10 +135,10 @@ public class SellerController {
 		return model;
 	}
 	
-	@GetMapping("/productDetailPage")
-	public ModelAndView productDetailPage() throws IOException {
+	@GetMapping("/productDetailPage/{productId}")
+	public ModelAndView productDetailPage(@PathVariable("productId") int productId) throws IOException {
 		ModelAndView model = new ModelAndView("productdetailpage");
-       ProductBean	prod = sellerservice.getProductByProductId(7);
+       ProductBean	prod = sellerservice.getProductByProductId(productId);
        if(prod!=null) {
            ProductBeanDTO prodDto=  sellerservice.productBeanDTOConvert(prod);
            model.addObject("product",prodDto);

@@ -32,6 +32,12 @@ public class SellerDao {
 	public String getMyQuotes = "SELECT * FROM qralink.buyquotation where userid=?";
 	String deleteProductByIdquery="delete from qralink.productdetail where productId =?";
 	String getProductByIdquery="select * from qralink.productdetail where productId =?";
+	String getProductByCategoryIdquery="select * from qralink.productdetail where CategoryId =?";
+	String getProductBySubCategoryIdquery="select * from qralink.productdetail where SubCategoryId =?";
+	String getProductByMicroCategoryIdquery="select * from qralink.productdetail where microCategoryId =?";
+	public String getCategoryByCategoryIdQuery = "SELECT * FROM qralink.category where CATEGORYID=?";
+	public String getSubCategoryBySubCategoryIdQuery = "SELECT * FROM qralink.subcategory where SUB_CATEGORY_ID=?";
+	public String getMicroCategoryByMicroCategoryIdQuery = "SELECT * FROM qralink.microcategory where MICRO_CATEGORY_ID=?";
 	public List<CategoryBean> getCategorylist() {
 		List<Map<String, Object>> l = jdbc.queryForList(getCategoryQuery);
 		List<CategoryBean> categories = new ArrayList<CategoryBean>();
@@ -43,7 +49,37 @@ public class SellerDao {
 		System.out.println(categories);
 		return categories;
 	}
-
+	public CategoryBean getCategoryByCategoryId(int categoryId) {
+		List<Map<String, Object>> l = jdbc.queryForList(getCategoryByCategoryIdQuery,categoryId);
+		CategoryBean cat=null;
+		for (Map<String, Object> map : l) {
+			 cat = new CategoryBean(Integer.parseInt(map.get("CATEGORYID").toString()),
+					map.get("CATEGORY_NAME").toString(),map.get("CATEGORY_IMG").toString(),map.get("CATEGORY_Flag").toString());
+		}
+		System.out.println(cat);
+		return cat;
+	}
+	public SubCategoryBean getSubCategoryBySubCategoryId(int subcategoryId) {
+		List<Map<String, Object>> l = jdbc.queryForList(getSubCategoryBySubCategoryIdQuery,subcategoryId);
+		SubCategoryBean subcat=null;
+		for (Map<String, Object> map : l) {
+			subcat = new SubCategoryBean(Integer.parseInt(map.get("SUB_CATEGORY_ID").toString()),
+					map.get("SUB_CATEGORY_NAME").toString(), Integer.parseInt(map.get("CATEGORYID").toString()),map.get("SUB_CATEGORY_IMG").toString(),map.get("SUB_CATEGORY_FLG").toString());
+		}
+		System.out.println(subcat);
+		return subcat;
+	}
+	public MicroCategoryBean getMicroCategoryByMicroategoryId(int subcategoryId) {
+		List<Map<String, Object>> l = jdbc.queryForList(getMicroCategoryByMicroCategoryIdQuery,subcategoryId);
+		MicroCategoryBean microcat=null;
+		for (Map<String, Object> map : l) {
+			microcat = new MicroCategoryBean(Integer.parseInt(map.get("MICRO_CATEGORY_ID").toString()),
+					map.get("MICRO_CATEGORY_NAME").toString(), Integer.parseInt(map.get("SUB_CATEGORY_ID").toString()),map.get("MICRO_CATEGORY_IMG").toString(),map.get("MICRO_CATEGORY_FLG").toString());
+		}
+		System.out.println(microcat);
+		return microcat;
+	}
+	
 	public List<SubCategoryBean> getSubCategorylist(int categoryid) {
 		List<Map<String, Object>> l = jdbc.queryForList(getSubCategoryQuery, categoryid);
 		System.out.println(l);
@@ -176,6 +212,102 @@ public class SellerDao {
 			product.setProductlive((map.get("productlive") == null ? null : map.get("productlive").toString()));
 		}
 		return product;
+	}
+	public List<ProductBean> getProductByCategoryId(int categoryId) {
+		List<Map<String, Object>> products = jdbc.queryForList(getProductByCategoryIdquery, categoryId);
+		System.out.println(products);
+		ProductBean product=null;
+		List<ProductBean> productlist = new ArrayList<ProductBean>();
+		for (Map<String, Object> map : products) {
+			product = new ProductBean();
+			product.setBrandName(map.get("productName") == null ? null : map.get("productName").toString());
+			product.setProductName(map.get("brandName") == null ? null : map.get("brandName").toString());
+			product.setProductId(
+					Integer.parseInt(map.get("productId") == null ? null : map.get("productId").toString()));
+			product.setProductPrice(map.get("productPrice") == null ? null : map.get("productPrice").toString());
+			product.setCategoryId((map.get("CategoryId") == null ? null : map.get("CategoryId").toString()));
+			product.setSubCategoryId((map.get("SubCategoryId") == null ? null : map.get("SubCategoryId").toString()));
+			product.setMicroCategoryId(
+					(map.get("microCategoryId") == null ? null : map.get("microCategoryId").toString()));
+			product.setProductdesc((map.get("productdesc") == null ? null : map.get("productdesc").toString()));
+			product.setModelnumber((map.get("modelnumber") == null ? null : map.get("modelnumber").toString()));
+			product.setWeight((map.get("weight") == null ? null : map.get("weight").toString()));
+			product.setShape((map.get("shape") == null ? null : map.get("shape").toString()));
+			product.setColor((map.get("color") == null ? null : map.get("color").toString()));
+			product.setMaterial((map.get("material") == null ? null : map.get("material").toString()));
+			product.setOrderqnt((map.get("orderqnt") == null ? null : map.get("orderqnt").toString()));
+			product.setUses((map.get("uses") == null ? null : map.get("uses").toString()));
+			product.setPic1((map.get("pic1") == null ? null : map.get("pic1").toString()));
+			product.setPic2((map.get("pic2") == null ? null : map.get("pic2").toString()));
+			product.setUserid(Integer.parseInt((map.get("userid") == null ? null : map.get("userid").toString())));
+			product.setProductlive((map.get("productlive") == null ? null : map.get("productlive").toString()));
+			productlist.add(product);
+		}
+		return productlist;
+	}
+	public List<ProductBean> getProductBySubCategoryId(int subcategoryId) {
+		List<Map<String, Object>> products = jdbc.queryForList(getProductBySubCategoryIdquery, subcategoryId);
+		System.out.println(products);
+		ProductBean product=null;
+		List<ProductBean> productlist = new ArrayList<ProductBean>();
+		for (Map<String, Object> map : products) {
+			product = new ProductBean();
+			product.setBrandName(map.get("productName") == null ? null : map.get("productName").toString());
+			product.setProductName(map.get("brandName") == null ? null : map.get("brandName").toString());
+			product.setProductId(
+					Integer.parseInt(map.get("productId") == null ? null : map.get("productId").toString()));
+			product.setProductPrice(map.get("productPrice") == null ? null : map.get("productPrice").toString());
+			product.setCategoryId((map.get("CategoryId") == null ? null : map.get("CategoryId").toString()));
+			product.setSubCategoryId((map.get("SubCategoryId") == null ? null : map.get("SubCategoryId").toString()));
+			product.setMicroCategoryId(
+					(map.get("microCategoryId") == null ? null : map.get("microCategoryId").toString()));
+			product.setProductdesc((map.get("productdesc") == null ? null : map.get("productdesc").toString()));
+			product.setModelnumber((map.get("modelnumber") == null ? null : map.get("modelnumber").toString()));
+			product.setWeight((map.get("weight") == null ? null : map.get("weight").toString()));
+			product.setShape((map.get("shape") == null ? null : map.get("shape").toString()));
+			product.setColor((map.get("color") == null ? null : map.get("color").toString()));
+			product.setMaterial((map.get("material") == null ? null : map.get("material").toString()));
+			product.setOrderqnt((map.get("orderqnt") == null ? null : map.get("orderqnt").toString()));
+			product.setUses((map.get("uses") == null ? null : map.get("uses").toString()));
+			product.setPic1((map.get("pic1") == null ? null : map.get("pic1").toString()));
+			product.setPic2((map.get("pic2") == null ? null : map.get("pic2").toString()));
+			product.setUserid(Integer.parseInt((map.get("userid") == null ? null : map.get("userid").toString())));
+			product.setProductlive((map.get("productlive") == null ? null : map.get("productlive").toString()));
+			productlist.add(product);
+		}
+		return productlist;
+	}
+	public List<ProductBean> getProductByMicroCategoryId(int subcategoryId) {
+		List<Map<String, Object>> products = jdbc.queryForList(getProductByMicroCategoryIdquery, subcategoryId);
+		System.out.println(products);
+		ProductBean product=null;
+		List<ProductBean> productlist = new ArrayList<ProductBean>();
+		for (Map<String, Object> map : products) {
+			product = new ProductBean();
+			product.setBrandName(map.get("productName") == null ? null : map.get("productName").toString());
+			product.setProductName(map.get("brandName") == null ? null : map.get("brandName").toString());
+			product.setProductId(
+					Integer.parseInt(map.get("productId") == null ? null : map.get("productId").toString()));
+			product.setProductPrice(map.get("productPrice") == null ? null : map.get("productPrice").toString());
+			product.setCategoryId((map.get("CategoryId") == null ? null : map.get("CategoryId").toString()));
+			product.setSubCategoryId((map.get("SubCategoryId") == null ? null : map.get("SubCategoryId").toString()));
+			product.setMicroCategoryId(
+					(map.get("microCategoryId") == null ? null : map.get("microCategoryId").toString()));
+			product.setProductdesc((map.get("productdesc") == null ? null : map.get("productdesc").toString()));
+			product.setModelnumber((map.get("modelnumber") == null ? null : map.get("modelnumber").toString()));
+			product.setWeight((map.get("weight") == null ? null : map.get("weight").toString()));
+			product.setShape((map.get("shape") == null ? null : map.get("shape").toString()));
+			product.setColor((map.get("color") == null ? null : map.get("color").toString()));
+			product.setMaterial((map.get("material") == null ? null : map.get("material").toString()));
+			product.setOrderqnt((map.get("orderqnt") == null ? null : map.get("orderqnt").toString()));
+			product.setUses((map.get("uses") == null ? null : map.get("uses").toString()));
+			product.setPic1((map.get("pic1") == null ? null : map.get("pic1").toString()));
+			product.setPic2((map.get("pic2") == null ? null : map.get("pic2").toString()));
+			product.setUserid(Integer.parseInt((map.get("userid") == null ? null : map.get("userid").toString())));
+			product.setProductlive((map.get("productlive") == null ? null : map.get("productlive").toString()));
+			productlist.add(product);
+		}
+		return productlist;
 	}
 
 

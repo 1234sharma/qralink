@@ -118,7 +118,7 @@
 															<label class="form-label fw-bold">Select
 																Currency:</label> <select class="form-select currency"
 																style="background-color: white"
-																aria-label="Default select example" name="currency"
+																aria-label="Default select example" name="currencyType"
 																required>
 																<option value="" selected disabled>Select
 																	Currency</option>
@@ -324,7 +324,8 @@
 					select = document.getElementById('categoryid');
 					for (var i = 0; i < data.length; i++) {
 						var opt = document.createElement('option');
-						opt.value = data[i].categoryId;
+						console.log(data[i].categoryId);
+						opt.value = data[i].categoryid;
 						opt.innerHTML = data[i].category_NAME;
 						select.appendChild(opt);
 					}
