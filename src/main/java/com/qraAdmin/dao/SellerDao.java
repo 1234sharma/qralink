@@ -32,9 +32,9 @@ public class SellerDao {
 	public String getMyQuotes = "SELECT * FROM qralink.buyquotation where userid=?";
 	String deleteProductByIdquery="delete from qralink.productdetail where productId =?";
 	String getProductByIdquery="select * from qralink.productdetail where productId =?";
-	String getProductByCategoryIdquery="select * from qralink.productdetail where CategoryId =?";
-	String getProductBySubCategoryIdquery="select * from qralink.productdetail where SubCategoryId =?";
-	String getProductByMicroCategoryIdquery="select * from qralink.productdetail where microCategoryId =?";
+	String getProductByCategoryIdquery="select * from qralink.productdetail where CategoryId =? and productlive='Y'";
+	String getProductBySubCategoryIdquery="select * from qralink.productdetail where SubCategoryId =? and productlive='Y'";
+	String getProductByMicroCategoryIdquery="select * from qralink.productdetail where microCategoryId =? and productlive='Y'";
 	public String getCategoryByCategoryIdQuery = "SELECT * FROM qralink.category where CATEGORYID=?";
 	public String getSubCategoryBySubCategoryIdQuery = "SELECT * FROM qralink.subcategory where SUB_CATEGORY_ID=?";
 	public String getMicroCategoryByMicroCategoryIdQuery = "SELECT * FROM qralink.microcategory where MICRO_CATEGORY_ID=?";

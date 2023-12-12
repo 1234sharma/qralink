@@ -139,9 +139,11 @@ public class SellerController {
 	public ModelAndView productDetailPage(@PathVariable("productId") int productId) throws IOException {
 		ModelAndView model = new ModelAndView("productdetailpage");
        ProductBean	prod = sellerservice.getProductByProductId(productId);
+       CategoryBean cat =  sellerservice.getCategoryByCategoryId(Integer.parseInt(prod.getCategoryId()));
        if(prod!=null) {
            ProductBeanDTO prodDto=  sellerservice.productBeanDTOConvert(prod);
            model.addObject("product",prodDto);
+           model.addObject("category",cat);
        }
 		return model;
 	}

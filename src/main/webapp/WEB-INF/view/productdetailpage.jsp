@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="com.qraAdmin.model.CategoryBean"%>
 <%@page import="com.qraAdmin.DTO.ProductBeanDTO"%>
 <html>
 <head>
@@ -110,7 +111,9 @@ text-color {
 <body>
 	<%@ include file="/headerpage.jsp"%>
 	<%@ include file="/homeNavbar.jsp"%>
-<% ProductBeanDTO product= (ProductBeanDTO)request.getAttribute("product"); %>
+<% ProductBeanDTO product= (ProductBeanDTO)request.getAttribute("product"); 
+   CategoryBean cat=(CategoryBean) request.getAttribute("category");
+%>
 	<div class="container my-5">
 		<div class="row">
 			<div class="col-md-5">
@@ -134,9 +137,8 @@ text-color {
 			</div>
 			<div class="col-md-7">
 				<div class="main-description px-2">
-					<div class="category text-bold">Category: <%=product.getCategoryId()%></div>
-					<div class="product-title text-bold my-3">Black dress for
-						Women</div>
+					<div class="category text-bold">Category: <%=cat.getCATEGORY_NAME()%></div>
+					<div class="product-title text-bold my-3"><%=product.getProductdesc() %></div>
 
 
 					<div class="price-area my-4">

@@ -166,6 +166,22 @@ public class LoginController {
 		return model;
 		
 	}
+	@GetMapping("/subCategoryListHome")
+	public ModelAndView subCategoryListAllHome(HttpServletRequest request) {
+		ModelAndView model=new ModelAndView("SubcategoryListHome");
+		List<SubCategoryBean> subcategories = sellerservice.getAllSubCategorylist();
+		model.addObject("subcategories", subcategories);
+		return model;
+		
+	}
+	@GetMapping("/microCategoryListHome")
+	public ModelAndView microCategoryListAllHome(HttpServletRequest request) {
+		ModelAndView model=new ModelAndView("MicrocategoryListHome");
+		List<MicroCategoryBean> microcategories = sellerservice.getAllMicroCategorylist();
+		model.addObject("microcategories", microcategories);
+		return model;
+		
+	}
 	@GetMapping("/microCategoryListHome/{subcategoryId}")
 	public ModelAndView microCategoryListHome(@PathVariable("subcategoryId") int subcategoryId,HttpServletRequest request) {
 		ModelAndView model=new ModelAndView("MicrocategoryListHome");

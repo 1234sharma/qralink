@@ -169,16 +169,16 @@ String usertype=(String)session.getAttribute("usertype")==null?null:(String)sess
 			<div class="col-md-9">
 
 				<a href="/home" class="fa fa-home">HOME</a>
-				 <a href="/productList" class="fa fa-list">Trending Categories</a> 
+<!-- 				 <a href="/productList" class="fa fa-list">Trending Categories</a>  -->
 				 <a href="/postbyreq" class="fa fa-handshake-o">Post By Req</a>
 				 <div class="dropdown1">
 					<button class="dropbtn1">
 						Categories <i class="fa fa-caret-down"></i>
 					</button>
 					<div class="dropdown-content1">
-						<a href="#">Categories</a>
-						 <a href="#">Sub Categories</a> 
-						 <a href="#">Micro Categories</a>
+						<a href="/">Categories</a>
+						 <a href="/subCategoryListHome">Sub Categories</a> 
+						 <a href="/microCategoryListHome">Micro Categories</a>
 					</div>
 				</div>
 				<a href="#about">About</a> 

@@ -123,72 +123,80 @@ System.out.print(category);
 	<!-- end header inner -->
 	<!-- end header -->
 	<!-- banner -->
-<!-- 	<section class="banner_main"> -->
-		<div class="slideshow-container">
-
-			<div class="mySlides fade">
-<!-- 				<div class="numbertext">1 / 3</div> -->
-				<img src="https://www.qralink.com/images/homebanner/1645065911.png" style="width: 100%">
-<!-- 				<div class="text">Caption Text</div> -->
-			</div>
-
-			<div class="mySlides fade">
-<!-- 				<div class="numbertext">2 / 3</div> -->
-				<img src="https://www.qralink.com/images/homebanner/1645065648.png" style="width: 100%">
-<!-- 				<div class="text">Caption Two</div> -->
-			</div>
-
-			<div class="mySlides fade">
-<!-- 				<div class="numbertext">3 / 3</div> -->
-				<img src="https://www.qralink.com/images/homebanner/1645067078.png" style="width: 100%">
-<!-- 				<div class="text">Caption Three</div> -->
-			</div>
-
-		</div>
-		<br>
-
-		<div style="text-align: center">
-			<span class="dot"></span> <span class="dot"></span> <span class="dot"></span>
-		</div>
-
+	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="https://www.qralink.com/images/homebanner/1645065911.png" alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="https://www.qralink.com/images/homebanner/1645065648.png" alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="https://www.qralink.com/images/homebanner/1645067078.png" alt="Third slide">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
 <!-- 	</section> -->
 	<!-- end banner -->
 	<!-- six_box section -->
 	<br>
-	<h1 class="six_box11" style="background-color:#000000; color: white; text-align: center;">SubCategories Under Category <span class="text-danger"><%=category.getCATEGORY_NAME() %></span> </h1>
+	<h1 class="six_box11" style="background-color:#000000; color: white; text-align: center;"><%if(category!=null){ %>SubCategories Under Category <span class="text-danger"><%=category.getCATEGORY_NAME() %><%}else{%> All Sub Categories <%} %></span> </h1>
 	<div class="six_box">
 		<div class="container-fluid" >
 			<div class="row" id="row_id">
 			<%for(SubCategoryBean subcat : subcategories){ %>
-				<div class="col-md-2 col-sm-4 pa_left" style="border-radius: 10px">
-					<div class="six_probpx bg-success">
-						<i><img  src="/images/<%=subcat.getSUB_CATEGORY_IMG()%>" alt="#"  style="max-width: 200px; max-height: 150px;border-radius:" /></i> 
-						<a href="/microCategoryListHome/<%=subcat.getSUB_CATEGORY_ID()%>"> <span><%=subcat.getSUB_CATEGORY_NAME() %></span></a>
-					</div>
+			<div class="col-md-2 text-center bg-light" style="">
+				<a href="/microCategoryListHome/<%=subcat.getSUB_CATEGORY_ID()%>">
+				<div class="row mt-2 text-center ">
+				<img  src="/images/<%=subcat.getSUB_CATEGORY_IMG()%>" alt="#"  style="width: 200px; height: 120px;border-radius:10%" />
 				</div>
-			<%}%>			
+				<div class="row">
+				<span><%=subcat.getSUB_CATEGORY_NAME() %></span>
+				</div>
+				</a>	
+			</div>		
+		<%}%>			
 			</div>
 		</div>
 <!-- 		<div class="six_box11" style="background-color:#000000;"></div> -->
 	</div>
 	<br>
 	<br>
+	<%if(products!=null){ %>
 		<h1 class="six_box11" style="background-color:#000000; color: white; text-align: center;">Products Available for category <span class="text-danger"><%=category.getCATEGORY_NAME() %></span></h1>
 	<div class="six_box">
 		<div class="container-fluid" >
 			<div class="row" id="row_id">
 			<%for(ProductBean prod : products){ %>
-				<div class="col-md-2 col-sm-4 pa_left" style="border-radius: 10px">
-					<div class="six_probpx bg-success">
-						<i><img  src="/images/<%=prod.getPic1()%>" alt="#"  style="max-width: 200px; max-height: 150px;border-radius:" /></i>
-						 <a href="/productDetailPage/<%=prod.getProductId()%>"> <span><%=prod.getBrandName() %></span></a>
-					</div>
+			<div class="col-md-2 text-center bg-light" style="">
+				<a href="/productDetailPage/<%=prod.getProductId()%>">
+				<div class="row mt-2 text-center ">
+				<img  src="/images/<%=prod.getPic1()%>" alt="#"  style="width: 200px; height: 120px;border-radius:10%" />
 				</div>
-			<%}%>			
+				<div class="row">
+				<span><%=prod.getBrandName() %></span>
+				</div>
+				</a>	
+			</div>
+		<%}%>			
 			</div>
 		</div>
 <!-- 		<div class="six_box11" style="background-color:#000000;"></div> -->
 	</div>
+	<%} %>
 <!-- 	<h1 class="six_box11" style="background-color:#000000; color: white; text-align: center;">CATEGORIES</h1> -->
 <!-- 	<div class="six_box"> -->
 <!-- 		<div class="container-fluid" > -->
@@ -232,12 +240,12 @@ System.out.print(category);
 				
 <!-- 			</div> -->
 <!-- 		</div> -->
-<!-- <!-- 		<div class="six_box11" style="background-color:#000000;"></div> --> -->
+<!-- <!-- 		<div class="six_box11" style="background-color:#000000;"></div> -->
 <!-- 	</div> -->
 <!-- 	<h1 class="six_box11" style="background-color:#000000;"></h1> -->
 <!-- 	<button id="see_more_btn" onclick="view_all()">SEE MORE</button> -->
-<!-- 	<!-- end six_box section --> -->
-<!-- 	<!-- project section --> -->
+<!-- 	<!-- end six_box section -->
+<!-- 	<!-- project section -->
 <!-- 	<div id="project" class="project"> -->
 <!-- 		<div class="container"> -->
 <!-- 			<div class="row"> -->
@@ -365,13 +373,13 @@ System.out.print(category);
 <!-- 			</div> -->
 <!-- 		</div> -->
 <!-- 	</div> -->
-<!-- 	<!-- end project section --> -->
-<!-- 	<!-- fashion section --> -->
+<!-- 	<!-- end project section -->
+<!-- 	<!-- fashion section -->
 <!-- 	<div class="fashion"> -->
 <!-- 		<img src="images/fashion.jpg" alt="#" /> -->
 <!-- 	</div> -->
-<!-- 	<!-- end fashion section --> -->
-<!-- 	<!-- news section --> -->
+<!-- 	<!-- end fashion section -->
+<!-- 	<!-- news section -->
 <!-- 	<div class="news"> -->
 <!-- 		<div class="container"> -->
 <!-- 			<div class="row"> -->
@@ -460,8 +468,8 @@ System.out.print(category);
 <!-- 			</div> -->
 <!-- 		</div> -->
 <!-- 	</div> -->
-<!-- 	<!-- end news section --> -->
-<!-- 	<!-- newslatter section --> -->
+<!-- 	<!-- end news section --> 
+<!-- 	<!-- newslatter section -->
 <!-- 	<div class="newslatter"> -->
 <!-- 		<div class="container"> -->
 <!-- 			<div class="row d_flex"> -->
@@ -478,8 +486,8 @@ System.out.print(category);
 <!-- 			</div> -->
 <!-- 		</div> -->
 <!-- 	</div> -->
-<!-- 	<!-- end newslatter section --> -->
-<!-- 	<!-- three_box section --> -->
+<!-- 	<!-- end newslatter section -->
+<!-- 	<!-- three_box section -->
 <!-- 	<div class="three_box"> -->
 <!-- 		<div class="container"> -->
 <!-- 			<div class="row"> -->
