@@ -205,7 +205,7 @@ html, body {
 										<div class="col-md-4">
 											<label class="name_sm ">City:<span
 												style="color: #F00">*</span></label> <span id="city_change"><select
-												name="city" id="city" class="form-control city">
+												name="city" id="city" class="form-control city" onchange="selectCities()">
 													<option selected>Select City</option>
 											</select> </span> <span id="city_error" style="color: #F00"></span>
 										</div>
@@ -348,6 +348,7 @@ html, body {
         stateSelect = document.querySelector('.state'),
         citySelect = document.querySelector('.city');
 
+    var countrymap = new Object();
     function loadCountries() {
         let apiEndPoint = config.cUrl;
         fetch(apiEndPoint, { headers: { "X-CSCAPI-KEY": config.ckey } })
@@ -356,8 +357,9 @@ html, body {
             	console.log(data);
             	data.forEach(country => {
                     const option = document.createElement('option');
-                    option.value = country.iso2;
+                    option.value = country.name;
                     option.textContent = country.name;
+                    countrymap[country.name]= country.iso2;
                     countrySelect.appendChild(option);
                 })
             })
@@ -366,8 +368,9 @@ html, body {
             });
     }
     
+    var statemap = new Object();
     function loadStates() {
-        const selectedCountryCode = countrySelect.value;
+        const selectedCountryCode =  countrymap[countrySelect.value];
         stateSelect.innerHTML = '<option value="">Select State</option>';
 
         var headers = new Headers();
@@ -385,8 +388,10 @@ html, body {
             	console.log(data);
             	data.forEach(state => {
              		const option = document.createElement('option');
-            		 option.value = state.iso2;
+            		 option.value = state.name;
              		option.textContent = state.name;
+             		statemap[state.name]= state.iso2;
+             		console.log("textContent:"+option.textContent);
              		stateSelect.appendChild(option);
              		
              		})
@@ -395,8 +400,10 @@ html, body {
     }
     
     function loadCities() {
-        const selectedCountryCode = countrySelect.value;
-        const selectedStateCode = stateSelect.value;
+        const selectedCountryCode = countrymap[countrySelect.value];
+        console.log("selectedCountryCode:"+selectedCountryCode);
+        const selectedStateCode = statemap[stateSelect.value];
+        console.log("selectedStateCode:"+selectedStateCode);
         citySelect.innerHTML = '<option value="">Select City</option>';
         var url="https://api.countrystatecity.in/v1/countries/"+selectedCountryCode+"/states/"+selectedStateCode+"/cities"
         var headers = new Headers();
@@ -415,7 +422,7 @@ html, body {
             	console.log(data);
             	data.forEach(city => {
              		const option = document.createElement('option');
-            		 option.value = city.iso2;
+            		 option.value = city.name;
              		option.textContent = city.name;
              		citySelect.appendChild(option);
              		
@@ -423,6 +430,11 @@ html, body {
             })
             .catch(error => console.log('error', error));
     }
+    
+   function selectCities(){
+	   const selectcity = citySelect.value;
+	   console.log("citySelect:"+selectcity);
+   }
 
     window.onload = loadCountries;
 </script>

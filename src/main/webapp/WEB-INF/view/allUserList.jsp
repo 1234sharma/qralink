@@ -124,6 +124,7 @@
 			}
 		}
 		function ApproveOrDisApproveUser(val) {
+			console.log("value :"+val);
 			if (val) {
 				$.ajax({
 					url : "usertoggelApproveStatus/" + val,
