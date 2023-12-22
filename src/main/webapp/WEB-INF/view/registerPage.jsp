@@ -245,19 +245,19 @@ html, body {
 												</tr>
 											</table>
 										</div>
-										<div class="col-md-12">
-											<label class="name_sm">Verification Code<span
-												style="color: #F00">*</span></label> <input class="form-control "
-												placeholder="Enter Verification Code" type="text"
-												name="security_code" id="cpcode" value> <span
-												id="alert_security"></span> <br />
-											<div id="alert_security" style="color: #FF0000;"></div>
-											<span id="captcha"><img
-												src="https://www.qralink.com/assets/captcha/1685632923.3226.jpg"
-												style="width: 150px; height: 30px; border: 0;" alt=" " /></span>&nbsp;
-											<span id="refresh_captcha">&nbsp; <img border="0" alt
-												src="https://www.qralink.com//images/refresh.png"></span>
-										</div>
+<!-- 										<div class="col-md-12"> -->
+<!-- 											<label class="name_sm">Verification Code<span -->
+<!-- 												style="color: #F00">*</span></label> <input class="form-control " -->
+<!-- 												placeholder="Enter Verification Code" type="text" -->
+<!-- 												name="security_code" id="cpcode" value> <span -->
+<!-- 												id="alert_security"></span> <br /> -->
+<!-- 											<div id="alert_security" style="color: #FF0000;"></div> -->
+<!-- 											<span id="captcha"><img -->
+<!-- 												src="https://www.qralink.com/assets/captcha/1685632923.3226.jpg" -->
+<!-- 												style="width: 150px; height: 30px; border: 0;" alt=" " /></span>&nbsp; -->
+<!-- 											<span id="refresh_captcha">&nbsp; <img border="0" alt -->
+<!-- 												src="https://www.qralink.com//images/refresh.png"></span> -->
+<!-- 										</div> -->
 									</div>
 									<div class="col-md-12">
 										<input type="checkbox" name="vehicle" value="Car" checked>

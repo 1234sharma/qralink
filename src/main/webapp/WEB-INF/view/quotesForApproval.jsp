@@ -77,10 +77,10 @@
 														data[i].person_name, 
 														data[i].mobile,
 														data[i].is_approved,
-														'<div class="row"><div class="col-md-3"><button  class="btn btn-danger" onclick="deleteProduct(`'
-														+ data[i].productId
-														+ '`)">DELETE</button><div><div class="col-md-3 mt-2"><div><div class="col-md-3 mt-2"><button  class="btn btn-success" onclick="ApproveOrDisApproveProduct(`'
-														+ data[i].productId
+														'<div class="row"><div class="col-md-3"><button  class="btn btn-danger" onclick="deleteQuote(`'
+														+ data[i].quoteId
+														+ '`)">DELETE</button><div><div class="col-md-3 mt-2"><div><div class="col-md-3 mt-2"><button  class="btn btn-success" onclick="ApproveOrDisApproveQuote(`'
+														+ data[i].quoteId
 														+ '`)">APPROVE</button><div></div>'])
 										.draw();
 
@@ -92,12 +92,12 @@
 						}
 					});
 		}
-
-		function deleteuser(val) {
+		
+		function deleteQuote(val) {
 			var result = confirm("Are you sure ? Want to delete?" + val);
 			if (result) {
 				$.ajax({
-					url : "deleteProduct/" + val,
+					url : "deletequote/" + val,
 					type : 'DELETE',
 					success : function(data) {
 						if (data == -1) {
@@ -112,6 +112,31 @@
 					},
 					error : function() {
 						console.log('error');
+					}
+				});
+
+			} else {
+				return;
+			}
+		}
+		function ApproveOrDisApproveQuote(val) {
+			if (val) {
+				$.ajax({
+					url : "quotetoggelApproveStatus/" + val,
+					type : 'PUT',
+					success : function(data) {
+						if (data == -1) {
+							window.location = "http://localhost:8089/qrahome";
+						} else if (data == 0) {
+							alert("Unable To Update The Status...");
+						} else {
+							alert("Status Updated Succesfully")
+							table.clear().draw();
+							tabledataload();
+						}
+					},
+					error : function(e) {
+						console.log('error '+e);
 					}
 				});
 

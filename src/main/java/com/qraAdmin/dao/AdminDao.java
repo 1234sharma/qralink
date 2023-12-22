@@ -27,7 +27,9 @@ public class AdminDao {
 	public String getAllProduct = "SELECT * FROM qralink.productdetail";
 	public String updateToggelApproveStatus="update qralink.productdetail set productlive  = CASE WHEN productlive = 'N' THEN 'Y' WHEN productlive = 'Y' THEN 'N' else productlive END where productId=?";
 	public String userupdateToggelApproveStatus="update qralink.userdetail set active  = CASE WHEN active = 'N' THEN 'Y' WHEN active = 'Y' THEN 'N' else active END where userid=?";
+	public String quoteupdateToggelApproveStatus="update qralink.buyquotation set is_approved  = CASE WHEN is_approved = 'N' THEN 'Y' WHEN is_approved = 'Y' THEN 'N' else is_approved END where userid=?";
 	String deleteUserByIdquery="delete from qralink.userdetail where userid =?";
+	String deleteQuoteByIdquery="delete from qralink.buyquotation where quoteId =?";
 	public List<ProductBean> getlistOfUnapprovedProducts() {
 		List<Map<String, Object>> products = jdbc.queryForList(getListOfUnapprovedProduct);
 		System.out.println(products);
@@ -238,10 +240,28 @@ public class AdminDao {
     	 return count;
 	}
 	
+	public int quotetoggelApproveStatus(int quoteid) {
+		int count=0;
+    	 count= jdbc.update(quoteupdateToggelApproveStatus, quoteid);
+    	 return count;
+	}
+	
 	public int deleteUserById(int userId) {
 		int delval=0;
 		try {
 		delval= jdbc.update(deleteUserByIdquery,userId);
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e);
+			return delval;
+		}
+		System.out.println("Delete row count  :"+delval);
+		return delval;
+	}
+	public int deleteQuoteById(int userId) {
+		int delval=0;
+		try {
+		delval= jdbc.update(deleteQuoteByIdquery,userId);
 		}catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e);

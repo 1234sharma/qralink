@@ -487,11 +487,38 @@ public class AdminController {
 		}
 
 	}
+	
+	@PutMapping("/quotetoggelApproveStatus/{quoteid}")
+	@ResponseBody
+	public ResponseEntity<Integer> quotetoggelApproveStatus(@PathVariable("quoteid") int quoteid, HttpServletRequest req) {
+		if (req.getSession().getAttribute("userid") != null) {
+			int count = adminDao.quotetoggelApproveStatus(quoteid);
+			System.out.println(count);
+			return new ResponseEntity<Integer>(count, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Integer>(-1, HttpStatus.OK);
+		}
+
+	}
+	
 	@DeleteMapping("/deleteuser/{userId}")
 	@ResponseBody
 	public ResponseEntity<Integer> deleteProductById(@PathVariable("userId") int userId, HttpServletRequest req) {
 		if (req.getSession().getAttribute("userid") != null) {
 			int count = adminDao.deleteUserById(userId);
+			System.out.println(count);
+			return new ResponseEntity<Integer>(count, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Integer>(-1, HttpStatus.OK);
+		}
+
+	}
+	
+	@DeleteMapping("/deletequote/{quoteid}")
+	@ResponseBody
+	public ResponseEntity<Integer> deleteQuoteById(@PathVariable("quoteid") int quoteid, HttpServletRequest req) {
+		if (req.getSession().getAttribute("userid") != null) {
+			int count = adminDao.deleteQuoteById(quoteid);
 			System.out.println(count);
 			return new ResponseEntity<Integer>(count, HttpStatus.OK);
 		} else {
