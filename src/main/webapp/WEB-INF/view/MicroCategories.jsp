@@ -178,7 +178,7 @@ function getMicroCatTbl(){
 		   		          $("#micro-cat-table").append(tr);
 		   		       		$(tr).append("<td>"+item.micro_CATEGORY_ID+"</td>");
 					   		$(tr).append("<td target=_blank><button id=subcatnmbtn onclick=getSubCategoryNm()>"+item.micro_CATEGORY_NAME+"</button></td>");
-					   		$(tr).append("<td><img alt='img' src='images/"+item.micro_CATEGORY_IMG+"' width='100' height='100'/></td>");
+					   		$(tr).append("<td><img alt='img' src='/uploads/"+item.micro_CATEGORY_IMG+"' width='100' height='100'/></td>");
 					   		$(tr).append("<td>"+item.micro_CATEGORY_FLG+"</td>");
 					   		$(tr).append("<td><button id=aprove_btn onclick=approveBtn('"+item.micro_CATEGORY_ID+"')>Approve</button><button id=edt_btn onclick=editBtn('"+item.CATEGORYID+"','"+item.CATEGORY_NAME+"')>EDIT</button><button id=dlt_btn onclick=deleteBtn('"+item.micro_CATEGORY_ID+"')>DELETE</button></td>");
 								
