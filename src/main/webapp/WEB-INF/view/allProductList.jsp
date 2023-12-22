@@ -74,8 +74,8 @@
 														data[i].brandName,
 														data[i].productPrice,
 														data[i].orderqnt,
-														'<img alt="img" src="images/'+data[i].pic1+'" width="100" height="100"/>',
-														'<img alt="img" src="images/'+data[i].pic2+'" width="100" height="100"/>',
+														'<img alt="img" src="/uploads/'+data[i].pic1+'" width="100" height="100"/>',
+														'<img alt="img" src="/uploads/'+data[i].pic2+'" width="100" height="100"/>',
 														data[i].productlive,
 														'<div class="row"><div class="col-md-3"><button  class="btn btn-danger" onclick="deleteProduct(`'
 																+ data[i].productId

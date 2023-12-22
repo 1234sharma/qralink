@@ -177,7 +177,7 @@ MicroCategoryBean microcategory=(MicroCategoryBean)request.getAttribute("microca
 				<div class="col-md-2 text-center bg-light" style="">
 				<a href="/productDetailPage/<%=prod.getProductId()%>">
 				<div class="row mt-2 text-center ">
-				<img  src="/images/<%=prod.getPic1()%>" alt="#"  style="width: 200px; height: 120px;border-radius:10%" />
+				<img  src="/uploads/<%=prod.getPic1()%>" alt="#"  style="width: 200px; height: 120px;border-radius:10%" />
 				</div>
 				<div class="row">
 				<span><%=prod.getBrandName() %></span>

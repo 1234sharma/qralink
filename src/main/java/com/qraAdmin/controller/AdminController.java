@@ -41,13 +41,15 @@ import com.qraAdmin.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+
+
 @RestController
 public class AdminController {
 	// for supply and product we use below jsp three time
 
-	@Value("${image.store.path}")
-	private String filelocation;
 
+	public static String filelocation= System.getProperty("user.dir")+"/uploads";
+	
 	@Autowired
 	AddCategoryDao addCategoryDao;
 

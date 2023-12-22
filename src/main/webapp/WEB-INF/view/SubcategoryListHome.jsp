@@ -161,7 +161,7 @@ System.out.print(category);
 			<div class="col-md-2 text-center bg-light" style="">
 				<a href="/microCategoryListHome/<%=subcat.getSUB_CATEGORY_ID()%>">
 				<div class="row mt-2 text-center ">
-				<img  src="/images/<%=subcat.getSUB_CATEGORY_IMG()%>" alt="#"  style="width: 200px; height: 120px;border-radius:10%" />
+				<img  src="/uploads/<%=subcat.getSUB_CATEGORY_IMG()%>" alt="#"  style="width: 200px; height: 120px;border-radius:10%" />
 				</div>
 				<div class="row">
 				<span><%=subcat.getSUB_CATEGORY_NAME() %></span>
@@ -184,7 +184,7 @@ System.out.print(category);
 			<div class="col-md-2 text-center bg-light" style="">
 				<a href="/productDetailPage/<%=prod.getProductId()%>">
 				<div class="row mt-2 text-center ">
-				<img  src="/images/<%=prod.getPic1()%>" alt="#"  style="width: 200px; height: 120px;border-radius:10%" />
+				<img  src="/uploads/<%=prod.getPic1()%>" alt="#"  style="width: 200px; height: 120px;border-radius:10%" />
 				</div>
 				<div class="row">
 				<span><%=prod.getBrandName() %></span>

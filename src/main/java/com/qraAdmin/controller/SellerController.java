@@ -50,10 +50,10 @@ import jakarta.websocket.server.PathParam;
 @Controller
 public class SellerController {
 
-	@Value("${image.store.path}")
-	private String filelocation;
 	
 	Random rand = new Random();
+	
+	public static String filelocation= System.getProperty("user.dir")+"/uploads";
 
 	@Autowired
 	UserService userservice;

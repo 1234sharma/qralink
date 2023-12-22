@@ -198,7 +198,7 @@ float: inline-end;
 				<div class="col-md-2 text-center bg-light" style="">
 				<a href="/subCategoryListHome/<%=cat.getCATEGORYID()%>">
 				<div class="row mt-2 text-center ">
-				<img  src="images/<%=cat.getCATEGORY_IMG()%>" alt="#"  style="width: 200px; height: 120px;border-radius:10%" />
+				<img  src="/uploads/<%=cat.getCATEGORY_IMG()%>" alt="#"  style="width: 200px; height: 120px;border-radius:10%" />
 				</div>
 				<div class="row">
 				<span><%=cat.getCATEGORY_NAME() %></span>

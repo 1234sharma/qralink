@@ -162,7 +162,7 @@ SubCategoryBean subcategory=(SubCategoryBean)request.getAttribute("subcategory")
 				<div class="col-md-2 text-center bg-light" style="">
 				<a href="/microCategoryProductListHome/<%=microcat.getMICRO_CATEGORY_ID()%>">
 				<div class="row mt-2 text-center ">
-				<img  src="/images/<%=microcat.getMICRO_CATEGORY_IMG()%>" alt="#"  style="width: 200px; height: 120px;border-radius:10%" />
+				<img  src="/uploads/<%=microcat.getMICRO_CATEGORY_IMG()%>" alt="#"  style="width: 200px; height: 120px;border-radius:10%" />
 				</div>
 				<div class="row">
 				<span><%=microcat.getMICRO_CATEGORY_NAME() %></span>
@@ -185,7 +185,7 @@ SubCategoryBean subcategory=(SubCategoryBean)request.getAttribute("subcategory")
 				<div class="col-md-2 text-center bg-light" style="">
 				<a href="/productDetailPage/<%=prod.getProductId()%>">
 				<div class="row mt-2 text-center ">
-				<img  src="/images/<%=prod.getPic1()%>" alt="#"  style="width: 200px; height: 120px;border-radius:10%" />
+				<img  src="/uploads/<%=prod.getPic1()%>" alt="#"  style="width: 200px; height: 120px;border-radius:10%" />
 				</div>
 				<div class="row">
 				<span><%=prod.getBrandName() %></span>

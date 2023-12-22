@@ -41,6 +41,8 @@ public class LoginController {
 	@Autowired
 	SellerService sellerservice;
 
+	public static String uploadDirectory= System.getProperty("user.dir")+"/uploads";
+	
 	@GetMapping("/loginPage")
 	public ModelAndView firstpage() { 
 		ModelAndView model = new ModelAndView("loginpage");
